@@ -1,6 +1,6 @@
-=======================================
-Activity 1.1: AWS Deploy your first VPC
-=======================================
+=============
+AWS Discovery
+=============
 
 Architecture de l’infrastructure à déployer sur AWS :
 
@@ -17,11 +17,11 @@ Log into the AWS console
 
 From the POD machine you can open firefox and navigate to the `AWS URL <https://console.aws.amazon.com/>`_
 
-Log in with your AWS **utd-console** account (your IAM account for API console) see the doc `here <https://utd-automation.readthedocs.io/en/latest/00-getting-started/aws-account.html>`_.
+Log in with your AWS **utd-console** account (your IAM account for API console) see the doc `here <#/00-getting-started/02-aws-account.html>`_.
 
 
-Création d’un VPC (Virtual Private Cloud)
------------------------------------------
+Create your first VPC (Virtual Private Cloud)
+---------------------------------------------
 
 
 Etape 1 : Allez dans Services, faites une recherche sur VPC et choisissez le service VPC :

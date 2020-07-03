@@ -1,6 +1,6 @@
-d=================================
-Activity 1.2: Terraform Discovery
-=================================
+========================================
+Activity: First Terraform Deployment
+========================================
 
 In this activity you will:
 
@@ -12,16 +12,14 @@ In this activity you will:
 - Deploy the lab infrastucture plan
 - Confirm firewall bootstrap completion
 
-
-
-Open Terminal :
----------------
+Open Terminal
+-------------
 
 .. figure:: img/work-in-progress.png
 
 
-Create terraform Environment :
-------------------------------
+Create terraform Environment
+----------------------------
 
 You will need to download the sample repository used in this lab.  This repository (or *repo*) contains
 the files needed to deploy the network and compute infrastructure we'll be working with.
@@ -40,6 +38,7 @@ Select the Paris region (eu-west-3) at the top right corner of the screen
 
 Create an SSH key-pair
 ----------------------
+
 All AWS EC2 instances are required to have an SSH key-pair defined when the
 instance is created.  This is done to ensure secure access to the instance will
 be available once it is created.
@@ -72,6 +71,7 @@ Change the key to the following folder
 
 Create S3 Bucket for bootstrapping
 ----------------------------------
+
 Bootstrapping is a feature of the VM-Series firewall that allows you to load a pre-
 defined configuration into the firewall during boot-up and to automate its deployment.
 This ensures that the firewall is configured and ready at initial boot-up, removing the
@@ -112,8 +112,8 @@ In your terminal type **export ARN=** and paste the key that is in your clipboar
 This information will used later in Terraform script for bootstrap of VM FW.
 
 
-Add restricted permission on S3 Bucket (Read only):
----------------------------------------------------
+Add restricted permission on S3 Bucket (Read only)
+--------------------------------------------------
 
 We need to give ** relevant rights** for IAM account created to use API (IAM account for API access).
 
@@ -153,9 +153,8 @@ Click Create policy
 
 
 
-Build Bootstrping in S3 Bucket :
---------------------------------
-
+Build Bootstrping in S3 Bucket
+------------------------------
 
 click on the newly created bucket and modify 
 
@@ -226,6 +225,7 @@ Upload:
 
 Create the Terraform variables
 ------------------------------
+
 Change into the AWS deployment directory.
 
 .. code-block:: bash
@@ -479,12 +479,9 @@ Nota :
 - Value for ARN (**arn:aws:s3:::mys3bucketutd**) was been copied in in file named **ARNBucket** in ~/utd/first-step-terraform folder at the begining of activity (see ici)
 
 
-
-
-
-
 Initialize the AWS Terraform provider
 -------------------------------------
+
 Once you've created the ``terraform.tfvars`` file and populated it with the
 variables and values you are now ready to initialize the Terraform providers.
 For this initial deployment we will only be using the
@@ -500,6 +497,7 @@ plugins needed for working in a particular environment.
 
 Deploy the lab infrastucture plan
 ---------------------------------
+
 We are now ready to deploy our lab infrastructure plan.  We should first
 perform a dry-run of the deployment process and validate the contents of the
 plan files and module dependencies.
@@ -554,6 +552,7 @@ Verify on AWS Console some elements created by terraform
 
 Confirm firewall bootstrap completion
 -------------------------------------
+
 SSH into the firewall with the following credentials.
 
 - **Username:** ``admin``
@@ -591,8 +590,9 @@ activities.
 
 
 
-Destroy the lab infrastucture plan:
------------------------------------
+Destroy the lab infrastucture plan
+----------------------------------
+
 To clean up the deployment, just run the following command
 
 .. code-block:: bash
@@ -603,8 +603,8 @@ it will automatically delete every object that was created by the template.
 
 
 
-What were bad things on this Activity:
---------------------------------------
+What were bad things on this Activity
+-------------------------------------
 
 - AWS Access key and AWS Secret key are visible and stored in vraiable.tf file.
 - It needs to prepare a S3 bucket from AWS Console before use this scripts Terraform. 
@@ -613,6 +613,7 @@ What were bad things on this Activity:
 
 
 
-Conclusion:
------------
+Conclusion
+----------
+
 We can do better then let's go to next activity : **Build Multicloud**

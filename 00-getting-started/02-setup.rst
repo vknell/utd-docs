@@ -35,8 +35,8 @@ You will create a specific role for terraform in a few minutes.
 
 
 
-Discovery VSCodium
-------------------
+Discovery VSCode/VSCodium
+-------------------------
 
 On desktop POD Machine you can find a shortcut named VSCodium. Double clic to launch this application.
 VSCodium will be your automation tool during this lab.

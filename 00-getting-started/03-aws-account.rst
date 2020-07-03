@@ -1,6 +1,6 @@
-===========================
-Activity 0: AWS IAM Account
-===========================
+===============
+AWS IAM Account
+===============
 
 In this activity you will create 2 users and a group for AWS.
 
@@ -40,12 +40,12 @@ You will create a user and a group to access the console with the proper rights.
 
 From AWS console, go to **Services** and choose **IAM** as shown:
 
-.. figure:: aws-iam.png
+.. figure:: img/aws-iam.png
 
 
 Clic on **Users** as shown:
 
-.. figure:: aws-iam-user.png
+.. figure:: img/aws-iam-user.png
 
 
 
@@ -54,14 +54,14 @@ Create IAM account for console access
 
 Clic **Add User**, give a name and define **Access type** for **AWS Management Console access** as shown after that clic on **Next Permissions**:
 
-.. figure:: aws-iam-user-add-console.png
+.. figure:: img/aws-iam-user-add-console.png
 
-.. figure:: aws-iam-user-creation-console.png
+.. figure:: img/aws-iam-user-creation-console.png
 
 
 Next clic **Create Group**:
 
-.. figure:: aws-iam-user-create-group-console.png
+.. figure:: img/aws-iam-user-create-group-console.png
 
 
 Provide a group name **utd** and filter **policy Type** menu by **FullAccess**, and add the following rights.
@@ -75,21 +75,21 @@ Amazon Rights for group **utd**:
     - AmazonVPCFullAccess
 Then click **Create Group**:
 
-.. figure:: aws-iam-user-group-creation-console.png
+.. figure:: img/aws-iam-user-group-creation-console.png
 
 Then select the group:
 
-.. figure:: aws-iam-user-to-group-console.png
+.. figure:: img/aws-iam-user-to-group-console.png
 
 
 Click **Next:Tags**, you can leave it empty and click **Next:Review** and finally click **Create User**:
 
-.. figure:: aws-iam-user-review-console.png
+.. figure:: img/aws-iam-user-review-console.png
 
 
 The user is now created, download the CSV file to retrieve the password. After this step you can click on **Close**:
 
-.. figure:: aws-iam-user-success-csv-console.png
+.. figure:: img/aws-iam-user-success-csv-console.png
 
 
 Create IAM account for API access
@@ -97,22 +97,22 @@ Create IAM account for API access
 
 Clic **Add User**:
 
-.. figure:: aws-iam-user-add-api.png
+.. figure:: img/aws-iam-user-add-api.png
 
 
 Give it a name and define **Access type** for **Programmatic access** as shown after that clic on **Next Permissions**:
 
-.. figure:: aws-iam-user-creation-api.png
+.. figure:: img/aws-iam-user-creation-api.png
 
 
 Next select the **utd** group previously created. And click on **Next:Tags**:
 
-.. figure:: aws-iam-user-to-group-api.png
+.. figure:: img/aws-iam-user-to-group-api.png
 
 
 Clic **Next:Review**, and finally click on **Create User**:
 
-.. figure:: aws-iam-user-review-api.png
+.. figure:: img/aws-iam-user-review-api.png
 
 
 The API user has been created, download the **Access key ID** and **Secret access key** by clicking **Download .csv**.These credentials are needed to connect to Amazon EC2 service through Terraform.
@@ -120,7 +120,7 @@ The API user has been created, download the **Access key ID** and **Secret acces
 We also recommand to copy/paste theses information in a **notepad** to use them to create AWS environment variables.
 After this step, you can click on close:
 
-.. figure:: aws-iam-user-success-csv-api.png
+.. figure:: img/aws-iam-user-success-csv-api.png
 
 
 *This is the end of Activity 0*

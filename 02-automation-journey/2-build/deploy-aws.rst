@@ -1,6 +1,6 @@
-================================
-Activity 2: Lab Deployment (AWS)
-================================
+====================
+Lab Deployment (AWS)
+====================
 
 .. warning:: If you are working on the GCP lab, skip this page and proceed to :doc:`../03-run/terraform/background-terraform`.
 
