@@ -1,23 +1,18 @@
-===========
-Cleaning Up
-===========
+########
+Clean Up
+########
 
 In this activity you will:
 
 - Destroy the lab deployment
 
+**************************
 Destroy the lab deployment
---------------------------
+**************************
+
 When deploying infrastructure in the public cloud it is important to tear it down when it is no longer needed. Otherwise you will end up paying for services that are no longer needed. We'll need to go back to the deployment directory and use Terraform to destroy the infrastructure we deployed at the start of the lab.
 
 Change into the ``deployment`` directory.
-
-For GCP:
-
-.. code-block:: bash
-
-    $ cd ~/multicloud-automation-lab/deployment/gcp
-
 
 For AWS:
 

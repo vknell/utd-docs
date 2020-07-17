@@ -1,6 +1,6 @@
-====================
+####################
 Lab Deployment (GCP)
-====================
+####################
 
 .. warning:: If you are working on the AWS lab, skip this page and proceed to the :doc:`deploy-aws`.
 
@@ -13,8 +13,11 @@ In this activity you will:
 - Deploy the lab infrastucture plan
 - Confirm firewall bootstrap completion
 
+
+****************************************
 Create a service account credential file
-----------------------------------------
+****************************************
+
 We will be deploying the lab infrastucture in GCP using Terraform.  A
 predefined Terraform plan is provided that will initialize the GCP provider and
 call modules responsible for instantiating the network, compute, and storage
@@ -46,8 +49,10 @@ Verify the JSON credentials file was successfully created.
     $ cat ~/gcp_compute_key.json
 
 
+**********************
 Create an SSH key-pair
-----------------------
+**********************
+
 All Compute Engine instances are required to have an SSH key-pair defined when
 the instance is created.  This is done to ensure secure access to the instance
 will be available once it is created.
@@ -66,8 +71,10 @@ directory.
           configured Compute Engine to use our key exclusively.
 
 
+******************************
 Create the Terraform variables
-------------------------------
+******************************
+
 Change into the GCP deployment directory.
 
 .. code-block:: bash
@@ -105,8 +112,10 @@ file, and the path to your SSH public key file.
     public_key_file     = "~/.ssh/lab_ssh_key.pub"
 
 
+*************************************
 Initialize the GCP Terraform provider
--------------------------------------
+*************************************
+
 Once you've created the ``terraform.tfvars`` file and populated it with the
 variables and values you are now ready to initialize the Terraform providers.
 For this initial deployment we will only be using the
@@ -119,8 +128,10 @@ plugins needed for working in a particular environment.
     $ terraform init
 
 
+*********************************
 Deploy the lab infrastucture plan
----------------------------------
+*********************************
+
 We are now ready to deploy our lab infrastructure plan.  We should first
 perform a dry-run of the deployment process and validate the contents of the
 plan files and module dependencies.
@@ -171,8 +182,10 @@ It is recommended that you read the
 :doc:`../03-run/terraform/background-terraform` section ahead while you wait.
 
 
+*************************************
 Confirm firewall bootstrap completion
--------------------------------------
+*************************************
+
 SSH into the firewall with the following credentials.
 
 - **Username:** ``admin``

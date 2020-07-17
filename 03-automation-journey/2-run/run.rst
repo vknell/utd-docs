@@ -1,9 +1,12 @@
-===
+###
 Run
-===
+###
 
+Configure your settings using Terraform and Ansible.
+
+*******************
 Run using Terraform
--------------------
+*******************
 
 In this activity you will:
 
@@ -214,8 +217,9 @@ Define those resources in ``main.tf``, and run ``terraform apply``.
 You're done with the Terraform portion of the lab!
 
 
+*****************
 Run using Ansible
------------------
+*****************
 
 In this activity you will:
 
@@ -440,8 +444,9 @@ tabs.
 You're now done with the Ansible portion of the lab!
 
 
+******************
 Validation Testing
-------------------
+******************
 
 In this activity you will:
 

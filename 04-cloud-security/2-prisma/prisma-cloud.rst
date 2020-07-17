@@ -1,12 +1,13 @@
-========================
-Activity 6: Prisma Cloud
-========================
+#######################
+Prisma Cloud Enterprise
+#######################
 
 .. figure:: img/work-in-progress.png
 
 
+*********************************************
 Subscribe to Prisma Cloud Free Trial Version:
----------------------------------------------
+*********************************************
 
 Prisma Cloud is a SaaS service and it’s subscription is available from Palo Alto
 Networks, GCP and AWS Marketplace. The free trial version is currently offered only
@@ -41,8 +42,9 @@ receive a welcome email that includes a link to log in to the Prisma Cloud
 tenant once it’s ready.
 
 
+************************
 On-board a AWS Account :
-------------------------
+************************
 
 .. figure:: img/work-in-progress.png
 
@@ -67,23 +69,24 @@ To connect your public AWS or AWS GovCloud account to Prisma™ Cloud, you must 
 enables you to create a Prisma Cloud role with either read-only access to your traffic flow logs or with limited read-write access to remediate incidents. With the correct 
 permissions, Prisma Cloud can successfully connect to and access your AWS account(s).
 
+***************************************************
 Etape 1 : Add an AWS Cloud Account on Prisma Cloud:
----------------------------------------------------
+***************************************************
 If you would like Prisma Cloud to ingest VPC flow logs and any other integrations, such as Amazon GuardDuty or AWS Inspector, you must enable these services on the AWS management 
 console. The CFT enables the ingestion of configuration data and AWS CloudTrail logs (audit events) only. VPC flow logs and any other integrations, such as Amazon GuardDuty or AWS 
 Inspector are retrieved only if you previously enabled these services for the AWS account that you are onboarding.
 
 
-
-
+**********************************
 [Optional] On-board a GCP Account:
-----------------------------------
+**********************************
 
 .. figure:: img/work-in-progress.png
 
 
+***********************************************************
 Prisma Cloud Security Alert Investigation and Remediation :
------------------------------------------------------------
+***********************************************************
 
 .. figure:: img/work-in-progress.png
 

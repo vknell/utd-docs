@@ -1,11 +1,12 @@
-=======
+#######
 Respond
-=======
+#######
 
 Respond with Palo Alto Networks
 
+*******
 Monitor
--------
+*******
 
 In this activity you will:
 
@@ -109,9 +110,9 @@ If the VM Information Source configuration was correct, you should see the statu
 If the status indicator is green, you can proceed to the next section.
 
 
-
+***
 DAG
----
+***
 
 In this activity you will:
 
@@ -164,9 +165,9 @@ Replace the ``db-srv`` destination with the ``db-grp`` Dynamic Address Group you
 Click **OK** and then commit your changes by clicking **Commit**.
 
 
-
+*****
 Scale
------
+*****
 
 In this activity you will:
 

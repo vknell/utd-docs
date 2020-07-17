@@ -1,13 +1,17 @@
-===============
+###############
 Tool Comparison
-===============
+###############
+
 At this point, you've now used both Ansible and Terraform to configure a Palo
 Alto Networks firewall. Though you've used these two tools to deploy the same
 configuration, they differ in some important ways. Let's discuss some of those
 differences now.
 
+
+**********
 Strengths
-----------
+**********
+
 Both tools have a certain reputation associated with them. Terraform is known
 more for its power in deployment, while Ansible is known more for its
 flexibility in configuration. Both products can do both jobs just fine.
@@ -16,8 +20,11 @@ Regardless of their reputations, the most important part is that Palo Alto
 Networks has integrations with both, and either way will get the job done.
 It's just a matter of preference.
 
+
+***********
 Idempotence
------------
+***********
+
 Both Terraform and Ansible support `idempotent <https://en.wikipedia.org/wiki/Idempotence>`_ operations. Saying that an
 operation is idempotent means that applying it multiple times will not change
 the result. This is important for automation tools because they can be run to
@@ -26,8 +33,10 @@ matches what you want. You can run ``terraform apply`` continuously for hours,
 and if your configuration matches what is defined in the plan, it won't
 actually change anything.
 
+*******
 Commits
--------
+*******
+
 As you've probably noticed, a lot of the Ansible modules allow you to commit
 directly from them. There is also a dedicated Ansible module that just does
 commits, containing support for both the firewall and Panorama.
@@ -39,8 +48,11 @@ it is addressed, support for it can be added to the provider. In the meantime,
 we've provides some Golang code in the appendix
 (:doc:`../06-appendix/terraform-commit`) that you can use to fill the gap.
 
+
+********************
 Operational Commands
---------------------
+********************
+
 Ansible currently has a ``panos_op`` module allows users to run arbitrary
 operational commands. An operational command could be something that just
 shows some part of the configuration, but it can also change configuration.
@@ -55,8 +67,11 @@ operational command makes a configuration change, and should only be executed
 once? This uncertainty is why support for operational commands in Terraform is
 not currently in place.
 
+
+********************
 Facts / Data Sources
---------------------
+********************
+
 Terraform may not have support for arbitrary operational commands, but it does
 have a data source that you can use to retrieve specific parts of a ``show
 system info`` command from the firewall or Panorama and then use that in your

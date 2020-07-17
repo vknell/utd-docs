@@ -1,9 +1,11 @@
-==================
+##################
 Ansible Background
-==================
+##################
 
+
+*******************
 Ansible At a Glance
-===================
+*******************
 
 * Company: `RedHat <https://www.ansible.com/>`_
 * Integration First Available: January 2015
@@ -12,11 +14,13 @@ Ansible At a Glance
 * `GitHub Repo <https://github.com/PaloAltoNetworks/ansible-pan>`_
 * Implementation Language: python
 
+
+**********************
 Configuration Overview
-======================
+**********************
 
 Playbooks
----------
+=========
 
 Though Ansible allows you to execute ad hoc commands against your desired
 inventory, the better way to use Ansible is with Ansible playbooks.
@@ -30,12 +34,12 @@ playbook.  You can even tell Ansible to run another playbook from within the
 first playbook by importing it in.
 
 No Local State
---------------
+==============
 
 Unlike Terraform, Ansible does not keep a local state of what is configured.
 
 Modules Are Use Case Focused
-----------------------------
+============================
 
 Also unlike the Terraform provider, Ansible modules tend to be more use case
 focused as opposed to trying to be a single, atomic component controller.  The
@@ -45,8 +49,10 @@ interfaces, but can also create zones, place the interface into that zone,
 then finally put the interface into a virtual router.  That same workflow in
 Terraform would require three separate resources using dependencies.
 
+
+*****************************
 Example Ansible Configuration
-=============================
+*****************************
 
 Here's an example of an Ansible playbook.  We will discuss the various
 parts of this below.
@@ -80,11 +86,13 @@ parts of this below.
             zone_name: 'L3-in'
             commit: false
 
+
+***********
 Terminology
-===========
+***********
 
 Hosts
------
+=====
 
 Ansible executes actions against an inventory.  If you’re going to run Ansible
 in production, you’ll probably want to use the inventory file to organize your
@@ -97,7 +105,7 @@ If you desire, you can read more about Ansible inventory
 `here <http://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html>`_.
 
 Connection
-----------
+==========
 
 Typically Ansible will ssh to a remote machine and perform commands as the
 specified user account.  However, we don't want this for the Palo Alto Networks
@@ -105,7 +113,7 @@ Ansible modules, as the modules connect to our API.  Thus this should be set to
 "local" as we want Ansible to initiate the connection locally.
 
 Gather Facts
-------------
+============
 
 Ansible facts are just information about remote nodes.  In our case, we aren’t
 going to use facts for anything, so we’re disabling them to ensure that our
@@ -116,7 +124,7 @@ If you want to read more about facts, you can find that info
 `here <https://docs.ansible.com/ansible/latest/reference_appendices/glossary.html#term-facts>`_.
 
 Roles
------
+=====
 
 Let’s discuss the **PaloAltoNetworks.paloaltonetworks** role that our playbook
 is using.  Ansible comes with various Palo Alto Networks packages when you
@@ -128,7 +136,7 @@ code) for the Ansible plays instead of the older code that's merged upstream
 with Ansible.
 
 Tasks
------
+=====
 
 Each playbook contains a list of tasks to perform.  These are executed in
 order, one at a time against the inventory.  Each task will have a "name",
@@ -147,8 +155,10 @@ You can read more about that
 `here <https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-keep-secret-data-in-my-playbook>`_
 in the Ansible FAQs.
 
+
+************
 Dependencies
-============
+************
 
 As mentioned previously, if you're using Ansible playbooks, then when you
 have dependencies, simply place those further up in the playbook.

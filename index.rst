@@ -1,13 +1,15 @@
-AWS Automation Lab Guide
-========================
+########################################
+Palo Alto Networks: Automation Lab Guide
+########################################
 
-.. image:: palo-alto-networks-logo.png
+.. image:: img/palo-alto-networks-logo.png
    :align: center
 
+*******
 Welcome
--------
+*******
 
-Welcome to the AWS Security Automation Lab!
+Welcome to the Palo Alto Networks Automation Lab!
 
 In this lab we will be learning how to automate the deployment and configuration of infrastructure supporting a web application within AWS public cloud provider.  A key element of this infrastructure is the Palo Alto Networks NGFW.  
 
@@ -16,32 +18,33 @@ Following the deployment, we will automate the configuration of the firewall to 
 Lastly, we will ensure that the firewall is able to respond effectively to changes made to the application infrastructure.  You will deploying your application in Amazon Web Services (AWS).  
 
 
+*********
 Objective
----------
+*********
+
 The objective of this workshop is to deploy and secure a `WordPress <https://wordpress.org>`_ content management system in AWS.  This web application will be supported by an `Apache <https://httpd.apache.org>`_ web server and a database server residing in two separate subnets with different AZ.  
 
 As part of our infrastructure deployment, a VM-Series NGFW in a specific VPC 'VPC-Transit' will be inserted between Internet and the web subnet, and the database subnet.  However, we will need to configure this virtual firewall to support its network environment and the applications it will be protecting.
 
 
+*****************
 Learning Outcomes
------------------
+*****************
+
 - Understand the various methods for automating the deployment of Palo Alto Networks NGFW instances in cloud environments
 - Learn to use industry-leading configuration management automation tools to implement changes to PAN-OS devices
 - Learn how the Palo Alto Networks NGFW can automatically respond to changes in the network environment
 
 
-============
-Introduction
-============
-
-Automation Overview
--------------------
+***************************
+Automation Journey Overview
+***************************
 
 This training workshop provides hands-on exposure to the three primary
 categories of infrastructure automation activities: **Build**, **Run**, and
 **Respond**.
 
-.. image:: build-run-respond.png
+.. image:: img/build-run-respond.png
 
 Build
     Build automation is the means by which a set of infrastructure elements are
@@ -65,37 +68,9 @@ Respond
     criteria occurs.
 
 
-Lab Topology
-------------
-
-.. figure:: topology.png
-
-+--------------+--------------+-------------+
-| Subnet       | Address      | Interface   |
-+==============+==============+=============+
-| ManagementFW1| 10.5.0.0/24  | Management  |
-+--------------+--------------+-------------+
-| ManagementFW2| 10.5.45.0/24 | Management  |
-+--------------+--------------+-------------+
-| WEB1         | 10.4.2.0/24  | web - 1     |
-+--------------+--------------+-------------+
-| WEB2         | 10.4.46.0/24 | web - 2     |
-+--------------+--------------+-------------+
-| SQL1         | 10.4.1.0/24  | sql - 1     |
-+--------------+--------------+-------------+
-| SQL2         | 10.4.1.0/24  | sql - 1     |
-+--------------+--------------+-------------+
-| Untrust FW1  | 10.5.2.0/24  | Unt - 1     |
-+--------------+--------------+-------------+
-| Untrust FW2  | 10.5.47.0/24 | Unt - 2     |
-+--------------+--------------+-------------+
-| trust FW1    | 10.5.1.0/24  | Tru - 1     |
-+--------------+--------------+-------------+
-| trust FW2    | 10.5.46.0/24 | Tru - 2     |
-+--------------+--------------+-------------+
-
+**************
 Lab Components
---------------
+**************
 
 AWS Amazon Web Service
     Amazon Web Services is a subsidiary of Amazon that provides on-demand cloud
@@ -159,8 +134,8 @@ Red Hat Ansible
     :hidden:
     :caption: Automation Journey
 
-    03-automation-journey/1-build/deploy
-    03-automation-journey/2-run//run
+    03-automation-journey/1-build/build
+    03-automation-journey/2-run/run
     03-automation-journey/3-respond/respond
     03-automation-journey/4-cleanup/cleanup
 
@@ -169,8 +144,8 @@ Red Hat Ansible
     :hidden:
     :caption: Cloud Security
 
-    04-cloud-security/1-deploy/deploy-aws
-    04-cloud-security/2-prisma/prisma-cloud
+    04-cloud-security/1-deploy/_deploy
+    04-cloud-security/2-prisma/_prisma-cloud
 
 .. toctree::
     :maxdepth: 2

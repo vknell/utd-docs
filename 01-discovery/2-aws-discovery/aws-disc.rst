@@ -1,22 +1,24 @@
-=============
+#############
 AWS Discovery
-=============
+#############
 
 Architecture de l’infrastructure à déployer sur AWS :
 
 .. figure:: img/aws-discovery-diagram.png
 
 
+************************
 Log into the AWS console
-------------------------
+************************
 
 From the POD machine you can open firefox and navigate to the `AWS URL <https://console.aws.amazon.com/>`_
 
 Log in with your AWS **utd-console** account (your IAM account for API console) see the doc `here <#/00-getting-started/requirements.html#create-iam-aws-accounts>`_.
 
 
+*********************************************
 Create your first VPC (Virtual Private Cloud)
----------------------------------------------
+*********************************************
 
 
 Etape 1 : Allez dans Services, faites une recherche sur VPC et choisissez le service VPC :
@@ -44,8 +46,9 @@ Etape 5 : Dans Edit DNS hostnames, cochez le bouton enable et sauvegardez
 .. figure:: img/create-vpc-6.png
 
 
+***************************************
 Création des sous réseaux AWS (subnets)
----------------------------------------
+***************************************
 
 Le bloc de réseaux IPv4 créé avec le VPC sera maintenant segmenté en plusieurs sous réseaux. Vous pouvez créer des sous-réseaux ayant des plages d’adresses IP qui feront partis du bloc IPv4 du VPC.
 Les sous réseaux seront utilisés comme suit :
@@ -80,8 +83,9 @@ Etape 3 : Répétez l’étape précédente pour les deux autres sous réseaux *
 .. figure:: img/create-vpc-9.png
 
 
+**************************************
 Création d’une passerelle Internet IGW
---------------------------------------
+**************************************
 
 La création d’un passerelle Internet est indispensable pour permettre au VPC de se connecter à Internet. Une fois que la passerelle est créée, il sera nécessaire de l’attacher à un VPC.
 
@@ -107,8 +111,9 @@ It may take up to a few minutes before the attached state goes to green.
 .. figure:: img/create-vpc-13.png
 
 
+******************************
 Création des tables de routage
-------------------------------
+******************************
 
 Les tables de routage vous permettent d'attribuer une connectivité telle que des passerelles Internet et des passerelles par défaut à des groupes spécifiques de points de terminaison. Rappelez-vous que tous les points d'extrémité dans le VPC peuvent se connecter de manière native à n'importe quel autre point d'extrémité dans le bloc CIDR VPC affecté (exemple : 10.2.0.0/16). Cela ne peut pas être modifié par une table de routage. Il existe une table de routage principale créée par défaut pour un VPC, et tous les sous-réseaux qui ne sont pas affectés à une table de routage personnalisée sont affectés à la table de routage principale du VPC. Par défaut, la table de routage principale route uniquement vers le bloc CIDR VPC. Les tables de routage peuvent contrôler toute connectivité de sous-réseau IP en
 dehors du bloc CIDR VPC.
@@ -180,8 +185,9 @@ Attention : Pas de route par défaut pour la table de routage utd-web-rt, cette 
 .. figure:: img/create-vpc-21.png
 
 
+**************************************************
 Création des groupes de sécurité (Security Groups)
---------------------------------------------------
+**************************************************
 
 Lorsque vous créez une instance de calcul AWS Elastic Compute (EC2) pour exécuter une instance de machine virtuelle, vous devez attribuer un groupe de sécurité (SG) nouveau ou existant à cette instance. Les groupes de sécurité fournissent un pare-feu à état de couche 4 pour le contrôle des adresses IP sources/destinations et les ports qui sont autorisés à destination ou en provenance des instances associées. Les SG sont appliqués aux interfaces réseau. Jusqu'à cinq SG peuvent être associés
 à une interface réseau. L'accès sortant par défaut est autorisé pour permettre l'ensemble du trafic de sortir vers tous les lieux ; vous pouvez toutefois la personnaliser en fonction de vos opérations. Par défaut, la liste d'accès aux services entrants est définie de manière à ne pas autoriser le trafic ; vous modifierez cette configuration en fonction des tableaux ci-dessous.
@@ -258,8 +264,9 @@ Au total, trois SG doivent être créés comme suit:
 .. figure:: img/create-vpc-26.png
 
 
+*****************************************************************
 Création des interfaces réseau pour le firewall virtuel VM-Series
------------------------------------------------------------------
+*****************************************************************
 
 Avant d’installer l’instance de pare-feu virtuel, vous allez créer les interfaces Ethernet1/1 et Ethernet1/2 pour l’associer ultérieurement à la VM-Series.
 
@@ -278,8 +285,9 @@ Etape 3 : Créez l’interface Ethernet1/2 qui est l’interface **Web** en donn
 .. figure:: img/create-vpc-30.png
 
 
+****************************************
 Déploiement de la VM-Series 300 dans AWS
-----------------------------------------
+****************************************
 
 Le pare-feu VM-Series sera déployé dans le VPC *utd-activity1* créé précédemment. L’interface de gestion est dans le sous-réseau Management_Subnet. Les sous-réseaux d'adresses IP, les tables de routage et les groupes de sécurité ont été mis en place dans la section précédente pour l'ensemble du VPC et sont utilisés dans cette section.
 Dans un premier temps le firewall sera déployé avec une seule interface qui est l’interface de management. Une fois déployé, vous allez lui associer les interfaces créées dans l’étape précédente.
@@ -315,8 +323,9 @@ Retournez dans le panneau de gestion des interfaces Services > EC2 > Network & S
 .. figure:: img/create-vpc-35-1.png
 
 
+*********************************
 Création de adresses IP publiques
----------------------------------
+*********************************
 
 Etape 1 : Allez dans Services > EC2 > Network & Security > Elastic IP > Allocate Elastic IP Address
 
@@ -341,8 +350,9 @@ Etape 7 : Sélectionnez Network interface dans Resource type, dans Network Inter
 .. figure:: img/create-vpc-39.png
 
 
+**************************************************************
 Attacher les interfaces Ethernet1/1 et Ethernet1/2 au Firewall
---------------------------------------------------------------
+**************************************************************
 
 Etape 1 : Allez dans Services > EC2 > Network & Security > Network Interfaces, Sélectionnez
 l’interface Ethernet1/1, cliquez sur Attach, choisissez l’instance du firewall dans Instance ID et cliquez sur Attach
@@ -355,8 +365,9 @@ Etape 2 : Répétez l’étape 1 pour attacher l’interface Ethernet1/2 à l’
 .. figure:: img/create-vpc-41.png
 
 
+*********************************
 Première connexion à la VM-Series
----------------------------------
+*********************************
 
 Par défaut et pour un nouveau déploiement de VM-Series dans AWS, l’instance déployée ne contient pas de mot passe pour le compte admin. Il est donc nécessaire de se connecter en SSH sur le pare-feu en utilisant la paire de clés générée durant l’étape de déploiement pour attribuer un mot de passe au compte administrateur. Une fois que le mot de passe est configuré, vous pouvez vous connecter au pare-feu via l’adresse IP publique de Management.
 
@@ -388,8 +399,9 @@ Etape 5 : Naviguez sur le firewall virtuel avec l’adresse IP publique avec le 
 .. figure:: img/create-vpc-42.png
 
 
+*********************************************
 Configuration du pare-feu nouvelle génération
----------------------------------------------
+*********************************************
 
 Configurer les Zones
 
@@ -404,8 +416,9 @@ Etape 3 : Ajoutez une deuxième zone nommée Trusted de type Layer3
 .. figure:: img/create-vpc-44.png
 
 
+**********************************************
 Configurer un Profil de Management d’Interface
-----------------------------------------------
+**********************************************
 
 Etape 1 : Dans Network > Network Profiles > Interface Mgmt cliquez sur Add en bas à gauche et ajoutez un nouveau profil de gestion.
 
@@ -443,8 +456,9 @@ Etape 8 : Dans l’onglet Advanced, allez dans Management Profile, sélectionnez
 .. figure:: img/create-vpc-53.png
 
 
+*********************
 Configurer les objets
----------------------
+*********************
 
 Etape 1 : Créez un objet d’adresse en allant dans Objects > Addresses > Add, nommez l’objet
 *WebServer_Private*, sélectionnez IP Netmask comme Type et ajoutez l’adresse IP *10.2.2.11*
@@ -456,8 +470,9 @@ Etape 2 : Créez un deuxième objet d’adresse en allant dans Objects > Address
 .. figure:: img/create-vpc-55.png
 
 
+*********************************
 Configuration Système du pare-feu
----------------------------------
+*********************************
 
 Dans cette section, la configuration système du firewall sera décrite. Cette configuration sera nécessaire pour que le firewall soit capable d’activer la licence dans la section suivante. La configuration de DNS, NTP, Hostname et Timezone est décrite ci-dessous.
 
@@ -474,8 +489,9 @@ Etape 3 : Dans l’onglet NTP, ajoutez l’adresse 0.fr.pool.ntp.org comme adres
 .. figure:: img/create-vpc-58.png
 
 
+************************************
 Configuration des règles de sécurité
-------------------------------------
+************************************
 
 Les étapes suivantes consistent à ajouter les bonnes règles de sécurité afin de vous permettre à la fois de gérer votre Serveur Web à distance (via ssh), d’accéder en HTTP vers le serveur Web depuis Internet et de laisser ce dernier sortir sur Internet pour télécharger et installer le package Apache. Vous allez configurer les mêmes règles de sécurité qui sont détaillées dans la figure suivante :
 
@@ -511,8 +527,9 @@ Une fois la configuration terminée, un **Commit** est indispensable pour appliq
 .. figure:: img/create-vpc-61.png
 
 
+************************************
 Activation de la licence (Auth-Code)
-------------------------------------
+************************************
 
 Utilisez le code d’autorisation (auth-code) que vous avez reçu par mail pour activer toutes les fonctionnalités de sécurité sur votre NGFW.
 
@@ -525,8 +542,9 @@ Etape 3 : Une fois la validation faite, cliquez sur Retrieve licence from licenc
 .. figure:: img/create-vpc-62.png
 
 
+********************************************************************
 Déploiement et configuration du serveur Web protégé par la VM-Series
---------------------------------------------------------------------
+********************************************************************
 
 Configurer une route par défaut pour le subnet Trusted_Subnet
 
@@ -595,14 +613,16 @@ Accès sécurisé à mon Serveur Web hébergé dans AWS
 Vous arrivez à l’étape finale du présent Lab. Vous pouvez ainsi tester la connectivité http vers votre serveur Web en naviguant vers l’adresse IP publique associée à l’interface *internet* de votre firewall. Vous pouvez aussi aller consulter les logs dans la section Monitor de votre NGFW et tester d’autres fonctionnalités de sécurité disponibles sur ce dernier.
 
 
+****************************************************
 (Optional) Create AWS Cloud Formation Template (CFT)
-----------------------------------------------------
+****************************************************
 
 https://docs.aws.amazon.com/cloudformation/index.html
 
 
+******************
 Suppression du VPC
-------------------
+******************
 
 Il faut supprimer dans cet ordre:
 Les instances (EC2 > Instances séléctionner les deux instances et les )

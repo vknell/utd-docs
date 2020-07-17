@@ -1,6 +1,6 @@
-=====================
+#####################
 Terraform and Commits
-=====================
+#####################
 
 One thing to know when working with Terraform is that it does not have
 support for committing your configuration.  To commit your configuration, you

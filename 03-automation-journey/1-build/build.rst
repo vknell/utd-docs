@@ -1,6 +1,8 @@
-======
-Deploy
-======
+#####
+Build
+#####
+
+Build your architecture as a code (IaC) using Terraform.
 
 .. warning:: If you are working on the GCP lab, skip this page and proceed to :doc:`../03-run/terraform/background-terraform`.
 
@@ -19,8 +21,10 @@ In this activity you will:
 
 You are now ready to deploy the lab infrastructure.
 
+********************************
 Create AWS environment variables
---------------------------------
+********************************
+
 We will be deploying the lab infrastucture in AWS using Terraform.  A
 predefined Terraform plan is provided that will initialize the AWS provider and
 call modules responsible for instantiating the network, compute, and storage
@@ -56,8 +60,9 @@ You can provide your credentials via the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS
     $ export AWS_SECRET_ACCESS_KEY=your-secret-key-here
 
 
+**********************
 Create an SSH key-pair
-----------------------
+**********************
 All AWS EC2 instances are required to have an SSH key-pair defined when the
 instance is created.  This is done to ensure secure access to the instance will
 be available once it is created.
@@ -70,8 +75,9 @@ directory.
     $ ssh-keygen -t rsa -b 1024 -N '' -f ~/.ssh/lab_ssh_key
 
 
+******************************
 Create the Terraform variables
-------------------------------
+******************************
 Change into the AWS deployment directory.
 
 .. code-block:: bash
@@ -107,8 +113,10 @@ file.
     public_key_file     = "~/.ssh/lab_ssh_key.pub"
 
 
+*************************************
 Initialize the AWS Terraform provider
--------------------------------------
+*************************************
+
 Once you've created the ``terraform.tfvars`` file and populated it with the
 variables and values you are now ready to initialize the Terraform providers.
 For this initial deployment we will only be using the
@@ -121,8 +129,10 @@ plugins needed for working in a particular environment.
     $ terraform init
 
 
+*********************************
 Deploy the lab infrastucture plan
----------------------------------
+*********************************
+
 We are now ready to deploy our lab infrastructure plan.  We should first
 perform a dry-run of the deployment process and validate the contents of the
 plan files and module dependencies.
@@ -174,15 +184,17 @@ complete the initial bootstrap process.
 It is recommended that you skip ahead and read the :doc:`../03-run/terraform/background-terraform` section while you wait.
 
 
+********************************************************
 Verify on AWS Console some elements created by terraform
---------------------------------------------------------
+********************************************************
 
 .. figure:: work-in-progress.png
 
 
-
+*************************************
 Confirm firewall bootstrap completion
--------------------------------------
+*************************************
+
 SSH into the firewall with the following credentials.
 
 - **Username:** ``admin``

@@ -1,6 +1,6 @@
-=======
+#######
 Summary
-=======
+#######
 
 Congratulations!  You have completed the hands-on workshop.  If you only
 completed the lab activities for one of the public cloud providers you are
@@ -9,8 +9,11 @@ environment.  What you'll find is that (with a few cloud-specific
 exceptions) the methods used to deploy and configure the VM-Series firewall
 are essentially the same.
 
+
+***********************
 What We've Accomplished
------------------------
+***********************
+
 We've covered all three categories of network security automation:
 
 - **Build:** We used Terraform to orchestrate the deployment of the lab
