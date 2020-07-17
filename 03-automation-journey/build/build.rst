@@ -2,9 +2,7 @@
 Build
 #####
 
-Build your architecture as a code (IaC) using Terraform.
-
-.. warning:: If you are working on the GCP lab, skip this page and proceed to :doc:`../03-run/terraform/background-terraform`.
+Build your architecture as code (IaC) using Terraform.
 
 In this activity you will:
 
@@ -14,10 +12,6 @@ In this activity you will:
 - Initialize the AWS Terraform provider
 - Deploy the lab infrastucture plan
 - Confirm firewall bootstrap completion
-
-
-
-
 
 You are now ready to deploy the lab infrastructure.
 
@@ -30,17 +24,10 @@ predefined Terraform plan is provided that will initialize the AWS provider and
 call modules responsible for instantiating the network, compute, and storage
 resources needed.
 
-In order for Terraform to do this it will need to authenticate to AWS using the
-AWS Access Key and Secret Key values that were presented in the Qwiklabs panel
-when the lab was started.  Rather than write these as Terraform variables, we
-will use Linux environment variables.
-
-You have to use your AWS Access key ID and AWS Secret Key from IAM account for API access ( see the doc `here </00-getting-started/03-aws-account.html#create-iam-account-for-api-access>`_. ):
+In order for Terraform to do this it will need to authenticate to AWS using your AWS Access key ID and AWS Secret Key. Use the credentials downloaded in your csv file. ( see the doc `here <#/00-getting-started/requirements.html#create-iam-account-for-api-access>`_. ):
 
 
-Warning: Hard-coding credentials into any Terraform configuration is not recommended, and risks secret leakage should this file ever be committed to a public version control system.
-
-Static credentials can be provided by adding an access_key and secret_key in-line in the AWS provider block:
+Static credentials can be provided by adding an access_key and secret_key in-line in the AWS provider block, **but this is not safe**:
 
 .. code-block:: bash
 
@@ -50,14 +37,19 @@ Static credentials can be provided by adding an access_key and secret_key in-lin
       secret_key = "my-secret-key"
     }
 
-Create the environment variables.
+.. warning:: Hard-coding credentials into any Terraform configuration is not recommended, and risks secret leakage should this file ever be committed to a public version control system (like github). Rather than write these as Terraform variables, we will use Linux environment variables.
 
-You can provide your credentials via the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, environment variables, representing your AWS Access Key and AWS Secret Key, respectively. Note that setting your AWS credentials using either these (or legacy) environment variables will override the use of AWS_SHARED_CREDENTIALS_FILE and AWS_PROFILE. The AWS_DEFAULT_REGION and AWS_SESSION_TOKEN environment variables are also used, if applicable:
+
+Instead create the environment variables.
+
+You can provide your credentials via the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, environment variables, representing your AWS Access Key and AWS Secret Key, respectively. 
 
 .. code-block:: bash
 
     $ export AWS_ACCESS_KEY_ID=your-access-key-here
     $ export AWS_SECRET_ACCESS_KEY=your-secret-key-here
+
+.. note:: Note that setting your AWS credentials using either these (or legacy) environment variables will override the use of AWS_SHARED_CREDENTIALS_FILE and AWS_PROFILE. The AWS_DEFAULT_REGION and AWS_SESSION_TOKEN environment variables are also used, if applicable.
 
 
 **********************

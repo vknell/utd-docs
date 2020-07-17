@@ -24,7 +24,7 @@ Predeployed Pod
 
 The instructor will give you an URL to connect on predeployed VM set with all required tools.
 
-If you wish to deploy your own set of tools on your machine or lab machine here are the lists of what you will need to install tools on your own device. See the following sections.
+.. warning:: If you wish to deploy your own set of tools on your machine or lab machine here are the lists of what you will need to install tools on your own device. See the following sections.
 
 
 Linux & Mac Endpoint
