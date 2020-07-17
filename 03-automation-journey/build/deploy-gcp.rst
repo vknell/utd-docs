@@ -30,7 +30,7 @@ is typically used because it is certain to have all the neccesary permissions.
 
 List the email address of the Compute Engine default service account.
 
-.. code-block:: bash
+.. code-block:: console
 
     $ gcloud iam service-accounts list
 
@@ -38,13 +38,13 @@ Use the following ``gcloud`` command to download the credentials for the
 **Compute Engine default service account** using its associated email address
 (displayed in the output of the previous command).
 
-.. code-block:: bash
+.. code-block:: console
 
     $ gcloud iam service-accounts keys create ~/gcp_compute_key.json --iam-account <EMAIL_ADDRESS>
 
 Verify the JSON credentials file was successfully created.
 
-.. code-block:: bash
+.. code-block:: console
 
     $ cat ~/gcp_compute_key.json
 
@@ -60,7 +60,7 @@ will be available once it is created.
 Create an SSH key-pair with an empty passphrase and save them in the ``~/.ssh``
 directory.
 
-.. code-block:: bash
+.. code-block:: console
 
     $ ssh-keygen -t rsa -b 1024 -N '' -f ~/.ssh/lab_ssh_key
 
@@ -77,15 +77,15 @@ Create the Terraform variables
 
 Change into the GCP deployment directory.
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ cd ~/multicloud-automation-lab/deployment/gcp
+    $ cd ~/utd-automation/journey/deployment/gcp
 
 In this directory you will find the three main files associated with a
 Terraform plan: ``main.tf``, ``variables.tf``, and ``outputs.tf``.  View the
 contents of these files to see what they contain and how they're structured.
 
-.. code-block:: bash
+.. code-block:: console
 
     $ more main.tf
     $ more variables.tf
@@ -123,7 +123,7 @@ For this initial deployment we will only be using the
 This initialization process will download all the software, modules, and
 plugins needed for working in a particular environment.
 
-.. code-block:: bash
+.. code-block:: console
 
     $ terraform init
 
@@ -136,14 +136,14 @@ We are now ready to deploy our lab infrastructure plan.  We should first
 perform a dry-run of the deployment process and validate the contents of the
 plan files and module dependencies.
 
-.. code-block:: bash
+.. code-block:: console
 
     $ terraform plan
 
 If there are no errors and the plan output looks good, let's go ahead and
 perform the deployment.
 
-.. code-block:: bash
+.. code-block:: console
 
     $ terraform apply -auto-approve
 
@@ -192,7 +192,7 @@ SSH into the firewall with the following credentials.
 - **Password:** ``Ignite2019!``
 
 
-.. code-block:: bash
+.. code-block:: console
 
     $ ssh admin@<FIREWALL_MGMT_IP>
 
@@ -209,7 +209,7 @@ deployment directory.
 Once you have logged into the firewall you can check to ensure the management
 plane has completed its initialization.
 
-.. code-block:: bash
+.. code-block:: console
 
     admin@lab-fw> show chassis-ready
 

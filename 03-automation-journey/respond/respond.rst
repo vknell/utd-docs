@@ -86,9 +86,9 @@ Once you have logged into the firewall, go to the **VM Information Sources** und
 
 - The **VPC ID** field will contain the AWS VPC value that was output during the deployment phase.  You can change into the AWS deployment directory and display the Terraform output values with the following commands.
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ cd ~/multicloud-automation-lab/deployment/aws
+    $ cd ~/utd-automation/journey/deployment/aws
     $ terraform output
 
 Click **OK** to accept the configuration.
@@ -200,15 +200,15 @@ To scale out the number of database instances we'll go back to our Terraform dep
 
 For GCP:
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ cd ~/multicloud-automation-lab/deployment/gcp
+    $ cd ~/utd-automation/journey/deployment/gcp
 
 For AWS:
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ cd ~/multicloud-automation-lab/deployment/aws
+    $ cd ~/utd-automation/journey/deployment/aws
 
 In the ``main.tf`` file there is a module called ``scale`` that is commented out.  Open ``main.tf`` in a text editor and uncomment that entire section.  
 
@@ -216,13 +216,13 @@ Save the file and exit.
 
 By uncommenting the ``scale`` module you have just added a new module to the Terraform plan.  This will require a re-initialization of the plan.
 
-.. code-block:: bash
+.. code-block:: console
 
     $ terraform init
 
 You can now apply the Terraform plan.
 
-.. code-block:: bash
+.. code-block:: console
 
     $ terraform apply
 

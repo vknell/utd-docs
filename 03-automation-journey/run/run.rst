@@ -21,9 +21,9 @@ For this portion of the lab, you will be using the Palo Alto Networks
 
 First, change to the Terraform configuration directory.
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ cd ~/utd-automation/utd/basic/configuration/terraform
+    $ cd ~/utd-automation/journey/configuration/terraform
 
 
 Provider Initialization
@@ -39,18 +39,18 @@ configuration which can contain the configuration.
 Another way you can accomplish this is by using environment variables.  Use the
 following commands to add the appropriate environment variables:
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ export PANOS_HOSTNAME="<YOUR FIREWALL MGMT IP GOES HERE>"
-    $ export PANOS_USERNAME="admin"
-    $ export PANOS_PASSWORD="Ignite2019!"
+    export PANOS_HOSTNAME="<YOUR FIREWALL MGMT IP GOES HERE>"
+    export PANOS_USERNAME="admin"
+    export PANOS_PASSWORD="Ignite2019!"
 
 .. note:: Replace the text ``<YOUR FIREWALL MGMT IP GOES HERE>`` with your firewall's management IP address.
 
 Now, you should see the variables exported in your shell, which you can verify
 using the ``env | grep PANOS`` command:
 
-.. code-block:: bash
+.. code-block:: console
 
     PANOS_HOSTNAME=3.216.53.203
     PANOS_USERNAME=admin
@@ -58,7 +58,7 @@ using the ``env | grep PANOS`` command:
 
 With these values defined, we can now initialize the Terraform panos provider with the following command.
 
-.. code-block:: bash
+.. code-block:: console
 
     $ terraform init
 
@@ -236,9 +236,9 @@ For this portion of the lab, you're going to be using the Palo Alto Networks
 
 First, let's change to the Ansible configuration directory.
 
-.. code-block:: bash
+.. code-block:: console
 
-  $ cd ~/multicloud-automation-lab/configuration/ansible
+  $ cd ~/utd-automation/journey/configuration/ansible
 
 
 Module Communications
@@ -432,7 +432,7 @@ Run the Playbook
 Save and exit your ``playbook.yml`` file.  Then run your playbook with the
 following command:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ ansible-playbook -i inventory playbook.yml
 
@@ -471,16 +471,16 @@ address of this interface.
 
 `For GCP:`
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ cd ~/multicloud-automation-lab/deployment/gcp
+    $ cd ~/utd-automation/journey/deployment/gcp
     $ terraform output
 
 `For AWS:`
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ cd ~/multicloud-automation-lab/deployment/aws
+    $ cd ~/utd-automation/journey/deployment/aws
     $ terraform output
 
 Open a new tab in your web browser and go to ``http://<web-server-ip-address>``.

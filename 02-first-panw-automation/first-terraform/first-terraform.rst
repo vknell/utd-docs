@@ -1,6 +1,6 @@
-==========================
+##########################
 First Terraform Deployment
-==========================
+##########################
 
 In this activity you will:
 
@@ -12,32 +12,37 @@ In this activity you will:
 - Confirm firewall bootstrap completion
 
 
+*************
 Open Terminal
--------------
+*************
 
 .. figure:: img/work-in-progress.png
 
 
+****************************
 Create terraform Environment
-----------------------------
+****************************
 
 You will need to download the sample repository used in this lab.  This repository (or *repo*) contains
 the files needed to deploy the network and compute infrastructure we'll be working with.
 
-.. code-block:: bash
+.. code-block:: console
     
-    wget  -P ~/utd-automation/first-step-terraform https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/deploy_pavm.tf
-    wget  -P ~/utd-automation/first-step-terraform https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/deploy_vpc.tf
-    wget  -P ~/utd-automation/first-step-terraform https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/variables.tf
+    wget  -P ~/utd-automation/first-terraform https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/deploy_pavm.tf
+    wget  -P ~/utd-automation/first-terraform https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/deploy_vpc.tf
+    wget  -P ~/utd-automation/first-terraform https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/variables.tf
 
 
+********************************
 Create AWS environment variables
---------------------------------
+********************************
 
 Select the Paris region (eu-west-3) at the top right corner of the screen
 
+
+**********************
 Create an SSH key-pair
-----------------------
+**********************
 
 All AWS EC2 instances are required to have an SSH key-pair defined when the
 instance is created.  This is done to ensure secure access to the instance will
@@ -65,12 +70,14 @@ And click Create .
 
 Change the key to the following folder
 
-.. code-block:: bash
+.. code-block:: console
 
-    mv ~/Downloads/ec2sshkeypair.pem ~/utd/utd-automation/first-step-terraform/
+    mv ~/Downloads/ec2sshkeypair.pem ~/utd-automation/first-terraform/
 
+
+**********************************
 Create S3 Bucket for bootstrapping
-----------------------------------
+**********************************
 
 Bootstrapping is a feature of the VM-Series firewall that allows you to load a pre-
 defined configuration into the firewall during boot-up and to automate its deployment.
@@ -105,15 +112,16 @@ name is not unique.
 Once the bucket is created, select your bucket and click on **copy ARN** button and copy/paste the value in file named **ARNBucket**
 In your terminal type **export ARN=** and paste the key that is in your clipboard then enter the following command:
 
-..  code-block:: bash
+..  code-block:: console
 
-    sed -i 's/arn:aws:s3:::ha1-dev-paloalto/'"$ARN"'/g' ~/utd/utd-automation/first-step-terraform/deploy_vpc.tf
+    sed -i 's/arn:aws:s3:::ha1-dev-paloalto/'"$ARN"'/g' ~/utd-automation/first-terraform/deploy_vpc.tf
 
 This information will used later in Terraform script for bootstrap of VM FW.
 
 
+**************************************************
 Add restricted permission on S3 Bucket (Read only)
---------------------------------------------------
+**************************************************
 
 We need to give ** relevant rights** for IAM account created to use API (IAM account for API access).
 
@@ -150,11 +158,9 @@ Click Create policy
 .. figure:: img/buckets3-11.png
 
 
-
-
-
+******************************
 Build Bootstrping in S3 Bucket
-------------------------------
+******************************
 
 click on the newly created bucket and modify 
 
@@ -175,12 +181,12 @@ folders.
 
 
 
-Upload files in the various buckets folder from ~/utd/first-step-terraform folde
+Upload files in the various buckets folder from ~/utd-automation/first-terraform folde
 
 
 
 
-Upload the bootstrap.xml and init-cfg.txt files from bootstrap folder (~/utd/first-step-terraform/bootstrap-files/) to the **config** folder by clicking **config**.
+Upload the bootstrap.xml and init-cfg.txt files from bootstrap folder (~/utd-automation/first-terraform/bootstrap-files/) to the **config** folder by clicking **config**.
 
 .. figure:: img/bootstrap-4.png
 
@@ -221,14 +227,13 @@ and select the file (example : 0001A100110-threats.key) downloaded previously an
 Upload:
 
 
-
-
+******************************
 Create the Terraform variables
-------------------------------
+******************************
 
 Change into the AWS deployment directory.
 
-.. code-block:: bash
+.. code-block:: console
 
     $ cd ~/utd/utd-automation/utd/sample --------  A REVOIR----------
 
@@ -236,7 +241,7 @@ In this directory you will find the three main files associated with a
 Terraform plan: ``deploy_panvm.tf``, ``variables.tf``, and ``deploy_vpc.tf``.  View the
 contents of these files to see what they contain and how they're structured.
 
-.. code-block:: bash
+.. code-block:: console
 
     $ more deploy_panvm.tf
     $ more deploy_vpc.tf
@@ -255,15 +260,16 @@ allow the firewall to access the S3 bucket via private IP address.
 variables.tf - Variables you can set for the deployment
 
 
+**************************
 Modify/Adapt Configuration
---------------------------
+**************************
 
 1. You need to modify the variables.tf file with a Terminal or text editor.
 
 
 To set the AWS access key and secret key of your IAM account for API access ( see the doc `here <https://utd-automation.readthedocs.io/en/latest/00-getting-started/aws-account.html>`_. ):
 
-.. code-block:: bash
+.. code-block:: console
 
     # AWS Credential
     variable "access_key" {
@@ -277,7 +283,7 @@ To set the AWS access key and secret key of your IAM account for API access ( se
 
 2.  Modify variables.tf file with a Terminal or text editor with right information regarding Region and AZ if needed:(The template is also setup to deploy in US East Region)
 
-.. code-block:: bash
+.. code-block:: console
 
 
         # AWS Region and Availablility Zone
@@ -292,7 +298,7 @@ To set the AWS access key and secret key of your IAM account for API access ( se
 
 3. Modify variables.tf file with a Terminal or text editor with right information regarding SSH keypair:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         variable "pavm_key_name" {
         description = "Name of the SSH keypair to use in AWS."
@@ -300,12 +306,12 @@ To set the AWS access key and secret key of your IAM account for API access ( se
         }
         variable "pavm_key_path" {
         description = "Path to the private portion of the SSH key specified."
-        default = "~/utd/first-step-terraform/ec2sshkeypair.pem"
+        default = "~/utd-automation/first-terraform/ec2sshkeypair.pem"
         }
 
 4. (Optional) Modify variables.tf file with a Terminal or text editor with right information regarding the VPC CIDR and VPC Subnets if needed:
 
-    .. code-block:: bash
+    .. code-block:: console
 
       
         
@@ -359,7 +365,7 @@ For example, to list all Palo Alto Networks AMIs provided by AWS, select Public 
 
 Then verify or adapt AMI ID if needed :
 
-.. code-block:: bash
+.. code-block:: console
 
     # PAVM configuration
     variable "pavm_payg_bun2_ami_id" {
@@ -394,7 +400,7 @@ Then verify or adapt AMI ID if needed :
 
 6. Adapt variables.tf file with a Terminal or text editor with right information regarding Bucket S3 for Bootstraping where XXXX is the name of your bucket S3.
 
-.. code-block:: bash
+.. code-block:: console
 
     variable "pavm_user_data" {
     #default = "vmseries-bootstrap-aws-s3bucket=panw-mlue-bucket"
@@ -419,7 +425,7 @@ For both AWS, the licensing options are bring your own license (BYOL) and pay as
 In deploy_panw.tf you can adapt the AMI information regarding your licensing
 type (BYOL or Bundle2):
 
-.. code-block:: bash
+.. code-block:: console
 
     # Palo Alto VM-Series Firewall
     resource "aws_instance" "pavm" {
@@ -454,7 +460,7 @@ bandwidth constraints on your network traffic.
 
 In deploy_vpc.tf you have to uncomment code to use Bootstrap S3 Bucket and give the S3 name bucket:
 
-.. code-block:: bash
+.. code-block:: console
 
     # Create an endpoint for S3 bucket
     /* Uncomment to enable */
@@ -476,11 +482,12 @@ In deploy_vpc.tf you have to uncomment code to use Bootstrap S3 Bucket and give 
     */
 
 Nota : 
-- Value for ARN (**arn:aws:s3:::mys3bucketutd**) was been copied in in file named **ARNBucket** in ~/utd/first-step-terraform folder at the begining of activity (see ici)
+- Value for ARN (**arn:aws:s3:::mys3bucketutd**) was been copied in in file named **ARNBucket** in ~/utd-automation/first-terraform folder at the begining of activity (see ici)
 
 
+*************************************
 Initialize the AWS Terraform provider
--------------------------------------
+*************************************
 
 Once you've created the ``terraform.tfvars`` file and populated it with the
 variables and values you are now ready to initialize the Terraform providers.
@@ -489,27 +496,27 @@ For this initial deployment we will only be using the
 This initialization process will download all the software, modules, and
 plugins needed for working in a particular environment.
 
-.. code-block:: bash
+.. code-block:: console
 
     $ terraform init
 
 
-
+*********************************
 Deploy the lab infrastucture plan
----------------------------------
+*********************************
 
 We are now ready to deploy our lab infrastructure plan.  We should first
 perform a dry-run of the deployment process and validate the contents of the
 plan files and module dependencies.
 
-.. code-block:: bash
+.. code-block:: console
 
     $ terraform plan
 
 If there are no errors and the plan output looks good, let's go ahead and
 perform the deployment.
 
-.. code-block:: bash
+.. code-block:: console
 
     $ terraform apply -auto-approve
 
@@ -543,22 +550,23 @@ complete the initial bootstrap process.
 It is recommended that you skip ahead and read the :doc:`../03-run/terraform/background-terraform` section while you wait.
 
 
+********************************************************
 Verify on AWS Console some elements created by terraform
---------------------------------------------------------
+********************************************************
 
 .. figure:: img/work-in-progress.png
 
 
-
+*************************************
 Confirm firewall bootstrap completion
--------------------------------------
+*************************************
 
 SSH into the firewall with the following credentials.
 
 - **Username:** ``admin``
 - **Password:** ``admin``
 
-.. code-block:: bash
+.. code-block:: console
 
     $ ssh admin@<FIREWALL_MGMT_IP>
 
@@ -575,7 +583,7 @@ deployment directory.
 Once you have logged into the firewall you can check to ensure the management
 plane has completed its initialization.
 
-.. code-block:: bash
+.. code-block:: console
 
     admin@lab-fw> show chassis-ready
 
@@ -589,22 +597,22 @@ activities.
           username/password or API key for authentication.
 
 
-
+**********************************
 Destroy the lab infrastucture plan
-----------------------------------
+**********************************
 
 To clean up the deployment, just run the following command
 
-.. code-block:: bash
+.. code-block:: console
 
     $ terraform destroy
 
 It will automatically delete every object that was created by the template.
 
 
-
+*************************************
 What were bad things on this Activity
--------------------------------------
+*************************************
 
 - AWS Access key and AWS Secret key are visible and stored in vraiable.tf file.
 - It needs to prepare a S3 bucket from AWS Console before use this scripts Terraform. 
@@ -612,8 +620,8 @@ What were bad things on this Activity
 - Structure of scripts is not relevant for large deployment architecture. 
 
 
-
+**********
 Conclusion
-----------
+**********
 
-We can do better then let's go to next activity : **Build Multicloud**
+We can do better then let's go to next activity : **The Automation Journey**

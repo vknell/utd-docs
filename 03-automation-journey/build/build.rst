@@ -28,6 +28,8 @@ In order for Terraform to do this it will need to authenticate to AWS using your
 
 
 .. warning:: Hard-coding credentials into any Terraform configuration is not recommended, and risks secret leakage should this file ever be committed to a public version control system (like github). Rather than write these as Terraform variables, we will use Linux environment variables. Static credentials can be provided by adding an access_key and secret_key in-line in the AWS provider block, **but this is not safe**:
+    
+.. code-block:: console
     provider "aws" {
       region     = "us-west-2"
       access_key = "my-access-key"
@@ -70,7 +72,7 @@ Change into the AWS deployment directory.
 
 .. code-block:: console
 
-    cd ~/utd/utd-automation/utd/basic/deployment/aws   ----------A REVOIR-------------
+    cd ~/utd-automation/journey/deployment/aws
 
 In this directory you will find the three main files associated with a
 Terraform plan: ``main.tf``, ``variables.tf``, and ``outputs.tf``.  View the
