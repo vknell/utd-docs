@@ -135,9 +135,7 @@ Red Hat Ansible
     :hidden:
     :caption: getting started
 
-    00-getting-started/01-requirements
-    00-getting-started/02-setup
-    00-getting-started/03-aws-account
+    00-getting-started/requirements
 
 .. toctree::
     :maxdepth: 2
@@ -146,7 +144,7 @@ Red Hat Ansible
 
     01-discovery/1-gcp-discovery/gcp-disc
     01-discovery/2-aws-discovery/aws-disc
-    01-discovery/3-azure-discovery/azure-dis
+    01-discovery/3-azure-discovery/azure-disc
     01-discovery/4-terraform-discovery/terraform-disc
 
 .. toctree::
@@ -162,7 +160,7 @@ Red Hat Ansible
     :caption: Automation Journey
 
     03-automation-journey/1-build/deploy
-    03-automation-journey/2-run//run-terraform
+    03-automation-journey/2-run//run
     03-automation-journey/3-respond/respond
     03-automation-journey/4-cleanup/cleanup
 

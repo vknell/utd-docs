@@ -1,5 +1,46 @@
-AWS IAM Account
----------------
+============
+Requirements
+============
+
+The following are requirements of this training workshop:
+
+
+
+Linux & Mac Endpoint
+--------------------
+
+- A laptop with Internet connectivity (SSH and HTTPS access is required).
+- A standards-compliant web browser (Google Chrome is recommended).
+- An SSH client (any Terminal, OpenSSH, SecureCRT, etc).
+- An SSL generator (ssh-keygen).
+- An understanding of Linux operating system basics.
+- Proficiency with a Linux text editor such as vim or visual studio code.
+- A basic understanding of cloud computing concepts.
+
+Windows Endpoint
+----------------
+
+- A laptop with Internet connectivity (SSH and HTTPS access is required).
+- A standards-compliant web browser (Google Chrome is recommended).
+- An SSH client (e.g., OpenSSH, PuTTY, SecureCRT, etc).
+- An SSL generator for Windows (PuTTYgen).
+- An understanding of Windows operating system basics.
+- Proficiency with a Windows text editor such as visual studio code or sublime text.
+- A basic understanding of cloud computing concepts.
+
+
+Create a root AWS account
+=========================
+If you do not have an AWS account already, go to
+https://aws.amazon.com/console/ and create an account. In order to continue you
+will need to add a method of payment to your AWS account. Use the following
+https://console.aws.amazon.com/billing/home#/paymentmethods
+If creating a new account, you may receive a phone call from AWS for verification
+purposes.
+
+
+Create IAM AWS Accounts
+-----------------------
 
 You will need to create two users and a group on AWS for the labs.
 
@@ -11,10 +52,6 @@ Navigate to the `AWS URL <https://console.aws.amazon.com/>`_
 
 Log in with your AWS credentials. 
 You will create a specific role for for AWS console and terraform in a few minutes.
-
-
-Create IAM account
-==================
 
 It is a best practice not to use the root account to create workloads and modify any configuration.
 You will create a user and a group to access the console with the proper rights.
@@ -103,3 +140,8 @@ After this step, you can click on close:
 
 .. figure:: img/aws-iam-user-success-csv-api.png
 
+
+Login on Linux dedicated hosted VM
+----------------------------------
+Instructor will give you an URL to connect on predeployed VM prepared with all tools.
+If you wish to deploy your own set of tools on your machine or lab machine here are the lists of what you will need.
