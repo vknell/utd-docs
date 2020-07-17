@@ -1,6 +1,9 @@
-==============================
-Activity 4.1: Cloud Monitoring
-==============================
+=======
+Respond
+=======
+
+Monitor
+-------
 
 In this activity you will:
 
@@ -13,7 +16,7 @@ The automation tasks we've accomplished thus far have focused on deploying the V
 
 
 Create a VM Information Source (GCP)
-------------------------------------
+====================================
 .. note:: If you are working on the AWS deployment you should skip ahead to :ref:`aws-source`.
 
 We will be creating a VM Information Source on the firewall to monitor the GCP Compute Engine environment for meta-data about the running VM instances.  Open a web browser and go to ``https://<your-firewall-ip>``.  You will log in with the following credentials.
@@ -23,7 +26,7 @@ We will be creating a VM Information Source on the firewall to monitor the GCP C
 
 Once you have logged into the firewall, go to the **VM Information Sources** under the **Device** tab and click **Add**.
 
-.. figure:: add-source-gcp.png
+.. figure:: /img/monitor-add-source-gcp.png
    :align: center
 
 - Provide a name for your monitored source in the **Name** field.
@@ -49,7 +52,7 @@ Click **OK** to accept the configuration.
 .. _aws-source:
 
 Create a VM Information Source (AWS)
-------------------------------------
+====================================
 .. note:: If you are working on the GCP deployment you should skip ahead to :ref:`verify-api`.
 
 We will be creating a VM Information Source on the firewall to monitor the AWS EC2 environment for meta-data about the running VM instances.  Open a web browser and go to ``https://<your-firewall-ip>``.  You will log in with the following credentials.
@@ -59,7 +62,7 @@ We will be creating a VM Information Source on the firewall to monitor the AWS E
 
 Once you have logged into the firewall, go to the **VM Information Sources** under the **Device** tab and click **Add**.
 
-.. figure:: add-source-aws.png
+.. figure:: /img/monitor-add-source-aws.png
    :align: center
 
 - Provide a name for your monitored source in the **Name** field.
@@ -91,12 +94,12 @@ Click **OK** to accept the configuration.
 .. _verify-api:
 
 Verify cloud API connectivity
------------------------------
+=============================
 Click **Commit** and commit the candidate configuration.
 
 If the VM Information Source configuration was correct, you should see the status indicator for your source turn green.
 
-.. figure:: working.png
+.. figure:: /img/monitor-working.png
    :align: center
 
     blah

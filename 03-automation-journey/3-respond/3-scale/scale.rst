@@ -2,6 +2,9 @@
 Activity 4.3: Compute Scaling
 =============================
 
+Scale
+-----
+
 In this activity you will:
 
 - Determine Dynamic Address Group membership
@@ -12,14 +15,14 @@ The combination of VM Information Sources and Dynamic Address Groups allows the 
 
 
 Determine Dynamic Address Group membership
-------------------------------------------
+==========================================
 First, we should confirm that the one database instance we've already deployed has already been mapped to the Dynamic Address Group based on it's ``server-type`` attribute.
 
 Navigate to **Objects > Address Groups** in the firewall web interface and select the Dynamic Address Group ``db-grp`` that you previously created.
 
 Under the *Addresses* column, click on the link entitled ``more...``
 
-.. figure:: before.png
+.. figure:: /img/scale-before.png
    :align: center
 
 You should see the IP address ``10.5.3.5``, which is the IP address of the existing database instance.
@@ -28,7 +31,7 @@ Click **Close** to close the pop-up window.
 
 
 Scale out the database instances
---------------------------------
+================================
 To scale out the number of database instances we'll go back to our Terraform deployment.
 
 For GCP:
@@ -63,10 +66,10 @@ This will result in four new database instances being added to the database subn
 
 
 Confirm Dynamic Address Group changes
--------------------------------------
+=====================================
 Now go back to the **Objects > Address Groups** section of the firewall web interface and click ``more...`` under the **Addresses** column of the ``db-grp`` entry.
 
-.. figure:: after.png
+.. figure:: /img/scale-after.png
    :align: center
 
 You should now see a total of five IP addresses as members of the ``db-grp`` Dynamic Address Group.  These are now part of the destination match criteria for the databaase security rule.

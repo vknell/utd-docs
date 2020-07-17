@@ -152,40 +152,42 @@ Red Hat Ansible
 .. toctree::
     :maxdepth: 2
     :hidden:
+    :caption: 1st pan automation
+
+    02-first-pan-automation/1-first-terraform/first-terraform
+
+.. toctree::
+    :maxdepth: 2
+    :hidden:
     :caption: Automation Journey
 
-    02-automation-journey/1-first-terraform/first-terraform
-    02-automation-journey/2-build/deploy-aws
-    02-automation-journey/3-run/1-terraform/run-t-aws
-    02-automation-journey/3-run/2-ansible/run-a-aws
-    02-automation-journey/3-run/3-validation/validation-aws
-    02-automation-journey/4-respond/1-monitor/monitor
-    02-automation-journey/4-respond/2-dag/dag
-    02-automation-journey/4-respond/3-scale/scale
+    03-automation-journey/1-build/deploy
+    03-automation-journey/2-run//run-terraform
+    03-automation-journey/3-respond/respond
+    03-automation-journey/4-cleanup/cleanup
 
 .. toctree::
     :maxdepth: 2
     :hidden:
     :caption: Cloud Security
 
-    03-cloud-security/1-deploy/deploy-aws
-    03-cloud-security/2-prisma/prisma-cloud
+    04-cloud-security/1-deploy/deploy-aws
+    04-cloud-security/2-prisma/prisma-cloud
 
 .. toctree::
     :maxdepth: 2
     :hidden:
     :caption: summary
 
-    04-summary/summary
-    04-summary/comparison
-    04-summary/cleanup
-    04-summary/moreinfo
+    05-summary/summary
+    05-summary/comparison
+    05-summary/moreinfo
 
 .. toctree::
     :maxdepth: 2
     :hidden:
     :caption: appendix
 
-    05-appendix/terraform-commit
-    05-appendix/background-terraform
-    05-appendix/background-ansible
+    06-appendix/terraform-commit
+    06-appendix/background-terraform
+    06-appendix/background-ansible

@@ -1,9 +1,8 @@
-========================================
-Activity: First Terraform Deployment
-========================================
+==========================
+First Terraform Deployment
+==========================
 
 In this activity you will:
-
 
 - Create AWS environment variables
 - Create an SSH key-pair
@@ -11,6 +10,7 @@ In this activity you will:
 - Initialize the AWS Terraform provider
 - Deploy the lab infrastucture plan
 - Confirm firewall bootstrap completion
+
 
 Open Terminal
 -------------
@@ -597,9 +597,9 @@ To clean up the deployment, just run the following command
 
 .. code-block:: bash
 
-$ terraform destroy
+    $ terraform destroy
 
-it will automatically delete every object that was created by the template.
+It will automatically delete every object that was created by the template.
 
 
 

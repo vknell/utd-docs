@@ -1,13 +1,12 @@
-====================
-Lab Deployment (AWS)
-====================
+======
+Deploy
+======
 
 .. warning:: If you are working on the GCP lab, skip this page and proceed to :doc:`../03-run/terraform/background-terraform`.
 
 In this activity you will:
 
-- Clone lab's github repository
-- Create AWS environment variables
+- Use AWS environment variables
 - Create an SSH key-pair
 - Create the Terraform variables
 - Initialize the AWS Terraform provider
@@ -32,7 +31,7 @@ AWS Access Key and Secret Key values that were presented in the Qwiklabs panel
 when the lab was started.  Rather than write these as Terraform variables, we
 will use Linux environment variables.
 
-You have to use your AWS Access key ID and AWS Secret Key from IAM account for API access ( see the doc `here <https://utd-automation.readthedocs.io/en/latest/00-getting-started/aws-account.html>`_. ):
+You have to use your AWS Access key ID and AWS Secret Key from IAM account for API access ( see the doc `here </00-getting-started/03-aws-account.html#create-iam-account-for-api-access>`_. ):
 
 
 Warning: Hard-coding credentials into any Terraform configuration is not recommended, and risks secret leakage should this file ever be committed to a public version control system.

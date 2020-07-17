@@ -2,6 +2,9 @@
 Activity 3.1: Terraform Configuration
 =====================================
 
+Run using Terraform
+-------------------
+
 In this activity you will:
 
 - Initialize the Provider
@@ -17,11 +20,11 @@ First, change to the Terraform configuration directory.
 
 .. code-block:: bash
 
-    $ cd ~/UTD/utd-automation/utd/basic/configuration/terraform
+    $ cd ~/utd-automation/utd/basic/configuration/terraform
 
 
 Provider Initialization
------------------------
+=======================
 Your first task is to set up the communications between the provider and your
 lab firewall.  There's several ways this can be done.  The IP address,
 username, and password (or API key) can be set as variables in Terraform, and
@@ -59,7 +62,7 @@ With these values defined, we can now initialize the Terraform panos provider wi
 The provider is now ready to communicate with our firewall.
 
 Network Interfaces
-------------------
+==================
 Your firewall has been bootstrapped with an initial password and nothing else.
 We're going to be performing the initial networking configuration with
 Terraform.
@@ -101,7 +104,7 @@ firewall.
 
 
 Virtual Router
---------------
+==============
 Now, you'll have to assign those interfaces to the default virtual router.
 You will need the
 `panos_virtual_router <https://www.terraform.io/docs/providers/panos/r/virtual_router.html>`_
@@ -165,7 +168,7 @@ Define those resources in ``main.tf``, and run ``terraform apply``.
 
 
 Security Zones
---------------
+==============
 Next is creating the security zones for the firewall.  You will need the
 `panos_zone <https://www.terraform.io/docs/providers/panos/r/zone.html>`_ resource.
 
