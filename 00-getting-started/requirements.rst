@@ -19,7 +19,6 @@ Laptop required
 Provided POD or BYOD
 ********************
 
-
 Predeployed Pod
 ===============
 
@@ -55,7 +54,6 @@ Windows Endpoint
 ************************
 Create your AWS Accounts
 ************************
-
 
 Create a root AWS account
 =========================

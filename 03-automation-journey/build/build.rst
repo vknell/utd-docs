@@ -1,13 +1,14 @@
-######
-Deploy
-######
+#####
+Build
+#####
 
-.. figure:: img/work-in-progress.png
+Build your architecture as a code (IaC) using Terraform.
 
+.. warning:: If you are working on the GCP lab, skip this page and proceed to :doc:`../03-run/terraform/background-terraform`.
 
 In this activity you will:
 
-- Create AWS environment variables
+- Use AWS environment variables
 - Create an SSH key-pair
 - Create the Terraform variables
 - Initialize the AWS Terraform provider
@@ -15,39 +16,43 @@ In this activity you will:
 - Confirm firewall bootstrap completion
 
 
-**********************************
-Login on Linux dedicated hosted VM
-**********************************
-Instructor has to give you an URL to connect on predeployed VM prepared by hiself (POD Machine).
 
 
-************************
-Log into the AWS console
-************************
 
-From the POD machine you can open firefox and navigate to the `AWS URL <https://console.aws.amazon.com/>`_
-
-
-Log in with your AWS credentials. 
-You will create a specific role for terraform in a few minutes.
-
+You are now ready to deploy the lab infrastructure.
 
 ********************************
 Create AWS environment variables
 ********************************
+
 We will be deploying the lab infrastucture in AWS using Terraform.  A
 predefined Terraform plan is provided that will initialize the AWS provider and
 call modules responsible for instantiating the network, compute, and storage
 resources needed.
 
 In order for Terraform to do this it will need to authenticate to AWS using the
-AWS Access Key and Secret Key values that were presented to you or you can created in 
-AWS console when the lab was started.  Rather than write these as Terraform variables, we
-will use environment variables. Because in production you will upload your terraform to a repo,
-if you hardcode your access key and secret access to any file and push with github to a public repo
-you will create a security issue.
+AWS Access Key and Secret Key values that were presented in the Qwiklabs panel
+when the lab was started.  Rather than write these as Terraform variables, we
+will use Linux environment variables.
 
-In using Terminal, create the environment variables by typing:
+You have to use your AWS Access key ID and AWS Secret Key from IAM account for API access ( see the doc `here </00-getting-started/03-aws-account.html#create-iam-account-for-api-access>`_. ):
+
+
+Warning: Hard-coding credentials into any Terraform configuration is not recommended, and risks secret leakage should this file ever be committed to a public version control system.
+
+Static credentials can be provided by adding an access_key and secret_key in-line in the AWS provider block:
+
+.. code-block:: bash
+
+    provider "aws" {
+      region     = "us-west-2"
+      access_key = "my-access-key"
+      secret_key = "my-secret-key"
+    }
+
+Create the environment variables.
+
+You can provide your credentials via the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, environment variables, representing your AWS Access Key and AWS Secret Key, respectively. Note that setting your AWS credentials using either these (or legacy) environment variables will override the use of AWS_SHARED_CREDENTIALS_FILE and AWS_PROFILE. The AWS_DEFAULT_REGION and AWS_SESSION_TOKEN environment variables are also used, if applicable:
 
 .. code-block:: bash
 
@@ -55,48 +60,9 @@ In using Terminal, create the environment variables by typing:
     $ export AWS_SECRET_ACCESS_KEY=your-secret-key-here
 
 
-
-
 **********************
 Create an SSH key-pair
 **********************
-
-VOIR VICTOR -------------------------------->>>>>>>>>>  PAS CLAIR
-
-
-
-
-
-
-
-
-Method from AWS Console:
-Click on "Services" and "EC2" as shown :
-
-.. figure:: img/work-in-progress.png
-
-Clic on "Key Pairs" as shown:
-
-.. figure:: img/work-in-progress.png
-
-Clic Create Key Pair as shown :
-
-.. figure:: img/work-in-progress.png
-
-Give it a name and clic "Create":
-
-.. figure:: img/work-in-progress.png
-
-When prompted save your Key Pair you just created.
-
-.. figure:: img/work-in-progress.png
-
-
-
-
-HackLab Method:
-
-
 All AWS EC2 instances are required to have an SSH key-pair defined when the
 instance is created.  This is done to ensure secure access to the instance will
 be available once it is created.
@@ -108,44 +74,15 @@ directory.
 
     $ ssh-keygen -t rsa -b 1024 -N '' -f ~/.ssh/lab_ssh_key
 
-For windows you can create your public certificat with puttygen, please verify
-the option rsa at 1024 bit is selected. Put the certifcat in the hacklad folder.
-
-
-******************************
-Create terraform Environment :
-******************************
-
-On your POD Machine, create a directory work space with Terminal :
-
-mkdir ~/UTD
-
-
-*********************************
-Clone the lab software repository
-*********************************
-
-Once you have successfully install Git / Terraform / Ansible you will need to clone
-the GitHub repository used in this lab.  This repository (or *repo*) contains
-the files needed to deploy the network and compute infrastructure we'll be
-working with.
-
-.. code-block:: bash
-
-    $ git clone https://github.com/vknell/udt-automation
-
-You are now ready to deploy the lab infrastructure.
-
 
 ******************************
 Create the Terraform variables
 ******************************
-
 Change into the AWS deployment directory.
 
 .. code-block:: bash
 
-    $ cd ~/UTD
+    $ cd ~/utd/utd-automation/utd/basic/deployment/aws   ----------A REVOIR-------------
 
 In this directory you will find the three main files associated with a
 Terraform plan: ``main.tf``, ``variables.tf``, and ``outputs.tf``.  View the
@@ -158,26 +95,14 @@ contents of these files to see what they contain and how they're structured.
     $ more outputs.tf
 
 The file ``main.tf`` defines the providers that will be used and the resources
-that will be created (more on that shortly).  Since it is not scalable to hard
+that will be created (more on that shortly).  Since it is poor practice to hard
 code values into the plan, the file ``variables.tf`` will be used to declare
 the variables that will be used in the plan (but not necessarily their values).
 The ``outputs.tf`` file will define the values to display that result from
 applying the plan.
 
-
-
-Verify your region directly in the variables file, ``variables.tf``it's important to update it 
-for the lab.
-
-.. code-block:: terraform
-
-    variable "aws_region"
-    variable "aws_az_name1"
-    variable "aws_az_name2"
-    variable "public_key_file"
-
-Some developper prefere to create a file called ``terraform.tfvars`` in the current directory that
-contains the following variables and their values. Generally these file are fill with the
+Create a file called ``terraform.tfvars`` in the current directory that
+contains the following variables and their values.  Fill in the quotes with the
 AWS region name, the AWS availability zone, and the path to your SSH public key
 file.
 
@@ -187,20 +112,12 @@ file.
     aws_az_name         = "<SEE_INSTRUCTOR_PRESENTATION>"
     public_key_file     = "~/.ssh/lab_ssh_key.pub"
 
-For windows you have to change your public key file in variables.tf at the root level
-
-.. code-block:: terraform
-
-    aws_region_name     = "<SEE_INSTRUCTOR_PRESENTATION>"
-    aws_az_name         = "<SEE_INSTRUCTOR_PRESENTATION>"
-    public_key_file     = ".lab_ssh_key.pub"
-
 
 *************************************
 Initialize the AWS Terraform provider
 *************************************
 
-Once you've updated the ``variables.tf`` file and populated it with the
+Once you've created the ``terraform.tfvars`` file and populated it with the
 variables and values you are now ready to initialize the Terraform providers.
 For this initial deployment we will only be using the
 `AWS Provider <https://www.terraform.io/docs/providers/aws/index.html>`_.
@@ -219,9 +136,6 @@ Deploy the lab infrastucture plan
 We are now ready to deploy our lab infrastructure plan.  We should first
 perform a dry-run of the deployment process and validate the contents of the
 plan files and module dependencies.
-
-for windows :
-just before please update your module/bootstrap/main.tf line "dev/null" with "NUL"
 
 .. code-block:: bash
 
@@ -243,21 +157,14 @@ At a high level these are each of the steps this plan will perform:
     #. Create the ``/config/init-cfg.txt``, ``/config/bootstrap.xml``,
        ``/software``, ``/content``, and ``/license`` objects in the bootstrap
        bucket
-    #. This bucket contain the firewall configuration with the login/pwd and nothing else
 #. Run the ``vpc`` module
     #. Create the VPC
     #. Create the Internet gateway
-    #. Create the ``management``, ``untrust``, ``trust`` subnets
+    #. Create the ``management``, ``untrust``, ``web``, and ``database``
+       subnets
     #. Create the security groups for each subnet
-    #. Create the default route for the ``untrust`` subnets
-#. Run the ``vpc_client``module
-    #. Create the VPC
-    #. Create the different subnet for the ``web`` and ``sql``
-#. Run the ``VPN``module
-    #. Create the vpn connection
-    #. Create the customer gateway based on the eip of FW1 and FW2
-    #. Create the vpn gateway
-#. Run the ``firewall`` module 1 and 2
+    #. Create the default route for the ``web`` and ``database`` subnets
+#. Run the ``firewall`` module
     #. Create the VM-Series firewall instance
     #. Create the VM-Series firewall interfaces
     #. Create the Elastic IPs for the ``management`` and ``untrust`` interfaces
@@ -265,19 +172,23 @@ At a high level these are each of the steps this plan will perform:
 #. Run the ``web`` module
     #. Create the web server instance
     #. Create the web server interface
-#. Run the ``sql`` module
+#. Run the ``database`` module
     #. Create the database server instance
     #. Create the database server interface
 
 The deployment process should finish in a few minutes and you will be presented
 with the public IP addresses of the VM-Series firewall management and untrust
-interfaces.  However, the VM-Series firewall and VPN AWS connection can take up to *ten minutes* to
+interfaces.  However, the VM-Series firewall can take up to *ten minutes* to
 complete the initial bootstrap process.
 
+It is recommended that you skip ahead and read the :doc:`../03-run/terraform/background-terraform` section while you wait.
 
 
+********************************************************
+Verify on AWS Console some elements created by terraform
+********************************************************
 
-attention  MODIFIER ::::::   It is recommended that you skip ahead and read the :doc:`../03-run/terraform/background-terraform` section while you wait.
+.. figure:: work-in-progress.png
 
 
 *************************************
@@ -286,8 +197,8 @@ Confirm firewall bootstrap completion
 
 SSH into the firewall with the following credentials.
 
-- **Username:** ``paloalto``
-- **Password:** ``Pal0Alt0@123``
+- **Username:** ``admin``
+- **Password:** ``Ignite2019!``
 
 .. code-block:: bash
 
