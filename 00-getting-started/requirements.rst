@@ -30,7 +30,7 @@ Windows Endpoint
 
 
 Create a root AWS account
-=========================
+-------------------------
 If you do not have an AWS account already, go to
 https://aws.amazon.com/console/ and create an account. In order to continue you
 will need to add a method of payment to your AWS account. Use the following

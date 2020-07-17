@@ -7,17 +7,12 @@ Architecture de l’infrastructure à déployer sur AWS :
 .. figure:: img/aws-discovery-diagram.png
 
 
-Login on Linux dedicated hosted VM
-----------------------------------
-Instructor has to give you an URL to connect on predeployed VM prepared by hiself (POD Machine).
-
-
 Log into the AWS console
 ------------------------
 
 From the POD machine you can open firefox and navigate to the `AWS URL <https://console.aws.amazon.com/>`_
 
-Log in with your AWS **utd-console** account (your IAM account for API console) see the doc `here <#/00-getting-started/02-aws-account.html>`_.
+Log in with your AWS **utd-console** account (your IAM account for API console) see the doc `here <#/00-getting-started/requirements.html#create-iam-aws-accounts>`_.
 
 
 Create your first VPC (Virtual Private Cloud)
