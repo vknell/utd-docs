@@ -117,35 +117,35 @@ Red Hat Ansible
     :hidden:
     :caption: cloud discovery
 
-    01-discovery/1-gcp-discovery/_gcp-disc
-    01-discovery/2-aws-discovery/aws-disc
-    01-discovery/3-azure-discovery/_azure-disc
-    01-discovery/4-terraform-discovery/terraform-disc
+    01-discovery/gcp-discovery/gcp-disc
+    01-discovery/aws-discovery/aws-disc
+    01-discovery/azure-discovery/azure-disc
+    01-discovery/terraform-discovery/terraform-disc
 
 .. toctree::
     :maxdepth: 2
     :hidden:
-    :caption: 1st pan automation
+    :caption: 1st panw automation
 
-    02-first-pan-automation/1-first-terraform/first-terraform
+    02-first-pan-automation/first-terraform/first-terraform
 
 .. toctree::
     :maxdepth: 2
     :hidden:
     :caption: Automation Journey
 
-    03-automation-journey/1-build/build
-    03-automation-journey/2-run/run
-    03-automation-journey/3-respond/respond
-    03-automation-journey/4-cleanup/cleanup
+    03-automation-journey/build/build
+    03-automation-journey/run/run
+    03-automation-journey/respond/respond
+    03-automation-journey/cleanup/cleanup
 
 .. toctree::
     :maxdepth: 2
     :hidden:
     :caption: Cloud Security
 
-    04-cloud-security/1-deploy/_deploy
-    04-cloud-security/2-prisma/_prisma-cloud
+    04-cloud-security/deploy/deploy
+    04-cloud-security/prisma/prisma-cloud
 
 .. toctree::
     :maxdepth: 2
