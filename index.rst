@@ -142,9 +142,9 @@ Red Hat Ansible
     :hidden:
     :caption: cloud discovery
 
-    01-discovery/1-gcp-discovery/gcp-disc
+    01-discovery/1-gcp-discovery/_gcp-disc
     01-discovery/2-aws-discovery/aws-disc
-    01-discovery/3-azure-discovery/azure-disc
+    01-discovery/3-azure-discovery/_azure-disc
     01-discovery/4-terraform-discovery/terraform-disc
 
 .. toctree::
