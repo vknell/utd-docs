@@ -13,13 +13,12 @@ Log into the AWS console
 
 From the POD machine you can open firefox and navigate to the `AWS URL <https://console.aws.amazon.com/>`_
 
-Log in with your AWS **utd-console** account (your IAM account for API console) see the doc `here </00-getting-started/requirements.html#create-iam-aws-accounts>`_.
+Log in with your AWS ``utd-console`` account (your IAM account for API console) see the doc `here </00-getting-started/requirements.html#create-iam-aws-accounts>`_.
 
 
 *********************************************
 Create your first VPC (Virtual Private Cloud)
 *********************************************
-
 
 Etape 1 : Allez dans Services, faites une recherche sur VPC et choisissez le service VPC :
 
@@ -35,7 +34,7 @@ Etape 3 : Remplissez le nom du VPC, le sous réseau, laissez les autres paramèt
 
 .. figure:: img/create-vpc-3.png
 
-Etape 4 : Sélectionnez le VPC **utd-activity1** et allez dans Actions > Edit DNS hostnames
+Etape 4 : Sélectionnez le VPC ``utd-activity1`` et allez dans Actions > Edit DNS hostnames
 
 .. figure:: img/create-vpc-4.png
 
@@ -78,7 +77,7 @@ Etape 2 : Renseignez le nom, le VPC *utd-activity1*, choisissez la première zon
 
 .. figure:: img/create-vpc-8-3.png
 
-Etape 3 : Répétez l’étape précédente pour les deux autres sous réseaux *internet* et *web*.
+Etape 3 : Répétez l’étape précédente pour les deux autres sous réseaux ``internet`` et ``web``.
 
 .. figure:: img/create-vpc-9.png
 
@@ -90,7 +89,7 @@ Création d’une passerelle Internet IGW
 La création d’un passerelle Internet est indispensable pour permettre au VPC de se connecter à Internet. Une fois que la passerelle est créée, il sera nécessaire de l’attacher à un VPC.
 
 
-Etape 1 : Allez dans VPC > Internet Gateways > Create internet gateway et utilisez *utd-activity1-igw* comme nom
+Etape 1 : Allez dans VPC > Internet Gateways > Create internet gateway et utilisez ``utd-activity1-igw`` comme nom
 
 .. figure:: img/create-vpc-10.png
 
@@ -98,11 +97,11 @@ Etape 1 : Allez dans VPC > Internet Gateways > Create internet gateway et utilis
 
 .. figure:: img/create-vpc-10-2.png
 
-Etape 2 : Sélectionnez l’IGW *utd-activity1-igw* et ensuite allez dans Actions > Attach to VPC
+Etape 2 : Sélectionnez l’IGW ``utd-activity1-igw`` et ensuite allez dans Actions > Attach to VPC
 
 .. figure:: img/create-vpc-11.png
 
-Etape 3 : Sélectionner le VPC *utd-activity1* et sauvegarder
+Etape 3 : Sélectionner le VPC ``utd-activity1`` et sauvegarder
 
 .. figure:: img/create-vpc-12.png
 
@@ -118,9 +117,9 @@ Création des tables de routage
 Les tables de routage vous permettent d'attribuer une connectivité telle que des passerelles Internet et des passerelles par défaut à des groupes spécifiques de points de terminaison. Rappelez-vous que tous les points d'extrémité dans le VPC peuvent se connecter de manière native à n'importe quel autre point d'extrémité dans le bloc CIDR VPC affecté (exemple : 10.2.0.0/16). Cela ne peut pas être modifié par une table de routage. Il existe une table de routage principale créée par défaut pour un VPC, et tous les sous-réseaux qui ne sont pas affectés à une table de routage personnalisée sont affectés à la table de routage principale du VPC. Par défaut, la table de routage principale route uniquement vers le bloc CIDR VPC. Les tables de routage peuvent contrôler toute connectivité de sous-réseau IP en
 dehors du bloc CIDR VPC.
 
-Bien que les tables de routage *internet-rt* (publique) et *management-rt* (table de routage du
+Bien que les tables de routage ``internet-rt`` (publique) et ``management-rt`` (table de routage du
 subnet de Management) soient programmées de la même manière ci-dessous, elles sont réparties
-séparément car vous pouvez personnaliser votre table de routage *management-rt* pour accéder
+séparément car vous pouvez personnaliser votre table de routage ``management-rt`` pour accéder
 uniquement aux destinations de gestion sélectionnées via l'IGW par rapport à une table ouverte par défaut de 0.0.0.0/0. Il existe une table de routage de serveur Web pour chaque zone de disponibilité et une route par défaut sera ajoutée plus loin dans ce guide, une fois les pare-feux programmés et opérationnels.
 
 Ci-dessous, les tables de routage à créer sont décrites dans le tableau ci-dessous :
@@ -149,7 +148,7 @@ Etape 2 : Entrez le nom de la table de routage, sélectionnez le VPC *utd-activi
 
 .. figure:: img/create-vpc-14-1.png
 
-Etape 3 : Sélectionnez la table de routage *utd-management-rt*
+Etape 3 : Sélectionnez la table de routage ``utd-management-rt``
 
 .. figure:: img/create-vpc-15.png
 
@@ -201,7 +200,7 @@ comme l’ICMP, le SSH et le HTTPS
 * web : Autoriser les flux nécessaires pour les flux de gestion du serveur web et
 évidemment les flux web.
 
-*utd-internet-sg* – inbound rules
+``utd-internet-sg`` – inbound rules
 
 +------------------+-----------+-------------+------------+
 | Type             | Protocol  | Port range  | Source     |
@@ -215,7 +214,7 @@ comme l’ICMP, le SSH et le HTTPS
 | All ICMP - IPv4  | ICMP      | All         | Anywhere   |
 +------------------+-----------+-------------+------------+
 
-*utd-management-sg* – inbound rules
+``utd-management-sg`` – inbound rules
 
 +------------------+-----------+-------------+------------+
 | Type             | Protocol  | Port range  | Source     |
@@ -227,7 +226,7 @@ comme l’ICMP, le SSH et le HTTPS
 | All ICMP - IPv4  | ICMP      | All         | Anywhere   |
 +------------------+-----------+-------------+------------+
 
-*utd-web-sg* – inbound rules
+``utd-web-sg`` – inbound rules
 
 +------------------+-----------+-------------+------------+
 | Type             | Protocol  | Port range  | Source     |
@@ -245,7 +244,7 @@ Etape 1: Cliquez sur Security Groups sur le bandeau de gauche:
 
 .. figure:: img/create-vpc-22.png
 
-Etape 2 : Donnez un nom au Group, une description, associez le SG au VPC *utd-activity1* et ajoutez les règles de sécurité comme indiqué dans l’image suivante
+Etape 2 : Donnez un nom au Group, une description, associez le SG au VPC ``utd-activity1`` et ajoutez les règles de sécurité comme indiqué dans l’image suivante
 
 .. figure:: img/create-vpc-23.png
 
@@ -255,9 +254,9 @@ Et validez:
 
 .. figure:: img/create-vpc-25.png
 
-Etape 3 : Répétez l’étape 2 pour créer *utd-management-sg*
+Etape 3 : Répétez l’étape 2 pour créer ``utd-management-sg``
 
-Etape 4 : Répétez l’étape 2 pour créer *utd-web-sg*
+Etape 4 : Répétez l’étape 2 pour créer ``utd-web-sg``
 
 Au total, trois SG doivent être créés comme suit:
 
@@ -275,11 +274,11 @@ Interface
 
 .. figure:: img/create-vpc-27.png
 
-Etape 2 : Créez l’interface Ethernet1/1 qui est l’interface **Internet** en donnant une description, sélectionnant le subnet Untrusted_Subnet, donnant l’adresse IP *10.2.1.10* et en sélectionnant le Security Group *utd-web-sg*
+Etape 2 : Créez l’interface Ethernet1/1 qui est l’interface ``Internet`` en donnant une description, sélectionnant le subnet Untrusted_Subnet, donnant l’adresse IP ``10.2.1.10`` et en sélectionnant le Security Group *utd-web-sg*
 
 .. figure:: img/create-vpc-28.png
 
-Etape 3 : Créez l’interface Ethernet1/2 qui est l’interface **Web** en donnant une description, sélectionnant le subnet Trusted_Subnet, donnant l’adresse IP *10.2.5.10* et en sélectionnant le Security Group *utd-web-sg*
+Etape 3 : Créez l’interface Ethernet1/2 qui est l’interface ``Web`` en donnant une description, sélectionnant le subnet Trusted_Subnet, donnant l’adresse IP ``10.2.5.10`` et en sélectionnant le Security Group ``utd-web-sg``
 
 .. figure:: img/create-vpc-29.png
 .. figure:: img/create-vpc-30.png
@@ -299,7 +298,7 @@ Etape 1 : Allez dans Services > EC2 > Instances > Instances > Launch Instance, s
 
 Etape 2 : Dans Choose Instance Type, cherchez le type m5.xlarge, sélectionnez et cliquez sur Next:Configure Instance Details
 
-Etape 3 : Dans Configure Instance Details, sélectionnez le VPC *utd-activity1* pour Network, dans Subnet sélectionner Management_Subnet. You can leave Auto-assign Public IP to the default behaviour which is *Disable* et dans Network Interfaces > Primary IP modifiez le champ pour mettre l’adresse IP *10.2.0.10*.
+Etape 3 : Dans Configure Instance Details, sélectionnez le VPC ``utd-activity1`` pour Network, dans Subnet sélectionner Management_Subnet. You can leave Auto-assign Public IP to the default behaviour which is *Disable* et dans Network Interfaces > Primary IP modifiez le champ pour mettre l’adresse IP ``10.2.0.10``.
 
 .. figure:: img/create-vpc-33.png
 
@@ -314,11 +313,11 @@ Etape 6 : Dans Configure Security Group, sélectionnez le groupe de sécurité M
 Etape 7 : Dans Review and Launch, cliquez sur Launch
 
 Etape 8 : Créez une paire de clé publique/clé privée pour pouvoir se connecter en SSH sur le firewall.
-Il faut choisir Create a new key pair, donner à un nom (comme *utd-activity1-kp*), télécharger la paire de clés sur votre machine et enfin, lancer le déploiement en cliquant sur Launch Instances
+Il faut choisir Create a new key pair, donner à un nom (comme ``utd-activity1-kp``), télécharger la paire de clés sur votre machine et enfin, lancer le déploiement en cliquant sur Launch Instances
 
 .. figure:: img/create-vpc-35.png
 
-Retournez dans le panneau de gestion des interfaces Services > EC2 > Network & Security > Network Interfaces et nommez vos interfaces *utd-eth1/1*, *utd-eth2/2* et *utd-mgmt* pour l'interface nouvellement créée.
+Retournez dans le panneau de gestion des interfaces Services > EC2 > Network & Security > Network Interfaces et nommez vos interfaces ``utd-eth1/1``, ``utd-eth2/2`` et ``utd-mgmt`` pour l'interface nouvellement créée.
 
 .. figure:: img/create-vpc-35-1.png
 
@@ -339,13 +338,13 @@ tape 4 : Sélectionnez une des deux adresses IP publiques, ensuite allez dans Ac
 
 .. figure:: img/create-vpc-37.png
 
-Etape 5 : Sélectionnez Network interface dans Resource type, dans Network Interface sélectionnez l’interface *utd-mgmt* et dans Private IP address, sélectionnez l’adresse IP privée du subnet *10.2.0.10*
+Etape 5 : Sélectionnez Network interface dans Resource type, dans Network Interface sélectionnez l’interface ``utd-mgmt`` et dans Private IP address, sélectionnez l’adresse IP privée du subnet ``10.2.0.10``
 
 .. figure:: img/create-vpc-38.png
 
 Etape 6 : Dans cette étape, il faut sélectionner la deuxième adresse IP qui n’est pas encore allouée, ensuite allez dans Actions > Associate Elastic IP Address
 
-Etape 7 : Sélectionnez Network interface dans Resource type, dans Network Interface sélectionnez l’interface *utd-eth1/1* et dans Private IP address, sélectionnez l’adresse IP privée du subnet *10.2.1.10*
+Etape 7 : Sélectionnez Network interface dans Resource type, dans Network Interface sélectionnez l’interface ``utd-eth1/1`` et dans Private IP address, sélectionnez l’adresse IP privée du subnet ``10.2.1.10``
 
 .. figure:: img/create-vpc-39.png
 
@@ -374,25 +373,22 @@ Par défaut et pour un nouveau déploiement de VM-Series dans AWS, l’instance 
 Ci-dessous, les étapes nécessaires seront détaillées.
 Etape 1 : Ouvrez un terminal Linux sur la machine de Lab
 
-Etape 2 : Connectez-vous en ssh sur la VM-Series admin@**your-ip** -i *utd-activity1*.pem
-```
-cd Downloads
-chmod 600 utd-activity1-kp.pem 
-ssh -i utd-activity1-kp.pem admin@your-ip
-```
+Etape 2 : Connectez-vous en ssh sur la VM-Series admin@**your-ip**
+.. code-block:: console
+    cd Downloads
+    chmod 600 utd-activity1-kp.pem 
+    ssh -i utd-activity1-kp.pem admin@your-ip
 
 Etape 3 : Configurez le mot de passe admin entrant la commande suivante:
-```
-configure
-set mgt-config users admin password
-```
+.. code-block:: console
+    configure
+    set mgt-config users admin password
 
 Etape 4 : Sauvegardez les modifications via un commit et quittez le terminal Linux
-```
-commit
-exit
-exit
-```
+.. code-block:: console
+    commit
+    exit
+    exit
 
 Etape 5 : Naviguez sur le firewall virtuel avec l’adresse IP publique avec le login admin et le mot de passe configuré durant l’étape précédente : https://**your-ip**
 
@@ -407,11 +403,11 @@ Configurer les Zones
 
 Etape 1 : Allez dans Networks > Zones > Add
 
-Etape 2 : Ajoutez une nouvelle zone nommée *internet* et de type Layer3
+Etape 2 : Ajoutez une nouvelle zone nommée ``internet`` et de type Layer3
 
 .. figure:: img/create-vpc-43.png
 
-Etape 3 : Ajoutez une deuxième zone nommée Trusted de type Layer3
+Etape 3 : Ajoutez une deuxième zone nommée ``web`` de type Layer3
 
 .. figure:: img/create-vpc-44.png
 
@@ -431,7 +427,7 @@ Etape 1 : Allez dans Network > Interfaces > Ethernet1/1
 
 Etape 2 : Dans Interface Type, sélectionnez Layer3
 
-Etape 3 : Dans l’onglet Config, sélectionnez le routeur virtuel default et la zone de sécurité *internet*
+Etape 3 : Dans l’onglet Config, sélectionnez le routeur virtuel default et la zone de sécurité ``internet``
 
 .. figure:: img/create-vpc-48.png
 
@@ -461,11 +457,11 @@ Configurer les objets
 *********************
 
 Etape 1 : Créez un objet d’adresse en allant dans Objects > Addresses > Add, nommez l’objet
-*WebServer_Private*, sélectionnez IP Netmask comme Type et ajoutez l’adresse IP *10.2.2.11*
+``WebServer_Private``, sélectionnez IP Netmask comme Type et ajoutez l’adresse IP ``10.2.2.11``
 
 .. figure:: img/create-vpc-54.png
 
-Etape 2 : Créez un deuxième objet d’adresse en allant dans Objects > Addresses > Add, nommez l’objet *WebServer_Public*, sélectionnez IP Netmask comme Type et ajoutez l’adresse IP *10.2.1.10*
+Etape 2 : Créez un deuxième objet d’adresse en allant dans Objects > Addresses > Add, nommez l’objet ``WebServer_Public``, sélectionnez IP Netmask comme Type et ajoutez l’adresse IP ``10.2.1.10``
 
 .. figure:: img/create-vpc-55.png
 
@@ -480,7 +476,7 @@ Etape 1 : Allez dans Device > Setup > Management > General Setting, attribuez au
 
 .. figure:: img/create-vpc-56.png
 
-Etape 2 : Dans l’onglet Services > Services, ajoutez l’adresse *8.8.8.8* comme adresse du Primary DNS Server et *1.1.1.1* comme Secondary DNS
+Etape 2 : Dans l’onglet Services > Services, ajoutez l’adresse ``8.8.8.8`` comme adresse du Primary DNS Server et ``1.1.1.1`` comme Secondary DNS
 
 .. figure:: img/create-vpc-57.png
 
