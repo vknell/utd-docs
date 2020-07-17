@@ -117,8 +117,8 @@ Red Hat Ansible
     :hidden:
     :caption: cloud discovery
 
-    01-discovery/gcp-discovery/gcp-disc
     01-discovery/aws-discovery/aws-disc
+    01-discovery/gcp-discovery/gcp-disc
     01-discovery/azure-discovery/azure-disc
     01-discovery/terraform-discovery/terraform-disc
 
@@ -127,7 +127,7 @@ Red Hat Ansible
     :hidden:
     :caption: 1st panw automation
 
-    02-first-pan-automation/first-terraform/first-terraform
+    02-first-panw-automation/first-terraform/first-terraform
 
 .. toctree::
     :maxdepth: 2
