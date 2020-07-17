@@ -24,11 +24,11 @@ predefined Terraform plan is provided that will initialize the AWS provider and
 call modules responsible for instantiating the network, compute, and storage
 resources needed.
 
-In order for Terraform to do this it will need to authenticate to AWS using your AWS Access key ID and AWS Secret Key. Use the credentials downloaded in your csv file. ( see the doc `here <#/00-getting-started/requirements.html#create-iam-account-for-api-access>`_. ):
+In order for Terraform to do this it will need to authenticate to AWS using your AWS Access key ID and AWS Secret Key. Use the credentials downloaded in your csv file. ( see the doc `here </00-getting-started/requirements.html#create-iam-account-for-api-access>`_. ):
 
 
 .. warning:: Hard-coding credentials into any Terraform configuration is not recommended, and risks secret leakage should this file ever be committed to a public version control system (like github). Rather than write these as Terraform variables, we will use Linux environment variables. Static credentials can be provided by adding an access_key and secret_key in-line in the AWS provider block, **but this is not safe**:
-    
+
 .. code-block:: console
     provider "aws" {
       region     = "us-west-2"
@@ -40,7 +40,7 @@ Instead create the environment variables.
 
 You can provide your credentials via the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables, representing your AWS Access Key and AWS Secret Key, respectively.
 
-.. code-block:: bash
+.. code-block:: console
 
     $ export AWS_ACCESS_KEY_ID=your-access-key-here
     $ export AWS_SECRET_ACCESS_KEY=your-secret-key-here

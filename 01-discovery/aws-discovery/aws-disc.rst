@@ -13,7 +13,7 @@ Log into the AWS console
 
 From the POD machine you can open firefox and navigate to the `AWS URL <https://console.aws.amazon.com/>`_
 
-Log in with your AWS **utd-console** account (your IAM account for API console) see the doc `here <#/00-getting-started/requirements.html#create-iam-aws-accounts>`_.
+Log in with your AWS **utd-console** account (your IAM account for API console) see the doc `here </00-getting-started/requirements.html#create-iam-aws-accounts>`_.
 
 
 *********************************************

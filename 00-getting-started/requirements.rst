@@ -15,7 +15,7 @@ Laptop required
 - A basic understanding of cloud computing concepts.
 
 
-*********************
+********************
 Provided POD or BYOD
 ********************
 
