@@ -1,36 +1,60 @@
-============
+############
 Requirements
-============
+############
 
 The following are requirements of this training workshop:
 
 
+***************
+Laptop required
+***************
+- A laptop with Internet connectivity (SSH, alternative HTTP - TCP/8080 - and HTTPS access are required).
+- A standards-compliant web browser (Firefox or Google Chrome are recommended).
+- An understanding of Linux or Windows operating system basics.
+- Proficiency with a text editor such as vim, sublime text, visual studio code or notepad++
+- A basic understanding of cloud computing concepts.
+
+
+*********************
+Provided POD or BYOD
+********************
+
+The instructor will give you an URL to connect on predeployed VM set with all required tools.
+
+If you wish to deploy your own set of tools on your machine or lab machine here are the lists of what you will need:
+
 
 Linux & Mac Endpoint
---------------------
+====================
 
-- A laptop with Internet connectivity (SSH and HTTPS access is required).
-- A standards-compliant web browser (Google Chrome is recommended).
+- A standards-compliant web browser (Firefox or Google Chrome are recommended).
 - An SSH client (any Terminal, OpenSSH, SecureCRT, etc).
-- An SSL generator (ssh-keygen).
-- An understanding of Linux operating system basics.
-- Proficiency with a Linux text editor such as vim or visual studio code.
-- A basic understanding of cloud computing concepts.
+- An SSL generator (ssh-keygen, OpenSSL).
+- A code friendly Text editor (like VSCode, SublimeText or VIM/emacs))
+- Terraform 0.11
+- Ansible
+- Python 3
+
 
 Windows Endpoint
-----------------
+================
 
-- A laptop with Internet connectivity (SSH and HTTPS access is required).
-- A standards-compliant web browser (Google Chrome is recommended).
+- A standards-compliant web browser (Firefox or Google Chrome are recommended).
 - An SSH client (e.g., OpenSSH, PuTTY, SecureCRT, etc).
-- An SSL generator for Windows (PuTTYgen).
-- An understanding of Windows operating system basics.
-- Proficiency with a Windows text editor such as visual studio code or sublime text.
-- A basic understanding of cloud computing concepts.
+- An SSL generator for Windows (PuTTYgen, OpenSSL).
+- A code friendly Text editor (like VSCode, SublimeText or Notepad++))
+- Terraform 0.11
+- Ansible
+- Python 3
+
+
+************************
+Create your AWS Accounts
+************************
 
 
 Create a root AWS account
--------------------------
+=========================
 If you do not have an AWS account already, go to
 https://aws.amazon.com/console/ and create an account. In order to continue you
 will need to add a method of payment to your AWS account. Use the following
@@ -40,13 +64,13 @@ purposes.
 
 
 Create IAM AWS Accounts
------------------------
+=======================
 
 You will need to create two users and a group on AWS for the labs.
 
 
 Log into the AWS console
-========================
+------------------------
 
 Navigate to the `AWS URL <https://console.aws.amazon.com/>`_
 
@@ -68,7 +92,7 @@ Clic on **Users** as shown:
 
 
 Create IAM account for console access
-=====================================
+-------------------------------------
 
 Clic **Add User**, give a name and define **Access type** for **AWS Management Console access** as shown after that clic on **Next Permissions**:
 
@@ -111,7 +135,7 @@ The user is now created, download the CSV file to retrieve the password. After t
 
 
 Create IAM account for API access
-=================================
+---------------------------------
 
 Clic **Add User**:
 
@@ -140,8 +164,3 @@ After this step, you can click on close:
 
 .. figure:: img/aws-iam-user-success-csv-api.png
 
-
-Login on Linux dedicated hosted VM
-----------------------------------
-Instructor will give you an URL to connect on predeployed VM prepared with all tools.
-If you wish to deploy your own set of tools on your machine or lab machine here are the lists of what you will need.
