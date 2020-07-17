@@ -26,9 +26,9 @@ the files needed to deploy the network and compute infrastructure we'll be worki
 
 .. code-block:: bash
     
-    wget  -P ~/utd/utd-automation/first-step-terraform https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/deploy_pavm.tf
-    wget  -P ~/utd/utd-automation/first-step-terraform https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/deploy_vpc.tf
-    wget  -P ~/utd/utd-automation/first-step-terraform https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/variables.tf
+    wget  -P ~/utd-automation/first-step-terraform https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/deploy_pavm.tf
+    wget  -P ~/utd-automation/first-step-terraform https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/deploy_vpc.tf
+    wget  -P ~/utd-automation/first-step-terraform https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/variables.tf
 
 
 Create AWS environment variables

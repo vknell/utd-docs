@@ -1,6 +1,6 @@
-=====================================
-Activity 3.1: Terraform Configuration
-=====================================
+===
+Run
+===
 
 Run using Terraform
 -------------------
@@ -122,7 +122,7 @@ The example code from that page looks like this:
 
 Your version will be similar, but it should have the following definition:
 
-.. figure:: vr.png
+.. figure:: img/terraform-vr.png
 
    Virtual router **default**.
 
@@ -160,7 +160,7 @@ the network *10.1.7.0/32* to the next hop of *10.1.7.4*.
 
 You will need to create three resources for the static routes depicted below:
 
-.. figure:: gcp_static_routes.png
+.. figure:: img/terraform-gcp_static_routes.png
 
    Static routes needed in GCP.
 
@@ -197,15 +197,15 @@ The example code from that page looks like this:
 You need to create three security zones (similar to ``e1`` or ``e5`` in this example),
 but they need to have the following definition:
 
-.. figure:: untrust_zone.png
+.. figure:: img/terraform-untrust_zone.png
 
    Definition of **untrust-zone**.
 
-.. figure:: web_zone.png
+.. figure:: img/terraform-web_zone.png
 
    Definition of **web-zone**.
 
-.. figure:: db_zone.png
+.. figure:: img/terraform-db_zone.png
 
    Definition of **db-zone**.
 

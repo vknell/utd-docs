@@ -1,6 +1,5 @@
-================================
-Activity 3.3: Validation Testing
-================================
+Validation Testing
+------------------
 
 In this activity you will:
 
@@ -18,7 +17,7 @@ corrections.
 
 
 Access the Apache web server
-----------------------------
+============================
 The web server is using the firewall's untrust interface address in a
 destination NAT rule.  Run the following commands to determine the IP
 address of this interface.
@@ -40,16 +39,16 @@ address of this interface.
 Open a new tab in your web browser and go to ``http://<web-server-ip-address>``.
 You should see the Apache default home page.
 
-.. figure:: apache.png
+.. figure:: img/validation-apache.png
    :align: center
 
 
 Access the WordPress application
---------------------------------
+================================
 Append ``/wordpress`` to the end of the web server URL and the WordPress
 installation page should be displayed.
 
-.. figure:: wordpress-home.png
+.. figure:: img/validation-wordpress-home.png
    :align: center
 
 Fill in values of your choosing for the **Site Name**, **Username**, and
@@ -63,29 +62,29 @@ Click **Install WordPress** when you are done.
 On the following page, click on **Log In** to log into the WordPress
 administrator dashboard.
 
-.. figure:: proceed.png
+.. figure:: img/validation-proceed.png
    :align: center
 
 Log into WordPress using the username and password you created.
 
-.. figure:: login.png
+.. figure:: img/validation-login.png
    :align: center
 
 You will then be presented with the WordPress administrator dashboard.
 
-.. figure:: dashboard.png
+.. figure:: img/validation-dashboard.png
    :align: center
 
 
 Post a blog article
--------------------
+===================
 Now that you've successfully logged into the WordPress administrator dashboard,
 let's post an update to the blog.
 
 Click on **Write your first blog post** under the **Next Steps** section.  You
 will be presented with the **Add New Post** editor.
 
-.. figure:: new-post.png
+.. figure:: img/validation-new-post.png
    :align: center
 
 Enter a title for your post and some sample content.  Then click on **Publish**
@@ -93,11 +92,11 @@ to post the update.
 
 You can then click on **Preview** to see the published blog update.
 
-.. figure:: post.png
+.. figure:: img/validation-post.png
 
 
 Verify firewall rule matches
-----------------------------
+============================
 Now that we've confirmed the WordPress application is working properly, let's
 see what is happening with our firewall rules.
 
@@ -107,14 +106,14 @@ and navigate to **Policies > Security**.
 If you scroll to the right you will see details on the security rules that are
 being hit.
 
-.. figure:: hit-count.png
+.. figure:: img/validation-hit-count.png
    :align: center
 
 Scroll back to the left, find the security rule entitled *Allow web inbound*.
 Then click on the drop-down menu icon to the right of the rule name and
 select **Log Viewer*.
 
-.. figure:: web-hits.png
+.. figure:: img/validation-web-hits.png
    :align: center
 
 You will see all of the logs associated with inbound web traffic.  Notice the
@@ -127,7 +126,7 @@ applications identified are *web-browsing* and *blog-posting*.
 Navigate back to **Policies > Security** and click on the **Log Viewer** for
 the *Allow web to db* rule.
 
-.. figure:: db-hits.png
+.. figure:: img/validation-db-hits.png
    :align: center
 
 You will see all of the MySQL (actually MariaDB) database traffic between the

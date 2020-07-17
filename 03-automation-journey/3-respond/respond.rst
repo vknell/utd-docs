@@ -28,7 +28,7 @@ We will be creating a VM Information Source on the firewall to monitor the GCP C
 
 Once you have logged into the firewall, go to the **VM Information Sources** under the **Device** tab and click **Add**.
 
-.. figure:: /img/monitor-add-source-gcp.png
+.. figure:: img/monitor-add-source-gcp.png
    :align: center
 
 - Provide a name for your monitored source in the **Name** field.
@@ -64,7 +64,7 @@ We will be creating a VM Information Source on the firewall to monitor the AWS E
 
 Once you have logged into the firewall, go to the **VM Information Sources** under the **Device** tab and click **Add**.
 
-.. figure:: /img/monitor-add-source-aws.png
+.. figure:: img/monitor-add-source-aws.png
    :align: center
 
 - Provide a name for your monitored source in the **Name** field.
@@ -101,12 +101,13 @@ Click **Commit** and commit the candidate configuration.
 
 If the VM Information Source configuration was correct, you should see the status indicator for your source turn green.
 
-.. figure:: /img/monitor-working.png
+.. figure:: img/monitor-working.png
    :align: center
 
     blah
 
 If the status indicator is green, you can proceed to the next section.
+
 
 
 DAG
@@ -127,7 +128,7 @@ Navigate to **Objects > Address Groups** in the firewall web interface.
 
 Click **Add** to create a new Dynamic Address Group.
 
-.. figure:: /img/dag-new_dag.png
+.. figure:: img/dag-new_dag.png
    :align: center
 
 In the **Address Group** window:
@@ -143,7 +144,7 @@ The attributes displayed are discovered from the cloud provider API and are refr
 
 Most of the attributes displayed are not needed.  However, each of the VM instances we've deployed have used a tag entitled ``server-type``.  Using the search bar at the top of the match criteria pop-up window, search for the term `server-type`.  Then add the result that has a value of ``database`` to the match criteria list.
 
-.. figure:: /img/dag-dag_match.png
+.. figure:: img/dag-dag_match.png
    :align: center
 
 Click **OK** when you are done.
@@ -153,7 +154,7 @@ Apply the Dynamic Address Group to a rule
 ================================================
 Now that we've defined a VM Information Source and a Dynamic Address Group, let's put them to use.  Navigate to **Policies > Security** in the firewall web interface.
 
-.. figure:: /img/dag-new_rules.png
+.. figure:: img/dag-new_rules.png
    :align: center
 
 Find the rule that allows *mysql* traffic from the ``web-srv`` address object in the ``web-zone`` to the ``db-srv`` address object in the ``db-zone``.
@@ -163,9 +164,6 @@ Replace the ``db-srv`` destination with the ``db-grp`` Dynamic Address Group you
 Click **OK** and then commit your changes by clicking **Commit**.
 
 
-=============================
-Activity 4.3: Compute Scaling
-=============================
 
 Scale
 -----
@@ -187,7 +185,7 @@ Navigate to **Objects > Address Groups** in the firewall web interface and selec
 
 Under the *Addresses* column, click on the link entitled ``more...``
 
-.. figure:: /img/scale-before.png
+.. figure:: img/scale-before.png
    :align: center
 
 You should see the IP address ``10.5.3.5``, which is the IP address of the existing database instance.
@@ -234,7 +232,7 @@ Confirm Dynamic Address Group changes
 =====================================
 Now go back to the **Objects > Address Groups** section of the firewall web interface and click ``more...`` under the **Addresses** column of the ``db-grp`` entry.
 
-.. figure:: /img/scale-after.png
+.. figure:: img/scale-after.png
    :align: center
 
 You should now see a total of five IP addresses as members of the ``db-grp`` Dynamic Address Group.  These are now part of the destination match criteria for the databaase security rule.
