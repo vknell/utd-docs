@@ -27,22 +27,16 @@ resources needed.
 In order for Terraform to do this it will need to authenticate to AWS using your AWS Access key ID and AWS Secret Key. Use the credentials downloaded in your csv file. ( see the doc `here <#/00-getting-started/requirements.html#create-iam-account-for-api-access>`_. ):
 
 
-Static credentials can be provided by adding an access_key and secret_key in-line in the AWS provider block, **but this is not safe**:
-
-.. code-block:: bash
-
+.. warning:: Hard-coding credentials into any Terraform configuration is not recommended, and risks secret leakage should this file ever be committed to a public version control system (like github). Rather than write these as Terraform variables, we will use Linux environment variables. Static credentials can be provided by adding an access_key and secret_key in-line in the AWS provider block, **but this is not safe**:
     provider "aws" {
       region     = "us-west-2"
       access_key = "my-access-key"
       secret_key = "my-secret-key"
     }
 
-.. warning:: Hard-coding credentials into any Terraform configuration is not recommended, and risks secret leakage should this file ever be committed to a public version control system (like github). Rather than write these as Terraform variables, we will use Linux environment variables.
-
-
 Instead create the environment variables.
 
-You can provide your credentials via the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, environment variables, representing your AWS Access Key and AWS Secret Key, respectively. 
+You can provide your credentials via the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables, representing your AWS Access Key and AWS Secret Key, respectively.
 
 .. code-block:: bash
 
@@ -55,6 +49,7 @@ You can provide your credentials via the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS
 **********************
 Create an SSH key-pair
 **********************
+
 All AWS EC2 instances are required to have an SSH key-pair defined when the
 instance is created.  This is done to ensure secure access to the instance will
 be available once it is created.
@@ -62,29 +57,30 @@ be available once it is created.
 Create an SSH key-pair with an empty passphrase and save them in the ``~/.ssh``
 directory.
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ ssh-keygen -t rsa -b 1024 -N '' -f ~/.ssh/lab_ssh_key
+    ssh-keygen -t rsa -b 1024 -N '' -f ~/.ssh/lab_ssh_key
 
 
 ******************************
 Create the Terraform variables
 ******************************
+
 Change into the AWS deployment directory.
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ cd ~/utd/utd-automation/utd/basic/deployment/aws   ----------A REVOIR-------------
+    cd ~/utd/utd-automation/utd/basic/deployment/aws   ----------A REVOIR-------------
 
 In this directory you will find the three main files associated with a
 Terraform plan: ``main.tf``, ``variables.tf``, and ``outputs.tf``.  View the
 contents of these files to see what they contain and how they're structured.
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ more main.tf
-    $ more variables.tf
-    $ more outputs.tf
+    more main.tf
+    more variables.tf
+    more outputs.tf
 
 The file ``main.tf`` defines the providers that will be used and the resources
 that will be created (more on that shortly).  Since it is poor practice to hard
@@ -116,9 +112,9 @@ For this initial deployment we will only be using the
 This initialization process will download all the software, modules, and
 plugins needed for working in a particular environment.
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ terraform init
+    terraform init
 
 
 *********************************
@@ -129,16 +125,16 @@ We are now ready to deploy our lab infrastructure plan.  We should first
 perform a dry-run of the deployment process and validate the contents of the
 plan files and module dependencies.
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ terraform plan
+    terraform plan
 
 If there are no errors and the plan output looks good, let's go ahead and
 perform the deployment.
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ terraform apply -auto-approve
+    terraform apply -auto-approve
 
 At a high level these are each of the steps this plan will perform:
 
@@ -192,9 +188,9 @@ SSH into the firewall with the following credentials.
 - **Username:** ``admin``
 - **Password:** ``Ignite2019!``
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ ssh admin@<FIREWALL_MGMT_IP>
+    ssh admin@<FIREWALL_MGMT_IP>
 
 Replace ``<FIREWALL_MGMT_IP>`` with the IP address of the firewall management
 interface that was provided in the Terraform plan results.  This information
@@ -209,7 +205,7 @@ deployment directory.
 Once you have logged into the firewall you can check to ensure the management
 plane has completed its initialization.
 
-.. code-block:: bash
+.. code-block:: console
 
     admin@lab-fw> show chassis-ready
 
