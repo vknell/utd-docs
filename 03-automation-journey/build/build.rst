@@ -15,6 +15,7 @@ In this activity you will:
 
 You are now ready to deploy the lab infrastructure.
 
+
 ********************************
 Create AWS environment variables
 ********************************
@@ -24,20 +25,22 @@ predefined Terraform plan is provided that will initialize the AWS provider and
 call modules responsible for instantiating the network, compute, and storage
 resources needed.
 
-In order for Terraform to do this it will need to authenticate to AWS using your AWS Access key ID and AWS Secret Key. Use the credentials downloaded in your csv file. ( see the doc `here </00-getting-started/requirements.html#create-iam-account-for-api-access>`_. ):
+In order for Terraform to do this it will need to authenticate to AWS using your AWS Access key ID and AWS Secret Key. Use the credentials downloaded in your csv file. ( see the doc `here </en/latest/00-getting-started/requirements.html#create-iam-account-for-api-access>`_. ):
 
 
 .. warning:: Hard-coding credentials into any Terraform configuration is not recommended, and risks secret leakage should this file ever be committed to a public version control system (like github). Rather than write these as Terraform variables, we will use Linux environment variables. Static credentials can be provided by adding an access_key and secret_key in-line in the AWS provider block, **but this is not safe**
 
+*Working on a private project with no public sources you could add the following snippet*
 
 .. code-block:: console
+
     provider "aws" {
       region     = "us-west-2"
       access_key = "my-access-key"
       secret_key = "my-secret-key"
     }
 
-Instead create **environment variables**, you can provide your credentials via the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables, representing your AWS Access Key and AWS Secret Key, respectively.
+Instead create **environment variables**, you can provide your credentials via the ``AWS_ACCESS_KEY_ID`` and ``AWS_SECRET_ACCESS_KEY`` environment variables, representing your AWS Access Key and AWS Secret Key, respectively.
 
 .. code-block:: console
 
@@ -60,7 +63,7 @@ directory.
 
 .. code-block:: console
 
-    ssh-keygen -t rsa -b 1024 -N '' -f ~/.ssh/lab_ssh_key
+    ssh-keygen -t rsa -b 4096 -N '' -f ~/.ssh/lab_ssh_key
 
 
 ******************************
@@ -75,13 +78,11 @@ Change into the AWS deployment directory.
 
 In this directory you will find the three main files associated with a
 Terraform plan: ``main.tf``, ``variables.tf``, and ``outputs.tf``.  View the
-contents of these files to see what they contain and how they're structured.
+contents of these files in your text editor to see what they contain and how they're structured. Launch VS Code from the console:
 
 .. code-block:: console
 
-    more main.tf
-    more variables.tf
-    more outputs.tf
+    code main.tf variable.tf outputs.tf
 
 The file ``main.tf`` defines the providers that will be used and the resources
 that will be created (more on that shortly).  Since it is poor practice to hard
@@ -95,11 +96,46 @@ contains the following variables and their values.  Fill in the quotes with the
 AWS region name, the AWS availability zone, and the path to your SSH public key
 file.
 
+.. code-block:: console
+
+    code terraform.tfvars
+
+Copy and paste the following snippet in your new file. **Change the values** for the Region and Availability Zone.
+You can find more information about Region and AZ in the `AWS User Guide <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html>`_.
+
 .. code-block:: terraform
 
     aws_region_name     = "<SEE_INSTRUCTOR_PRESENTATION>"
     aws_az_name         = "<SEE_INSTRUCTOR_PRESENTATION>"
+    public_key_file     = "/home/panadmin/.ssh/lab_ssh_key.pub"
+
+**Do not forget to save your changes to create the new file: File > Save or CTRL + S.**
+
+
+You can find the available AZ for a region by typing the following command from the terminal (AWS Cli is required):
+
+.. code-block:: console
+
+    aws ec2 describe-availability-zones --region region-name
+
+For exemple for Paris
+
+.. code-block:: terraform
+
+    aws_region_name     = "eu-west-3"
+    aws_az_name         = "eu-west-3-a"
     public_key_file     = "~/.ssh/lab_ssh_key.pub"
+
+For the United States - North Carolina (1st Region and AZ):
+
+.. code-block:: terraform
+
+    aws_region_name     = "eu-east-1"
+    aws_az_name         = "eu-east-1-a"
+    public_key_file     = "~/.ssh/lab_ssh_key.pub"
+
+
+.. note:: On your Virtual Machine, a .gitignore file has been added at the root of ``/utd-automation`` preventing the synchronisation of files like ``.tfvars``. You can remove files from the git process by adding the filename or the extension to the .gitignore.
 
 
 *************************************
@@ -219,3 +255,4 @@ activities.
           bootstrap package).  This is because the PAN-OS XML API cannot utilize SSH keys and requires a
           username/password or API key for authentication.
 
+https://docs.paloaltonetworks.com/vm-series/9-0/vm-series-deployment/set-up-the-vm-series-firewall-on-aws/deploy-the-vm-series-firewall-on-aws/obtain-the-ami/get-amazon-machine-image-ids.html

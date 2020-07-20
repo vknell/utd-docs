@@ -13,18 +13,18 @@ Log into the AWS console
 
 From the POD machine you can open firefox and navigate to the `AWS URL <https://console.aws.amazon.com/>`_
 
-Log in with your AWS ``utd-console`` account (your IAM account for API console) see the doc `here </00-getting-started/requirements.html#create-iam-aws-accounts>`_.
+Log in with your AWS ``utd-console`` account (your IAM account with console access rights) see the doc `here </en/latest/00-getting-started/requirements.html#create-iam-aws-accounts>`_.
 
 
 *********************************************
 Create your first VPC (Virtual Private Cloud)
 *********************************************
 
-Etape 1 : Allez dans Services, faites une recherche sur VPC et choisissez le service VPC :
+Step 1: Click on Services, and search for VPC. You can add it to the quicklinks at the top of the screen.
 
 .. figure:: img/aws-console-access.png
 
-Etape 2 : Allez à Virtual Private Cloud > Your VPC > Create VPC
+Step2: In the left menu Virtual Private Cloud > Your VPC > Create VPC
 
 .. figure:: img/create-vpc-1.png
 
@@ -619,13 +619,13 @@ Vous arrivez à l’étape finale du présent Lab. Vous pouvez ainsi tester la c
 https://docs.aws.amazon.com/cloudformation/index.html
 
 
-******************
-Suppression du VPC
-******************
+************
+VPC Deletion
+************
 
-Il faut supprimer dans cet ordre:
-Les instances (EC2 > Instances séléctionner les deux instances et les )
-Les Networks Interfaces VPC > Network Interfaces
-Les IP Elastiques VPC > Elastic IP addresses
-Puis allez dans Services > EC2 > VPC > Your VPC, sélectionnez le VPC *utd-activity1* ensuite allez dans Actions > Delete VPC et ensuite confirmez la suppression.
+In order to clean up and suppress the VPC you need to delete the following items in that order: 
+- EC2 instances (**EC2 > Instances** select both instances, select action and **Terminate**)
+- Network interfaces (**VPC > Network Interfaces**)
+- Elastic IP addresses (**VPC > Elastic IP addresses**)
+- VPC (**EC2 > VPC > Your VPC**, select the ``utd-activity1`` VPC and go to **Actions** then **Delete VPC**, confirm to delete the VPC and the reminding configuration)
 

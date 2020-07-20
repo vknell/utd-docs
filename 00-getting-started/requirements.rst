@@ -117,6 +117,7 @@ Amazon Rights for group **utd**:
     - AmazonS3FullAccess
     - CloudWatchFullAccess
     - AmazonVPCFullAccess
+    - IAMFullAccess
 Then click **Create Group**:
 
 .. figure:: img/aws-iam-user-group-creation-console.png
@@ -166,3 +167,11 @@ After this step, you can click on close:
 
 .. figure:: img/aws-iam-user-success-csv-api.png
 
+
+Launch a first EC2 instance to sign the EULA
+============================================
+
+.. warning:: To be able to launch an EC2 instance of a Palo Alto Networks VM Series, you need to first approve the End-User Licence Agreement. To do that log in using any account and 
+
+You should receive an email from AWS, letting you know that the service is now available.
+.. figure:: img/aws-ec2-vmseries-email.png
