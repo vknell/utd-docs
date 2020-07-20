@@ -88,8 +88,8 @@ Once you have logged into the firewall, go to the **VM Information Sources** und
 
 .. code-block:: console
 
-    $ cd ~/utd-automation/journey/deployment/aws
-    $ terraform output
+    cd ~/utd-automation/journey/deployment/aws
+    terraform output
 
 Click **OK** to accept the configuration.
 
@@ -202,13 +202,13 @@ For GCP:
 
 .. code-block:: console
 
-    $ cd ~/utd-automation/journey/deployment/gcp
+    cd ~/utd-automation/journey/deployment/gcp
 
 For AWS:
 
 .. code-block:: console
 
-    $ cd ~/utd-automation/journey/deployment/aws
+    cd ~/utd-automation/journey/deployment/aws
 
 In the ``main.tf`` file there is a module called ``scale`` that is commented out.  Open ``main.tf`` in a text editor and uncomment that entire section.  
 
@@ -218,13 +218,13 @@ By uncommenting the ``scale`` module you have just added a new module to the Ter
 
 .. code-block:: console
 
-    $ terraform init
+    terraform init
 
 You can now apply the Terraform plan.
 
 .. code-block:: console
 
-    $ terraform apply
+    terraform apply
 
 This will result in four new database instances being added to the database subnet.
 

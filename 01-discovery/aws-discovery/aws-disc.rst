@@ -374,17 +374,20 @@ Ci-dessous, les étapes nécessaires seront détaillées.
 Etape 1 : Ouvrez un terminal Linux sur la machine de Lab
 
 Etape 2 : Connectez-vous en ssh sur la VM-Series admin@**your-ip**
+
 .. code-block:: console
     cd Downloads
     chmod 600 utd-activity1-kp.pem 
     ssh -i utd-activity1-kp.pem admin@your-ip
 
 Etape 3 : Configurez le mot de passe admin entrant la commande suivante:
+
 .. code-block:: console
     configure
     set mgt-config users admin password
 
-Etape 4 : Sauvegardez les modifications via un commit et quittez le terminal Linux
+Etape 4 : Sauvegardez les modifications via un **commit** et quittez le terminal Linux
+
 .. code-block:: console
     commit
     exit
@@ -439,7 +442,7 @@ Etape 5 : Dans l’onglet Advanced, allez dans Management Profile, sélectionnez
 
 .. figure:: img/create-vpc-50.png
 
-Etape 6 : Ouvrez Ethernet1/2. Dans Interface Type, sélectionnez Layer3 et dans l’onglet Config, sélectionnez le routeur virtuel default et la zone de sécurité *web*
+Etape 6 : Ouvrez Ethernet1/2. Dans Interface Type, sélectionnez Layer3 et dans l’onglet Config, sélectionnez le routeur virtuel default et la zone de sécurité ``web``
 
 .. figure:: img/create-vpc-51.png
 
@@ -544,7 +547,7 @@ Déploiement et configuration du serveur Web protégé par la VM-Series
 
 Configurer une route par défaut pour le subnet Trusted_Subnet
 
-Etape 1 : Allez dans Services > VPC > Routes tables > **utd-web-rt** > Routes > Edit Routes et ajoutez une route par défaut qui pointe vers l’interface Ethernet1/2 du NGFW virtuel déployé précédemment
+Etape 1 : Allez dans Services > VPC > Routes tables > ``utd-web-rt`` > Routes > Edit Routes et ajoutez une route par défaut qui pointe vers l’interface Ethernet1/2 du NGFW virtuel déployé précédemment
 
 Etape 2 : Sauvegardez les modifications via Save routes
 
@@ -559,11 +562,11 @@ Etape 2 : Dans Choose Instance Type, sélectionnez le type t2.micro et cliquez s
 
 .. figure:: img/create-vpc-65.png
 
-Etape 3 : Dans Configure Instance, sélectionnez le VPC *utd-activity1* dans Network, sélectionnez le subnet Trusted_Subnet, sélectionnez Disable dans Auto-assign Public IP et laissez les autres paramètres par défaut
+Etape 3 : Dans Configure Instance, sélectionnez le VPC ``utd-activity1`` dans Network, sélectionnez le subnet Trusted_Subnet, sélectionnez Disable dans Auto-assign Public IP et laissez les autres paramètres par défaut
 
 .. figure:: img/create-vpc-66.png
 
-Etape 4 : Dans Networks interfaces, ajoutez l’adresse IP *10.2.2.11* comme adresse IP Primaire
+Etape 4 : Dans Networks interfaces, ajoutez l’adresse IP ``10.2.2.11`` comme adresse IP Primaire
 
 Etape 5 : Dans cette étape, vous allez utiliser Cloud-Init pour initialiser l'instance avec les paramètres souhaités. Il faut copié coller le script **bash** suivant
 Cliquez ensuite sur Next: Add Storage.
@@ -575,7 +578,7 @@ Cliquez ensuite sur Next: Add Storage.
     systemctl start httpd
     systemctl stop firewalld
     cd /var/www/html
-    echo "I finished the first module!" > index.html
+    echo "I deployed a web server and secured it thanks to Palo Alto Networks!" > index.html
 
 
 .. code-block:: yaml
@@ -606,7 +609,7 @@ Etape 10 : Dans Select existing key pair or create a new key pair, choisissez l�
 .. figure:: img/create-vpc-69.png
 
 Accès sécurisé à mon Serveur Web hébergé dans AWS
-Vous arrivez à l’étape finale du présent Lab. Vous pouvez ainsi tester la connectivité http vers votre serveur Web en naviguant vers l’adresse IP publique associée à l’interface *internet* de votre firewall. Vous pouvez aussi aller consulter les logs dans la section Monitor de votre NGFW et tester d’autres fonctionnalités de sécurité disponibles sur ce dernier.
+Vous arrivez à l’étape finale du présent Lab. Vous pouvez ainsi tester la connectivité http vers votre serveur Web en naviguant vers l’adresse IP publique associée à l’interface ``internet`` de votre firewall. Vous pouvez aussi aller consulter les logs dans la section Monitor de votre NGFW et tester d’autres fonctionnalités de sécurité disponibles sur ce dernier.
 
 
 ****************************************************

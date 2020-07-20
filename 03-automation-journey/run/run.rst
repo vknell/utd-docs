@@ -23,7 +23,7 @@ First, change to the Terraform configuration directory.
 
 .. code-block:: console
 
-    $ cd ~/utd-automation/journey/configuration/terraform
+    cd ~/utd-automation/journey/configuration/terraform
 
 
 Provider Initialization
@@ -60,7 +60,7 @@ With these values defined, we can now initialize the Terraform panos provider wi
 
 .. code-block:: console
 
-    $ terraform init
+    terraform init
 
 The provider is now ready to communicate with our firewall.
 
@@ -238,7 +238,7 @@ First, let's change to the Ansible configuration directory.
 
 .. code-block:: console
 
-  $ cd ~/utd-automation/journey/configuration/ansible
+  cd ~/utd-automation/journey/configuration/ansible
 
 
 Module Communications
@@ -434,7 +434,7 @@ following command:
 
 .. code-block:: console
 
-   $ ansible-playbook -i inventory playbook.yml
+   ansible-playbook -i inventory playbook.yml
 
 Log in to the web UI of the firewall, and verify that the configuration matches
 what you want.  If you get errors, indentation is most likely the problem.
@@ -473,15 +473,15 @@ address of this interface.
 
 .. code-block:: console
 
-    $ cd ~/utd-automation/journey/deployment/gcp
-    $ terraform output
+    cd ~/utd-automation/journey/deployment/gcp
+    terraform output
 
 `For AWS:`
 
 .. code-block:: console
 
-    $ cd ~/utd-automation/journey/deployment/aws
-    $ terraform output
+    cd ~/utd-automation/journey/deployment/aws
+    terraform output
 
 Open a new tab in your web browser and go to ``http://<web-server-ip-address>``.
 You should see the Apache default home page.

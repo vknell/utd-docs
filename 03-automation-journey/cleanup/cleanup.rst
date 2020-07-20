@@ -27,6 +27,5 @@ Tell Terraform to destroy the contents of its plan files.
 
     terraform destroy
 
-.. note:: The Qwiklabs training environment will actually take care of destroying everything that we've created at the end of this lab, but it is a good habit to be aware of the cloud resources you've deployed and to destroy it when you are done with it.
-
+.. warning:: Make sure that all resources that you created today are destroyed. Failing to do so may incur high unexpected charges.
 
