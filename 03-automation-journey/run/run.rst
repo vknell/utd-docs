@@ -43,7 +43,7 @@ following commands to add the appropriate environment variables:
 
     export PANOS_HOSTNAME="<YOUR FIREWALL MGMT IP GOES HERE>"
     export PANOS_USERNAME="admin"
-    export PANOS_PASSWORD="Ignite2019!"
+    export PANOS_PASSWORD="PaloAlto#2020"
 
 .. note:: Replace the text ``<YOUR FIREWALL MGMT IP GOES HERE>`` with your firewall's management IP address.
 
@@ -54,7 +54,7 @@ using the ``env | grep PANOS`` command:
 
     PANOS_HOSTNAME=3.216.53.203
     PANOS_USERNAME=admin
-    PANOS_PASSWORD=Ignite2019!
+    PANOS_PASSWORD=PaloAlto#2020
 
 With these values defined, we can now initialize the Terraform panos provider with the following command.
 

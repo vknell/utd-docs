@@ -35,7 +35,7 @@ In order for Terraform to do this it will need to authenticate to AWS using your
 .. code-block:: console
 
     provider "aws" {
-      region     = "us-west-2"
+      region     = "us-east-1"
       access_key = "my-access-key"
       secret_key = "my-secret-key"
     }
@@ -123,19 +123,19 @@ For exemple for Paris
 .. code-block:: terraform
 
     aws_region_name     = "eu-west-3"
-    aws_az_name         = "eu-west-3-a"
+    aws_az_name         = "eu-west-3a"
     public_key_file     = "~/.ssh/lab_ssh_key.pub"
 
-For the United States - North Carolina (1st Region and AZ):
+For the United States - North Carolina (1st AWS Region and AZ):
 
 .. code-block:: terraform
 
     aws_region_name     = "eu-east-1"
-    aws_az_name         = "eu-east-1-a"
+    aws_az_name         = "eu-east-1a"
     public_key_file     = "~/.ssh/lab_ssh_key.pub"
 
 
-.. note:: On your Virtual Machine, a .gitignore file has been added at the root of ``/utd-automation`` preventing the synchronisation of files like ``.tfvars``. You can remove files from the git process by adding the filename or the extension to the .gitignore.
+.. note:: On your Virtual Machine, a .gitignore file has been added at the root of your home path ``~/`` preventing the synchronisation of files like ``.tfvars``. You can remove files from the git process by adding the filename or the extension to the .gitignore: vim ~/.gitignore
 
 
 *************************************
@@ -223,7 +223,7 @@ Confirm firewall bootstrap completion
 SSH into the firewall with the following credentials.
 
 - **Username:** ``admin``
-- **Password:** ``Ignite2019!``
+- **Password:** ``PaloAlto#2020``
 
 .. code-block:: console
 

@@ -189,7 +189,7 @@ Confirm firewall bootstrap completion
 SSH into the firewall with the following credentials.
 
 - **Username:** ``admin``
-- **Password:** ``Ignite2019!``
+- **Password:** ``PaloAlto#2020``
 
 
 .. code-block:: console
