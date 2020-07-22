@@ -82,7 +82,7 @@ contents of these files in your text editor to see what they contain and how the
 
 .. code-block:: console
 
-    code main.tf variable.tf outputs.tf
+    code main.tf variables.tf outputs.tf
 
 The file ``main.tf`` defines the providers that will be used and the resources
 that will be created (more on that shortly).  Since it is poor practice to hard
