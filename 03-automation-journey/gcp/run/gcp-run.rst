@@ -28,7 +28,6 @@ First, change to the Terraform configuration directory.
 
 Provider Initialization
 =======================
-
 Your first task is to set up the communications between the provider and your
 lab firewall.  There's several ways this can be done.  The IP address,
 username, and password (or API key) can be set as variables in Terraform, and
@@ -67,7 +66,6 @@ The provider is now ready to communicate with our firewall.
 
 Network Interfaces
 ==================
-
 Your firewall has been bootstrapped with an initial password and nothing else.
 We're going to be performing the initial networking configuration with
 Terraform.
@@ -110,7 +108,6 @@ firewall.
 
 Virtual Router
 ==============
-
 Now, you'll have to assign those interfaces to the default virtual router.
 You will need the
 `panos_virtual_router <https://www.terraform.io/docs/providers/panos/r/virtual_router.html>`_
@@ -126,25 +123,55 @@ The example code from that page looks like this:
         interfaces = ["ethernet1/1", "ethernet1/2"]
     }
 
-Exercise:
----------
-Open VS Code and edit the ``main.tf`` file to add a code snippet that will add a virtual router to your configuration, matchning the following settings:
-
-.. code-block:: console
-  code maint.tf
+Your version will be similar, but it should have the following definition:
 
 .. figure:: img/terraform-vr.png
 
    Virtual router **default**.
-   :align: center
 
-Once the virtual router resource in ``main.tf`` has been added and the file saved (*CTRL+S*) you can run ``terraform apply``.
+Specifying the static distance isn't required.
 
-..note:: When a value is by default, you do not need to specify it in your Terraform file. The Static Distance is 10 by default.
+Define the virtual router resource in ``main.tf``, and run ``terraform apply``.
+
+.. warning:: AWS and GCP have slight differences in the way that routing has to
+   be configured.  **If you chose GCP as your cloud, you have an additional
+   step!**
+
+   If you chose AWS, please continue to `Security Zones <#security-zones>`_ section and skip the following.
+
+GCP requires static routes for each subnet to be defined on the virtual router.
+You will need the `panos_static_route_ipv4 <https://www.terraform.io/docs/providers/panos/r/static_route_ipv4.html>`_
+resource.
+
+The example code from that page looks like this:
+
+.. code-block:: terraform
+
+    resource "panos_static_route_ipv4" "example" {
+        name = "localnet"
+        virtual_router = "${panos_virtual_router.vr1.name}"
+        destination = "10.1.7.0/32"
+        next_hop = "10.1.7.4"
+    }
+
+    resource "panos_virtual_router" "vr1" {
+        name = "my virtual router"
+    }
+
+This code adds a static route named *localnet*, that routes traffic destined to
+the network *10.1.7.0/32* to the next hop of *10.1.7.4*.
+
+You will need to create three resources for the static routes depicted below:
+
+.. figure:: img/terraform-gcp_static_routes.png
+
+   Static routes needed in GCP.
+
+Define those resources in ``main.tf``, and run ``terraform apply``.
+
 
 Security Zones
 ==============
-
 Next is creating the security zones for the firewall.  You will need the
 `panos_zone <https://www.terraform.io/docs/providers/panos/r/zone.html>`_ resource.
 
@@ -170,32 +197,24 @@ The example code from that page looks like this:
         mode = "layer3"
     }
 
-Exercise:
----------
-Open VS Code and edit the ``main.tf`` file to add a code snippet that will add three zones mapped with the right interfaces to your configuration, matchning the following settings:
-
-.. code-block:: console
-  code maint.tf
+You need to create three security zones (similar to ``e1`` or ``e5`` in this example),
+but they need to have the following definition:
 
 .. figure:: img/terraform-untrust_zone.png
 
    Definition of **untrust-zone**.
-   :align: center
 
 .. figure:: img/terraform-web_zone.png
 
    Definition of **web-zone**.
-   :align: center
 
 .. figure:: img/terraform-db_zone.png
 
    Definition of **db-zone**.
-   :align: center
 
+Define those resources in ``main.tf``, and run ``terraform apply``.
 
-Once the zones and mapping in ``main.tf`` have been added and the file saved (*CTRL+S*) you can run ``terraform apply``.
-
-**You're done with the Terraform portion of the lab!**
+You're done with the Terraform portion of the lab!
 
 
 *****************
@@ -228,7 +247,7 @@ Module Communications
 Just like with Terraform, your first task is setting up the communication with
 the firewall.  The IP address, username, and password (or API key) can be set
 as variables or specified on the command line.  However, since we've already
-set them as environment variables during the Terraform Configuration, we can just read them in.
+got them as environment variables, we can just read them in.
 
 The ``vars.yml`` file contains the following:
 
@@ -239,7 +258,7 @@ The ``vars.yml`` file contains the following:
       username: "{{ lookup('env', 'PANOS_USERNAME') }}"
       password: "{{ lookup('env', 'PANOS_PASSWORD') }}"
 
-This code simply reads the content of the environment variables (``env | grep PANOS``) we set in the
+This code simply reads the content of the environment variables we set in the
 Terraform portion into the dictionary ``provider``.  This is then referenced by
 our playbook file, ``playbook.yml``.
 
@@ -255,13 +274,7 @@ playbook.
 Address Objects
 ===============
 
-Open the ``playbook.yml`` file in your text editor.  
-
-.. code-block:: console
-
-  code playbook.yml
-
-It will contain the following:
+Open the ``playbook.yml`` file in your text editor.  It will contain the following:
 
 .. code-block:: yaml
 
@@ -319,8 +332,6 @@ The example code for that module looks like this:
         destination_port: '22'
         description: 'SSH on tcp/22'
 
-Exercise:
----------
 Use the ``panos_service_object`` module to create two objects with the
 following definitions:
 
@@ -356,8 +367,6 @@ The example code for that module looks like this:
         application: ['ssh']
         action: 'allow'
 
-Exercise:
----------
 Use the ``panos_security_rule`` module to create the following security rules:
 
 .. figure:: img/ansible-security_rules.png
@@ -390,8 +399,6 @@ The example code for that module looks like this:
         dnat_address: "10.0.1.101"
         dnat_port: "22"
 
-Exercise:
----------
 Use the ``panos_nat_rule`` module to create the following NAT rules:
 
 .. figure:: img/ansible-nat_rules.png
@@ -410,7 +417,7 @@ If you have been writing your playbook with ``commit`` set to **False** each
 time, you have an uncommitted candidate configuration.  There's a panos_commit
 module to perform a commit.
 
-The example code for the module should do what you need, copy and paste the following snippet to your ``playbook.yml`` file:
+The example code for the module should do what you need:
 
 .. code-block:: yaml
 
@@ -422,7 +429,7 @@ The example code for the module should do what you need, copy and paste the foll
 Run the Playbook
 ================
 
-Don't forget to save your ``playbook.yml`` file.  Then run your playbook with the
+Save and exit your ``playbook.yml`` file.  Then run your playbook with the
 following command:
 
 .. code-block:: console
@@ -434,7 +441,7 @@ what you want.  If you get errors, indentation is most likely the problem.
 Ansible is very particular about lines being indented with spaces and not with
 tabs.
 
-**You're now done with the Ansible portion of the lab!**
+You're now done with the Ansible portion of the lab!
 
 
 ******************
@@ -461,6 +468,15 @@ Access the Apache web server
 The web server is using the firewall's untrust interface address in a
 destination NAT rule.  Run the following commands to determine the IP
 address of this interface.
+
+`For GCP:`
+
+.. code-block:: console
+
+    cd ~/utd-automation/journey/deployment/gcp
+    terraform output
+
+`For AWS:`
 
 .. code-block:: console
 

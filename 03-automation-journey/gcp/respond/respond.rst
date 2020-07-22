@@ -10,6 +10,7 @@ Monitor
 
 In this activity you will:
 
+- Create a VM Information Source (GCP)
 - Create a VM Information Source (AWS)
 - Verify cloud API connectivity
 
@@ -17,8 +18,45 @@ In this activity you will:
 The automation tasks we've accomplished thus far have focused on deploying the VM-Series firewall and making changes to it externally via the API.  We'll now shift our focus to how PAN-OS can leverage third-party APIs to monitor its environment and automatically respond to changes it observes.
 
 
+Create a VM Information Source (GCP)
+====================================
+.. note:: If you are working on the AWS deployment you should skip ahead to :ref:`aws-source`.
+
+We will be creating a VM Information Source on the firewall to monitor the GCP Compute Engine environment for meta-data about the running VM instances.  Open a web browser and go to ``https://<your-firewall-ip>``.  You will log in with the following credentials.
+
+- **Username:** ``admin``
+- **Password:** ``PaloAlto#2020``
+
+Once you have logged into the firewall, go to the **VM Information Sources** under the **Device** tab and click **Add**.
+
+.. figure:: img/monitor-add-source-gcp.png
+   :align: center
+
+- Provide a name for your monitored source in the **Name** field.
+
+- Ensure that *Google Compute Engine* is selected from the **Type** field selection.
+
+- (optional) Provide a description of the monitored source in the **Description** field.
+
+- Ensure that the **Enabled** button is selected.
+
+- Select *VM-Series running in GCE* from the **Service Authorization Type** selector.
+
+- The **Project ID** field will contain the Access Key ID provided in the Qwiklabs portal.
+
+- The **Zone Name** field will contain the GCP zone in which the lab has been deployed.
+
+
+- The **Update Interval**, and timeout fields can keep their default values.
+
+Click **OK** to accept the configuration.
+
+
+.. _aws-source:
+
 Create a VM Information Source (AWS)
 ====================================
+.. note:: If you are working on the GCP deployment you should skip ahead to :ref:`verify-api`.
 
 We will be creating a VM Information Source on the firewall to monitor the AWS EC2 environment for meta-data about the running VM instances.  Open a web browser and go to ``https://<your-firewall-ip>``.  You will log in with the following credentials.
 
@@ -40,9 +78,9 @@ Once you have logged into the firewall, go to the **VM Information Sources** und
 
 - The **Source** field will contain the URI of the AWS region in which the lab is deployed.  The format for this is *ec2.<your_AWS_region>.amazonaws.com*. For example, if the region is *us-west-2* then the URI will be *ec2.us-west-2.amazonaws.com*.
 
-- The **Access Key ID** Type ``env | grep AWS_ACCESS | cut -f2 -d "="`` to display your key ID in the terminal.
+- The **Access Key ID** field will contain the Access Key ID provided in the Qwiklabs portal.
 
-- The **Secret Access Key** Type ``env | grep AWS_SECRET | cut -f2 -d "="``  to display your secret key in the terminal.
+- The **Secret Access Key** field (and confirmation field) will contain the Secret Access Key provided in the Qwiklabs portal.
 
 - The **Update Interval**, and timeout fields can keep their default values.
 
@@ -56,9 +94,10 @@ Once you have logged into the firewall, go to the **VM Information Sources** und
 Click **OK** to accept the configuration.
 
 
+.. _verify-api:
+
 Verify cloud API connectivity
 =============================
-
 Click **Commit** and commit the candidate configuration.
 
 If the VM Information Source configuration was correct, you should see the status indicator for your source turn green.
@@ -86,7 +125,6 @@ Dynamic Address Groups are policy object groups whose members are ephemeral in n
 
 Create a Dynamic Address Group
 ==============================
-
 Navigate to **Objects > Address Groups** in the firewall web interface.
 
 Click **Add** to create a new Dynamic Address Group.
@@ -101,15 +139,13 @@ In the **Address Group** window:
 - Select *Dynamic* from the **Type** drop-down menu.
 - Click on **Add Match Criteria** to view the available attributes.
 
-
 Define the attribute match criteria
 ===================================
-
 The attributes displayed are discovered from the cloud provider API and are refreshed every *60 seconds*.  You will select the attributes that will need to be matched in order to associate a VM instance to your Dynamic Address Group.
 
 Most of the attributes displayed are not needed.  However, each of the VM instances we've deployed have used a tag entitled ``server-type``.  Using the search bar at the top of the match criteria pop-up window, search for the term `server-type`.  Then add the result that has a value of ``database`` to the match criteria list.
 
-.. figure:: img/dag-match.png
+.. figure:: img/dag-dag_match.png
    :align: center
 
 Click **OK** when you are done.
@@ -117,7 +153,6 @@ Click **OK** when you are done.
 
 Apply the Dynamic Address Group to a rule
 ================================================
-
 Now that we've defined a VM Information Source and a Dynamic Address Group, let's put them to use.  Navigate to **Policies > Security** in the firewall web interface.
 
 .. figure:: img/dag-new_rules.png
@@ -145,7 +180,6 @@ The combination of VM Information Sources and Dynamic Address Groups allows the 
 
 Determine Dynamic Address Group membership
 ==========================================
-
 First, we should confirm that the one database instance we've already deployed has already been mapped to the Dynamic Address Group based on it's ``server-type`` attribute.
 
 Navigate to **Objects > Address Groups** in the firewall web interface and select the Dynamic Address Group ``db-grp`` that you previously created.
@@ -162,33 +196,29 @@ Click **Close** to close the pop-up window.
 
 Scale out the database instances
 ================================
-
 To scale out the number of database instances we'll go back to our Terraform deployment.
 
+For GCP:
+
+.. code-block:: console
+
+    cd ~/utd-automation/journey/deployment/gcp
+
+For AWS:
 
 .. code-block:: console
 
     cd ~/utd-automation/journey/deployment/aws
 
-In the ``main.tf`` file there is a module called ``scale`` that is commented out.  Open ``main.tf`` in a text editor and uncomment that entire section.
+In the ``main.tf`` file there is a module called ``scale`` that is commented out.  Open ``main.tf`` in a text editor and uncomment that entire section.  
 
-.. code-block:: console
-
-    code main.tf
-
-Do not forget to save the file (CTRL+S).
+Save the file and exit.
 
 By uncommenting the ``scale`` module you have just added a new module to the Terraform plan.  This will require a re-initialization of the plan.
 
 .. code-block:: console
 
     terraform init
-
-Then plan again:
-
-.. code-block:: console
-
-    terraform plan
 
 You can now apply the Terraform plan.
 
@@ -201,7 +231,6 @@ This will result in four new database instances being added to the database subn
 
 Confirm Dynamic Address Group changes
 =====================================
-
 Now go back to the **Objects > Address Groups** section of the firewall web interface and click ``more...`` under the **Addresses** column of the ``db-grp`` entry.
 
 .. figure:: img/scale-after.png

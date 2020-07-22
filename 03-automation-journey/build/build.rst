@@ -101,7 +101,7 @@ file.
     code terraform.tfvars
 
 Copy and paste the following snippet in your new file. **Change the values** for the Region and Availability Zone.
-You can find more information about Region and AZ in the `AWS User Guide <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html>`_.
+You can find more information about Region and AZ in the `AWS User Guide <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html>`_. And more information on Palo Alto Networks solutions on `TechDocs <https://docs.paloaltonetworks.com/vm-series/9-0/vm-series-deployment/set-up-the-vm-series-firewall-on-aws/deploy-the-vm-series-firewall-on-aws/obtain-the-ami/get-amazon-machine-image-ids.html>`_.
 
 .. code-block:: terraform
 
@@ -118,15 +118,7 @@ You can find the available AZ for a region by typing the following command from 
 
     aws ec2 describe-availability-zones --region region-name
 
-For exemple for Paris
-
-.. code-block:: terraform
-
-    aws_region_name     = "eu-west-3"
-    aws_az_name         = "eu-west-3a"
-    public_key_file     = "~/.ssh/lab_ssh_key.pub"
-
-For the United States - North Carolina (1st AWS Region and AZ):
+For example, for the United States - North Virginia (1st AWS Region and AZ):
 
 .. code-block:: terraform
 
@@ -213,7 +205,9 @@ It is recommended that you skip ahead and read the :doc:`../03-run/terraform/bac
 Verify on AWS Console some elements created by terraform
 ********************************************************
 
-.. figure:: work-in-progress.png
+You can log in to the AWS Console using your utd-console `IAM profile </en/latest/00-getting-started/requirements.html#create-iam-account-for-console-access>`_. Confirm that the 3 EC2 instances have been created by Terraform:
+
+.. figure:: img/aws-console-check.png
 
 
 *************************************
@@ -255,4 +249,3 @@ activities.
           bootstrap package).  This is because the PAN-OS XML API cannot utilize SSH keys and requires a
           username/password or API key for authentication.
 
-https://docs.paloaltonetworks.com/vm-series/9-0/vm-series-deployment/set-up-the-vm-series-firewall-on-aws/deploy-the-vm-series-firewall-on-aws/obtain-the-ami/get-amazon-machine-image-ids.html
