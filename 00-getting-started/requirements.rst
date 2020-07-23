@@ -171,7 +171,35 @@ After this step, you can click on close:
 Launch a first EC2 instance to sign the EULA
 ============================================
 
-.. warning:: To be able to launch an EC2 instance of a Palo Alto Networks VM Series, you need to first approve the End-User Licence Agreement. To do that log in using any account and 
+.. warning:: To be able to launch an EC2 instance of a Palo Alto Networks VM Series, you need to first approve the End-User Licence Agreement. If no date is displayed under the **Effective Date** in your subscription page of the product, your subscription is not yet approved and you won't be able to use this AMI.
 
-You should receive an email from AWS, letting you know that the service is now available.
-.. figure:: img/aws-ec2-vmseries-email.png
+To do that log in using any account and search for Palo Alto Networks in the marketplace. Click on **Services**, type ``Marketplace`` and open the link:
+
+.. figure:: img/aws-marketplace-open.png
+
+Then choose **discover** in the left menu and search for ``Palo Alto Networks``:
+
+.. figure:: img/aws-marketplace-search.png
+
+Open the four following links in new tabs:
+
+- Palo Alto Networks VM-300 Bundle 2
+- VM-Series Next-Generation Firewall (BYOL and ELA)
+- VM-Series Next-Generation Firewall Bundle 1
+- VM-Series Next-Generation Firewall Bundle 2
+
+For each one, click on **Continue to Subscribe** and **Accept the terms**:
+
+.. figure:: img/aws-marketplace-subscribe.png
+
+.. figure:: img/aws-marketplace-acceptterms.png
+
+Once done you should see a green ribbon at the top of the screen *Thanking you for subscribing*, the **effective date** will be in the pending state. This step can take several minutes (20-30).
+
+.. figure:: img/aws-marketplace-subscribed.png
+
+You should also receive an email from AWS, letting you know that the service is now available:
+
+.. figure:: img/aws-marketplace-email.png
+
+
