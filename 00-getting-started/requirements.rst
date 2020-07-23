@@ -162,7 +162,7 @@ Clic :guilabel:`Next:Review`, and finally click on :guilabel:`Create User`:
 
 The API user has been created, download the :guilabel:`Access key ID` and :guilabel:`Secret access key` by clicking :guilabel:`Download .csv`.These credentials are needed to connect to Amazon EC2 service through Terraform.
 
-We also recommand to copy/paste theses information in a :guilabel:`notepad` to use them to create AWS environment variables.
+We also recommand to copy/paste theses information in a **text editor** to use them to create AWS environment variables.
 After this step, you can click on close:
 
 .. figure:: img/aws-iam-user-success-csv-api.png
