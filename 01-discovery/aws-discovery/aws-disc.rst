@@ -34,11 +34,11 @@ Etape 3 : Remplissez le nom du VPC, le sous réseau, laissez les autres paramèt
 
 .. figure:: img/create-vpc-3.png
 
-Etape 4 : Sélectionnez le VPC :guilabel:`utd-activity1` et allez dans Actions > Edit DNS hostnames
+Etape 4 : Sélectionnez le VPC :guilabel:`utd-activity1` et allez dans :guilabel:`Actions` > :guilabel:`Edit DNS hostnames`
 
 .. figure:: img/create-vpc-4.png
 
-Etape 5 : Dans Edit DNS hostnames, cochez le bouton enable et sauvegardez
+Etape 5 : Dans :guilabel:`Edit DNS hostnames`, cochez le bouton :guilabel:`enable` et sauvegardez
 
 .. figure:: img/create-vpc-5.png
 
@@ -63,11 +63,11 @@ Les sous réseaux seront utilisés comme suit :
 +--------------+--------------+-------------+--------------------+
 
 
-Etape 1: allez dans VPC > Subnets > Create subnet
+Etape 1: allez dans :guilabel:`VPC` > :guilabel:`Subnets` > :guilabel:`Create subnet`
 
 .. figure:: img/create-vpc-7.png
 
-Etape 2 : Renseignez le nom, le VPC *utd-activity1*, choisissez la première zone d'availibility.
+Etape 2 : Renseignez le nom ``utd-activity1-mgmt`` par exemple, le VPC :guilabel:`utd-activity1`, choisissez la première zone d'availibility.
 
 .. figure:: img/create-vpc-8.png
 
@@ -89,7 +89,7 @@ Création d’une passerelle Internet IGW
 La création d’un passerelle Internet est indispensable pour permettre au VPC de se connecter à Internet. Une fois que la passerelle est créée, il sera nécessaire de l’attacher à un VPC.
 
 
-Etape 1 : Allez dans VPC > Internet Gateways > Create internet gateway et utilisez ``utd-activity1-igw`` comme nom
+Etape 1 : Allez dans :guilabel:`VPC` > :guilabel:`Internet Gateways` > :guilabel:`Create internet gateway` et utilisez ``utd-activity1-igw`` comme nom
 
 .. figure:: img/create-vpc-10.png
 
@@ -97,11 +97,11 @@ Etape 1 : Allez dans VPC > Internet Gateways > Create internet gateway et utilis
 
 .. figure:: img/create-vpc-10-2.png
 
-Etape 2 : Sélectionnez l’IGW ``utd-activity1-igw`` et ensuite allez dans Actions > Attach to VPC
+Etape 2 : Sélectionnez l’IGW ``utd-activity1-igw`` et ensuite allez dans :guilabel:`Actions` > :guilabel:`Attach to VPC`
 
 .. figure:: img/create-vpc-11.png
 
-Etape 3 : Sélectionner le VPC ``utd-activity1`` et sauvegarder
+Etape 3 : Sélectionner le VPC :guilabel:`utd-activity1` et sauvegarder
 
 .. figure:: img/create-vpc-12.png
 
@@ -142,44 +142,44 @@ Ci-dessous, les tables de routage à créer sont décrites dans le tableau ci-de
 
 Etape 1 : Créez la table de routage *utd-management-rt* en allant vers Services > VPC > Virtual Private Cloud > Routes Tables > Create route table.
 
-Etape 2 : Entrez le nom de la table de routage, sélectionnez le VPC *utd-activity1* et sauvegardez.
+Etape 2 : Entrez le nom de la table de routage, sélectionnez le VPC :guilabel:`utd-activity1` et sauvegardez.
 
 .. figure:: img/create-vpc-14.png
 
 .. figure:: img/create-vpc-14-1.png
 
-Etape 3 : Sélectionnez la table de routage ``utd-management-rt``
+Etape 3 : Sélectionnez la table de routage :guilabel:`utd-management-rt`
 
 .. figure:: img/create-vpc-15.png
 
-Etape 4 : Allez dans Routes pour ajouter une nouvelle route par défaut en cliquant sur Edit Routes
+Etape 4 : Allez dans :guilabel:`Routes` pour ajouter une nouvelle route par défaut en cliquant sur :guilabel:`Edit Routes`
 
 .. figure:: img/create-vpc-16.png
 
-Etape 5 : Ajoutez la nouvelle route 0.0.0.0/0, sélectionnez la passerelle internet *utd-activity1-igw* créée au niveau du Target et sauvegardez les changements.
+Etape 5 : Ajoutez la nouvelle route ``0.0.0.0/0``, sélectionnez la passerelle internet :guilabel:`utd-activity1-igw` créée au niveau du Target et sauvegardez les changements.
 
 .. figure:: img/create-vpc-17.png
 
 .. figure:: img/create-vpc-17-1.png
 
-Etape 6 : Allez dans Subnet Associations > Edit subnet associations
+Etape 6 : Allez dans :guilabel:`Subnet Associations` > :guilabel:`Edit subnet associations`
 
 .. figure:: img/create-vpc-18.png
 
-Etape 7 : Sélectionnez Management_Subnet et sauvegardez
+Etape 7 : Sélectionnez :guilabel:`Management_Subnet` et sauvegardez
 
 .. figure:: img/create-vpc-19.png
 
 .. figure:: img/create-vpc-19-1.png
 
-Etape 8 : Répétez les étapes 1 à 7 pour créer, modifier la table de routage et associer le subnet pour la table de routage utd-internet-rt
+Etape 8 : Répétez les étapes 1 à 7 pour créer, modifier la table de routage et associer le subnet pour la table de routage ``utd-internet-rt``
 
 .. figure:: img/create-vpc-20.png
 
 
-Etape 9 : Créez la table de routage utd-web-rt et le subnet associé à cette dernière.
+Etape 9 : Créez la table de routage ``utd-web-rt`` et le subnet associé à cette dernière.
 
-Attention : Pas de route par défaut pour la table de routage utd-web-rt, cette route par défaut sera ajoutée ultérieurement.
+Attention : Pas de route par défaut pour la table de routage ``utd-web-rt``, cette route par défaut sera ajoutée ultérieurement.
 
 .. figure:: img/create-vpc-21.png
 
