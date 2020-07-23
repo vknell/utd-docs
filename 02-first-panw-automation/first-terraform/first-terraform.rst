@@ -12,32 +12,26 @@ In this activity you will:
 - Confirm firewall bootstrap completion
 
 
-*************
-Open Terminal
-*************
-
-.. figure:: img/work-in-progress.png
-
-
 ****************************
 Create terraform Environment
 ****************************
 
 You will need to download the sample repository used in this lab.  This repository (or *repo*) contains
-the files needed to deploy the network and compute infrastructure we'll be working with.
+the files needed to deploy the network and compute infrastructure we'll be working with. Open the terminal and download the three following files:
 
 .. code-block:: console
     
-    wget  -P ~/utd-automation/first-terraform https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/deploy_pavm.tf
-    wget  -P ~/utd-automation/first-terraform https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/deploy_vpc.tf
-    wget  -P ~/utd-automation/first-terraform https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/variables.tf
+    wget  -P ~/utd-automation/first-terraform/ https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/deploy_pavm.tf
+    wget  -P ~/utd-automation/first-terraform/ https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/deploy_vpc.tf
+    wget  -P ~/utd-automation/first-terraform/ https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/variables.tf
 
 
 ********************************
 Create AWS environment variables
 ********************************
 
-Select the Paris region (eu-west-3) at the top right corner of the screen
+Use your ``utd-console`` credentials to log in on the AWS Console. See documentation `here </en/latest/00-getting-started/requirements.html#create-iam-account-for-console-access>`_.
+Select the N.Virginia region (us-east-1) at the top right corner of the screen.
 
 
 **********************
@@ -98,15 +92,7 @@ through the subsequent steps as the default values will be used.
 
 .. figure:: img/buckets3-3.png
 
-
-
-
-!!!!!!!!!!!!    Bootstrap Bucket have to be created in same region of VPC     !!!!!!!!!!!!!!!!!!
-
-
-
-You will need to enter a globally unique bucket name. AWS will warn you if the
-name is not unique. 
+.. note:: Select the same region as your VPC. You will need to enter a globally unique bucket name. AWS will warn you if the name is not unique. 
 
 
 Once the bucket is created, select your bucket and click on **copy ARN** button and copy/paste the value in file named **ARNBucket**
@@ -181,12 +167,9 @@ folders.
 
 
 
-Upload files in the various buckets folder from ~/utd-automation/first-terraform folde
+Upload files in the various buckets folder from ``~/utd-automation/first-terraform`` folder.
 
-
-
-
-Upload the bootstrap.xml and init-cfg.txt files from bootstrap folder (~/utd-automation/first-terraform/bootstrap-files/) to the **config** folder by clicking **config**.
+Upload the bootstrap.xml and init-cfg.txt files from bootstrap folder ``~/utd-automation/first-terraform/bootstrap-files/`` to the **config** folder by clicking **config**.
 
 .. figure:: img/bootstrap-4.png
 
@@ -205,10 +188,9 @@ and select the file (panupv2-all-contents-8225-5857) downloaded previously and c
 
 .. figure:: img/bootstrap-7.png
 
-Once complet ed the file is listed under the folder content :
+Once completed the file is listed under the folder content :
 
 .. figure:: img/bootstrap-8.png
-
 
 
 Optional for Bootstrap: 
@@ -216,8 +198,6 @@ If need upgrade automaticaly your VM after boot, you can Upload a PANOS image fi
 click on the **software** folder ins the S3 console and click Upload. Select Add Files
 and select the file (example : PanOS_vm_9.0.1 ) retrieved from PANW support site, and click
 **Upload**:
-
-
 
 
 Optional for Bootstrap: 
@@ -235,7 +215,7 @@ Change into the AWS deployment directory.
 
 .. code-block:: console
 
-    $ cd ~/utd/utd-automation/utd/sample --------  A REVOIR----------
+    $ cd ~/utd-automation/first-terraform/
 
 In this directory you will find the three main files associated with a
 Terraform plan: ``deploy_panvm.tf``, ``variables.tf``, and ``deploy_vpc.tf``.  View the
@@ -243,10 +223,7 @@ contents of these files to see what they contain and how they're structured.
 
 .. code-block:: console
 
-    $ more deploy_panvm.tf
-    $ more deploy_vpc.tf
-    $ more variables.tf
-
+    code deploy_panvm.tf deploy_vpc.tf variables.tf
 
 deploy_pavm.tf - Terraform template for Palo Alto Networks VM-Series
 firewall.
@@ -264,10 +241,10 @@ variables.tf - Variables you can set for the deployment
 Modify/Adapt Configuration
 **************************
 
-1. You need to modify the variables.tf file with a Terminal or text editor.
+1. You need to modify the ``variables.tf`` file with a Terminal or text editor.
 
 
-To set the AWS access key and secret key of your IAM account for API access ( see the doc `here <https://utd-automation.readthedocs.io/en/latest/00-getting-started/aws-account.html>`_. ):
+To set the AWS access key and secret key of your IAM account for API access ( see the doc `here </en/latest/00-getting-started/aws-account.html>`_. ):
 
 .. code-block:: console
 
@@ -285,61 +262,57 @@ To set the AWS access key and secret key of your IAM account for API access ( se
 
 .. code-block:: console
 
-
-        # AWS Region and Availablility Zone
-        variable "region" {
-        default = "us-west-2"
-        }
-        variable "availability_zone" {
-        default = "us-west-2a"
-        }
-
+    # AWS Region and Availablility Zone
+    variable "region" {
+    default = "us-west-2"
+    }
+    variable "availability_zone" {
+    default = "us-west-2a"
+    }
 
 
 3. Modify variables.tf file with a Terminal or text editor with right information regarding SSH keypair:
 
-    .. code-block:: console
+.. code-block:: console
 
-        variable "pavm_key_name" {
-        description = "Name of the SSH keypair to use in AWS."
-        default = "ec2sshkeypair.pem"
-        }
-        variable "pavm_key_path" {
-        description = "Path to the private portion of the SSH key specified."
-        default = "~/utd-automation/first-terraform/ec2sshkeypair.pem"
-        }
+    variable "pavm_key_name" {
+    description = "Name of the SSH keypair to use in AWS."
+    default = "ec2sshkeypair.pem"
+    }
+    variable "pavm_key_path" {
+    description = "Path to the private portion of the SSH key specified."
+    default = "~/utd-automation/first-terraform/ec2sshkeypair.pem"
+    }
 
 4. (Optional) Modify variables.tf file with a Terminal or text editor with right information regarding the VPC CIDR and VPC Subnets if needed:
 
-    .. code-block:: console
-
-      
+.. code-block:: console
         
-        Modify CIDR block if needed:
-        # VPC configuration
-        variable "vpc_cidr_block" {
-        default = "10.88.0.0/16"
-        }
-        variable "vpc_instance_tenancy" {
-        default = "default"
-        }
-        Modify VPC Name if needed:
-        variable "vpc_name" {
-        default = "PAVM VPC"
-        }
-        Modify CIDR Block of subnets if needed :
-        # Management subnet configuration
-        variable "mgmt_subnet_cidr_block" {
-        default = "10.88.0.0/24"
-        }
-        # Untrust subnet configuration
-        variable "untrust_subnet_cidr_block" {
-        default = "10.88.1.0/24"
-        }
-        # Trust subnet configuration
-        variable "trust_subnet_cidr_block" {
-        default = "10.88.66.0/24"
-        }
+    Modify CIDR block if needed:
+    # VPC configuration
+    variable "vpc_cidr_block" {
+    default = "10.88.0.0/16"
+    }
+    variable "vpc_instance_tenancy" {
+    default = "default"
+    }
+    Modify VPC Name if needed:
+    variable "vpc_name" {
+    default = "PAVM VPC"
+    }
+    Modify CIDR Block of subnets if needed :
+    # Management subnet configuration
+    variable "mgmt_subnet_cidr_block" {
+    default = "10.88.0.0/24"
+    }
+    # Untrust subnet configuration
+    variable "untrust_subnet_cidr_block" {
+    default = "10.88.1.0/24"
+    }
+    # Trust subnet configuration
+    variable "trust_subnet_cidr_block" {
+    default = "10.88.66.0/24"
+    }
 
 5. Adapt variables.tf file with a Terminal or text editor with right information regarding AMI reference if needed:
 
@@ -361,7 +334,6 @@ In the navigation pane on left, choose AMIs.
 
 Use the Filter options to scope the list of displayed AMIs to see only the AMIs that interest you. 
 For example, to list all Palo Alto Networks AMIs provided by AWS, select Public images. Type **palo alto networks** in filter fiels to view list of AMI available in choosen Region. 
-
 
 Then verify or adapt AMI ID if needed :
 
@@ -397,7 +369,6 @@ Then verify or adapt AMI ID if needed :
     }
     }
 
-
 6. Adapt variables.tf file with a Terminal or text editor with right information regarding Bucket S3 for Bootstraping where XXXX is the name of your bucket S3.
 
 .. code-block:: console
@@ -410,7 +381,6 @@ Then verify or adapt AMI ID if needed :
     default = "pa_bootstrap_s3_readonly"
     }
 
-
 7. You need to modify the deploy_panw.tf file with a Terminal or text editor.
 
 For both AWS, the licensing options are bring your own license (BYOL) and pay as you go/consumption-based (PAYG) subscriptions.
@@ -420,7 +390,6 @@ For both AWS, the licensing options are bring your own license (BYOL) and pay as
         - Bundle 1 contents: VM-300 firewall license, Threat Prevention Subscription (inclusive of IPS, AV, Malware prevention) and Premium Support.  
         - Bundle 2 contents: VM-300 firewall license, Threat Prevention (inclusive of IPS, AV, Malware prevention), WildFire™ threat intelligence service, 
           URL Filtering, GlobalProtect Subscriptions and Premium Support.
-
 
 In deploy_panw.tf you can adapt the AMI information regarding your licensing
 type (BYOL or Bundle2):
@@ -447,8 +416,6 @@ type (BYOL or Bundle2):
     tags = {
     Name = "PAVM"
     }
-
-
 
 8. (Optional) You need to modify the deploy_vpc.tf file with a Terminal or text editor if you want to use a VPC Endpoint.
 
@@ -520,12 +487,6 @@ perform the deployment.
 
     $ terraform apply -auto-approve
 
-
-
-
-
-
-
 At a high level these are each of the steps this plan will perform:
 
     #. Create the VPC
@@ -538,23 +499,22 @@ At a high level these are each of the steps this plan will perform:
     #. Create the VM-Series firewall interfaces
     #. Create the Elastic IPs for the ``management`` and ``untrust`` interfaces
 
-
-
-
-
 The deployment process should finish in a few minutes and you will be presented
 with the public IP addresses of the VM-Series firewall management and untrust
 interfaces.  However, the VM-Series firewall can take up to *ten minutes* to
 complete the initial bootstrap process.
 
-It is recommended that you skip ahead and read the :doc:`../03-run/terraform/background-terraform` section while you wait.
+It is recommended that you skip ahead and read the `documentation </en/latest/06-appendix/background-terraform>`_ section while you wait.
 
 
 ********************************************************
 Verify on AWS Console some elements created by terraform
 ********************************************************
 
-.. figure:: img/work-in-progress.png
+On the console check that your instances have been provisionned:
+
+.. figure:: img/aws-console-check.png
+    :align: center
 
 
 *************************************
