@@ -34,7 +34,7 @@ Etape 3 : Remplissez le nom du VPC, le sous réseau, laissez les autres paramèt
 
 .. figure:: img/create-vpc-3.png
 
-Etape 4 : Sélectionnez le VPC ``utd-activity1`` et allez dans Actions > Edit DNS hostnames
+Etape 4 : Sélectionnez le VPC :guilabel:`utd-activity1` et allez dans Actions > Edit DNS hostnames
 
 .. figure:: img/create-vpc-4.png
 
