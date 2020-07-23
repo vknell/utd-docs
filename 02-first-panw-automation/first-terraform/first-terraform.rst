@@ -16,14 +16,12 @@ In this activity you will:
 Create terraform Environment
 ****************************
 
-You will need to download the sample repository used in this lab.  This repository (or *repo*) contains
-the files needed to deploy the network and compute infrastructure we'll be working with. Open the terminal and download the three following files:
+For this lab we will use Palo Alto Networks public terraform templates.
+https://github.com/PaloAltoNetworks/terraform-templates
 
-.. code-block:: console
-    
-    wget  -P ~/utd-automation/first-terraform/ https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/deploy_pavm.tf
-    wget  -P ~/utd-automation/first-terraform/ https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/deploy_vpc.tf
-    wget  -P ~/utd-automation/first-terraform/ https://raw.githubusercontent.com/PaloAltoNetworks/terraform-templates/master/sample/variables.tf
+.. note:: We already provided the sample files  used in this lab. This repository (or *repo*) contains the files needed to deploy the network and compute infrastructure.
+
+On your machine the files are in the :guilable:`~/utd-automation/first-terraform/` folder. We will switch to this environnement later on.
 
 
 ********************************
@@ -94,11 +92,16 @@ through the subsequent steps as the default values will be used.
 
 .. note:: Select the same region as your VPC. You will need to enter a globally unique bucket name. AWS will warn you if the name is not unique. 
 
+Once the bucket is created, select your bucket and click on :guilable:`copy ARN` button and copy/paste the value in file named :guilable:`ARNBucket`.
+In your terminal type the following command and paste the key that is in your clipboard:
 
-Once the bucket is created, select your bucket and click on **copy ARN** button and copy/paste the value in file named **ARNBucket**
-In your terminal type **export ARN=** and paste the key that is in your clipboard then enter the following command:
+.. code-block:: console
+    
+    export ARN=
 
-..  code-block:: console
+Then enter the following command to update the files with your ARN.
+
+.. code-block:: console
 
     sed -i 's/arn:aws:s3:::ha1-dev-paloalto/'"$ARN"'/g' ~/utd-automation/first-terraform/deploy_vpc.tf
 
@@ -109,25 +112,25 @@ This information will used later in Terraform script for bootstrap of VM FW.
 Add restricted permission on S3 Bucket (Read only)
 **************************************************
 
-We need to give ** relevant rights** for IAM account created to use API (IAM account for API access).
+We need to give the **relevant rights** for the IAM account created to use the API (IAM account for API access).
 
-Go to Services -> IAM and click on **Customer Managed Policies** :
+Go to :guilable:`Services` > :guilable:`IAM` and click on :guilable:`Customer Managed Policies`:
 
 .. figure:: img/buckets3-4.png
 
-Clic **Create policy** :
+Clic :guilable:`Create policy`:
 
 .. figure:: img/buckets3-5.png
 
-Click on **Choose a service** and choose **S3**
+Click on :guilable:`Choose a service` and choose :guilable:`S3`:
 
 .. figure:: img/buckets3-6.png
 
-Choose **Read** for Acess level:
+Choose :guilable:`Read` for Access level:
 
 .. figure:: img/buckets3-7.png
 
-Click on **Ressources** **Specify bucket ressource ARN for the GetBucketLocation...** and clic on **bucket** on **Add ARN to retrict access**:
+Click on :guilable:`Ressources`, Specify bucket ressource ARN for the GetBucketLocation... and click on :guilable:`bucket` on :guilable:`Add ARN to retrict access`:
 
 .. figure:: img/buckets3-8.png
 
@@ -135,7 +138,7 @@ Add ARN of the Bucket :
 
 .. figure:: img/buckets3-9.png
 
-Click on *Review Policy**
+Click on :guilable:`Review Policy`
 
 .. figure:: img/buckets3-10.png
 
@@ -151,29 +154,25 @@ Build Bootstrping in S3 Bucket
 click on the newly created bucket and modify 
 
 on the newly created bucket
-and add four folders called **config**, **license**, **software** and **content** by clicking on
+and add four folders called :guilable:`config`, :guilable:`license`, :guilable:`software` and :guilable:`content` by clicking on
 Create Folder:
 
 .. figure:: img/bootstrap-1.png
 
-Fill in the folder name and click Save. Repeat the process for the three remaining
+Fill in the folder name and click :guilable:`Save`. Repeat the process for the three remaining
 folders.
-
 
 .. figure:: img/bootstrap-2.png
 
 .. figure:: img/bootstrap-3.png
 
+Upload files in the various buckets folder from :guilable:`~/utd-automation/first-terraform` folder.
 
-
-
-Upload files in the various buckets folder from ``~/utd-automation/first-terraform`` folder.
-
-Upload the bootstrap.xml and init-cfg.txt files from bootstrap folder ``~/utd-automation/first-terraform/bootstrap-files/`` to the **config** folder by clicking **config**.
+Upload the bootstrap.xml and init-cfg.txt files from bootstrap folder :guilable:`~/utd-automation/first-terraform/bootstrap-files/` to the :guilable:`config` folder by clicking :guilable:`config`.
 
 .. figure:: img/bootstrap-4.png
 
-Select Add Files and select the two files (bootstrap.xml and init-cft.txt) handled previously and click Upload:
+Select Add Files and select the two files (:guilable:`bootstrap.xml` and :guilable:`init-cft.txt`) handled previously and click Upload:
 
 .. figure:: img/bootstrap-5.png
 
@@ -181,10 +180,10 @@ The two files should be listed under the folder:
 
 .. figure:: img/bootstrap-6.png
 
-Upload the **panupv2-all-contents-8225-5857** file to the **content** folder.
-click on the **content** folder ins the S3 console and click Upload. Select **Add Files**
-and select the file (panupv2-all-contents-8225-5857) downloaded previously and click
-**Upload**:
+Upload the :guilable:`panupv2-all-contents-8225-5857` file to the :guilable:`content` folder.
+click on the :guilable:`content` folder ins the S3 console and click Upload. Select :guilable:`Add Files`
+and select the file (example: *panupv2-all-contents-8225-5857*) downloaded previously and click
+:guilable:`Upload`:
 
 .. figure:: img/bootstrap-7.png
 
@@ -195,16 +194,16 @@ Once completed the file is listed under the folder content :
 
 Optional for Bootstrap: 
 If need upgrade automaticaly your VM after boot, you can Upload a PANOS image file to the **software** folder.
-click on the **software** folder ins the S3 console and click Upload. Select Add Files
-and select the file (example : PanOS_vm_9.0.1 ) retrieved from PANW support site, and click
-**Upload**:
+click on the :guilable:`software` folder ins the S3 console and click :guilable:`Upload`. Select :guilable:`Add Files`
+and select the file (example: *PanOS_vm_9.0.1*) retrieved from PANW support site, and click
+:guilable:`Upload`:
 
 
 Optional for Bootstrap: 
-If need associate licenses (BYOL) automaticaly your FW VM after boot, you can Upload a Licenses file to the **license** folder.
-click on the **license** folder ins the S3 console and click Upload. Select Add Files
-and select the file (example : 0001A100110-threats.key) downloaded previously and click
-Upload:
+If need associate licenses (BYOL) automaticaly your FW VM after boot, you can Upload a Licenses file to the :guilable:`license` folder.
+click on the :guilable:`license` folder ins the S3 console and click :guilable:`Upload`. Select :guilable:`Add Files`
+and select the file (example: *0001A100110-threats.key*) downloaded previously and click
+:guilable:`Upload`:
 
 
 ******************************
@@ -225,16 +224,16 @@ contents of these files to see what they contain and how they're structured.
 
     code deploy_panvm.tf deploy_vpc.tf variables.tf
 
-deploy_pavm.tf - Terraform template for Palo Alto Networks VM-Series
+``deploy_pavm.tf`` - Terraform template for Palo Alto Networks VM-Series
 firewall.
 
-deploy_vpc.tf - Terraform template for create a VPC on AWS. The VPC will
+``deploy_vpc.tf`` - Terraform template for create a VPC on AWS. The VPC will
 create the management, trust, and untrust subnets for the VM-Series firewall.
 An internet gateway needed for the internet connection and AWS endpoint
 (currently disabled. need to uncomment the code to enable the feature) to
 allow the firewall to access the S3 bucket via private IP address.
 
-variables.tf - Variables you can set for the deployment
+``variables.tf`` - Variables you can set for the deployment
 
 
 **************************
@@ -286,7 +285,7 @@ To set the AWS access key and secret key of your IAM account for API access ( se
 
 4. (Optional) Modify variables.tf file with a Terminal or text editor with right information regarding the VPC CIDR and VPC Subnets if needed:
 
-.. code-block:: console
+.. code-block:: terraform
         
     Modify CIDR block if needed:
     # VPC configuration
@@ -333,11 +332,11 @@ From the navigation bar, select the Region in which to launch your instances. Yo
 In the navigation pane on left, choose AMIs.
 
 Use the Filter options to scope the list of displayed AMIs to see only the AMIs that interest you. 
-For example, to list all Palo Alto Networks AMIs provided by AWS, select Public images. Type **palo alto networks** in filter fiels to view list of AMI available in choosen Region. 
+For example, to list all Palo Alto Networks AMIs provided by AWS, select Public images. Type ``palo alto networks`` in filter fiels to view list of AMI available in choosen Region. 
 
 Then verify or adapt AMI ID if needed :
 
-.. code-block:: console
+.. code-block:: terraform
 
     # PAVM configuration
     variable "pavm_payg_bun2_ami_id" {
@@ -371,7 +370,7 @@ Then verify or adapt AMI ID if needed :
 
 6. Adapt variables.tf file with a Terminal or text editor with right information regarding Bucket S3 for Bootstraping where XXXX is the name of your bucket S3.
 
-.. code-block:: console
+.. code-block:: terraform
 
     variable "pavm_user_data" {
     #default = "vmseries-bootstrap-aws-s3bucket=panw-mlue-bucket"
@@ -394,7 +393,7 @@ For both AWS, the licensing options are bring your own license (BYOL) and pay as
 In deploy_panw.tf you can adapt the AMI information regarding your licensing
 type (BYOL or Bundle2):
 
-.. code-block:: console
+.. code-block:: terraform
 
     # Palo Alto VM-Series Firewall
     resource "aws_instance" "pavm" {
@@ -427,7 +426,7 @@ bandwidth constraints on your network traffic.
 
 In deploy_vpc.tf you have to uncomment code to use Bootstrap S3 Bucket and give the S3 name bucket:
 
-.. code-block:: console
+.. code-block:: terraform
 
     # Create an endpoint for S3 bucket
     /* Uncomment to enable */
@@ -448,8 +447,7 @@ In deploy_vpc.tf you have to uncomment code to use Bootstrap S3 Bucket and give 
     POLICY
     */
 
-Nota : 
-- Value for ARN (**arn:aws:s3:::mys3bucketutd**) was been copied in in file named **ARNBucket** in ~/utd-automation/first-terraform folder at the begining of activity (see ici)
+.. note:: The ARN value has been copied in this file at the beginning of the activity.
 
 
 *************************************
@@ -465,7 +463,7 @@ plugins needed for working in a particular environment.
 
 .. code-block:: console
 
-    $ terraform init
+    terraform init
 
 
 *********************************
@@ -478,14 +476,14 @@ plan files and module dependencies.
 
 .. code-block:: console
 
-    $ terraform plan
+    terraform plan
 
 If there are no errors and the plan output looks good, let's go ahead and
 perform the deployment.
 
 .. code-block:: console
 
-    $ terraform apply -auto-approve
+    terraform apply -auto-approve
 
 At a high level these are each of the steps this plan will perform:
 
@@ -528,7 +526,7 @@ SSH into the firewall with the following credentials.
 
 .. code-block:: console
 
-    $ ssh admin@<FIREWALL_MGMT_IP>
+    ssh admin@<FIREWALL_MGMT_IP>
 
 Replace ``<FIREWALL_MGMT_IP>`` with the IP address of the firewall management
 interface that was provided in the Terraform plan results.  This information
@@ -545,9 +543,9 @@ plane has completed its initialization.
 
 .. code-block:: console
 
-    admin@lab-fw> show chassis-ready
+    show chassis-ready
 
-If the response is ``yes``, you are ready to proceed with the configuration
+If the response is :guilable:`yes`, you are ready to proceed with the configuration
 activities.
 
 .. note:: While it is a security best practice to use SSH keys to authenticate
@@ -565,7 +563,7 @@ To clean up the deployment, just run the following command
 
 .. code-block:: console
 
-    $ terraform destroy
+    terraform destroy
 
 It will automatically delete every object that was created by the template.
 
