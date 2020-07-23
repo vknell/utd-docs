@@ -21,7 +21,7 @@ https://github.com/PaloAltoNetworks/terraform-templates
 
 .. note:: We already provided the sample files  used in this lab. This repository (or *repo*) contains the files needed to deploy the network and compute infrastructure.
 
-On your machine the files are in the :guilable:`~/utd-automation/first-terraform/` folder. We will switch to this environnement later on.
+On your machine the files are in the :guilabel:`~/utd-automation/first-terraform/` folder. We will switch to this environnement later on.
 
 
 ********************************
@@ -44,23 +44,23 @@ click on EC2:
 
 .. figure:: img/sshkeypair-1.png
 
-Click Key Pairs
+Click :guilabel:`Key Pairs`
 
 .. figure:: img/sshkeypair-2.png
 
-Clic Create key pair button:
+Click :guilabel:`Create key` pair button:
 
 .. figure:: img/sshkeypair-3.png
 
-Give it a name: ec2sshkeypair
+Give it a name: ``ec2sshkeypair``
 
 .. figure:: img/sshkeypair-4.png
 
-And click Create .
+And click :guilabel:`Create`.
 
 .. figure:: img/sshkeypair-5.png
 
-Change the key to the following folder
+Move the key to the following folder:
 
 .. code-block:: console
 
@@ -77,22 +77,22 @@ This ensures that the firewall is configured and ready at initial boot-up, remov
 need for manual configuration.
 
 To create a bootstrap bucket, Sign in to the AWS console https://www.amazon.com
-and click on S3
+and click on :guilabel:`S3`:
 
 .. figure:: img/buckets3-1.png
 
-Click Create Bucket:
+Click :guilabel:`Create Bucket`:
 
 .. figure:: img/buckets3-2.png
 
-Enter a bucket name and select a region and click Create as there is no need to go
+Enter a bucket name and select a region and click :guilabel:`Create` as there is no need to go
 through the subsequent steps as the default values will be used.
 
 .. figure:: img/buckets3-3.png
 
 .. note:: Select the same region as your VPC. You will need to enter a globally unique bucket name. AWS will warn you if the name is not unique. 
 
-Once the bucket is created, select your bucket and click on :guilable:`copy ARN` button and copy/paste the value in file named :guilable:`ARNBucket`.
+Once the bucket is created, select your bucket and click on :guilabel:`copy ARN` button and copy/paste the value in file named :guilabel:`ARNBucket`.
 In your terminal type the following command and paste the key that is in your clipboard:
 
 .. code-block:: console
@@ -114,23 +114,23 @@ Add restricted permission on S3 Bucket (Read only)
 
 We need to give the **relevant rights** for the IAM account created to use the API (IAM account for API access).
 
-Go to :guilable:`Services` > :guilable:`IAM` and click on :guilable:`Customer Managed Policies`:
+Go to :guilabel:`Services` > :guilabel:`IAM` and click on :guilabel:`Customer Managed Policies`:
 
 .. figure:: img/buckets3-4.png
 
-Clic :guilable:`Create policy`:
+Clic :guilabel:`Create policy`:
 
 .. figure:: img/buckets3-5.png
 
-Click on :guilable:`Choose a service` and choose :guilable:`S3`:
+Click on :guilabel:`Choose a service` and choose :guilabel:`S3`:
 
 .. figure:: img/buckets3-6.png
 
-Choose :guilable:`Read` for Access level:
+Choose :guilabel:`Read` for Access level:
 
 .. figure:: img/buckets3-7.png
 
-Click on :guilable:`Ressources`, Specify bucket ressource ARN for the GetBucketLocation... and click on :guilable:`bucket` on :guilable:`Add ARN to retrict access`:
+Click on :guilabel:`Ressources`, Specify bucket ressource ARN for the GetBucketLocation... and click on :guilabel:`bucket` on :guilabel:`Add ARN to retrict access`:
 
 .. figure:: img/buckets3-8.png
 
@@ -138,7 +138,7 @@ Add ARN of the Bucket :
 
 .. figure:: img/buckets3-9.png
 
-Click on :guilable:`Review Policy`
+Click on :guilabel:`Review Policy`
 
 .. figure:: img/buckets3-10.png
 
@@ -154,25 +154,25 @@ Build Bootstrping in S3 Bucket
 click on the newly created bucket and modify 
 
 on the newly created bucket
-and add four folders called :guilable:`config`, :guilable:`license`, :guilable:`software` and :guilable:`content` by clicking on
+and add four folders called :guilabel:`config`, :guilabel:`license`, :guilabel:`software` and :guilabel:`content` by clicking on
 Create Folder:
 
 .. figure:: img/bootstrap-1.png
 
-Fill in the folder name and click :guilable:`Save`. Repeat the process for the three remaining
+Fill in the folder name and click :guilabel:`Save`. Repeat the process for the three remaining
 folders.
 
 .. figure:: img/bootstrap-2.png
 
 .. figure:: img/bootstrap-3.png
 
-Upload files in the various buckets folder from :guilable:`~/utd-automation/first-terraform` folder.
+Upload files in the various buckets folder from :guilabel:`~/utd-automation/first-terraform` folder.
 
-Upload the bootstrap.xml and init-cfg.txt files from bootstrap folder :guilable:`~/utd-automation/first-terraform/bootstrap-files/` to the :guilable:`config` folder by clicking :guilable:`config`.
+Upload the bootstrap.xml and init-cfg.txt files from bootstrap folder :guilabel:`~/utd-automation/first-terraform/bootstrap-files/` to the :guilabel:`config` folder by clicking :guilabel:`config`.
 
 .. figure:: img/bootstrap-4.png
 
-Select Add Files and select the two files (:guilable:`bootstrap.xml` and :guilable:`init-cft.txt`) handled previously and click Upload:
+Select Add Files and select the two files (:guilabel:`bootstrap.xml` and :guilabel:`init-cft.txt`) handled previously and click Upload:
 
 .. figure:: img/bootstrap-5.png
 
@@ -180,10 +180,10 @@ The two files should be listed under the folder:
 
 .. figure:: img/bootstrap-6.png
 
-Upload the :guilable:`panupv2-all-contents-8225-5857` file to the :guilable:`content` folder.
-click on the :guilable:`content` folder ins the S3 console and click Upload. Select :guilable:`Add Files`
+Upload the :guilabel:`panupv2-all-contents-8225-5857` file to the :guilabel:`content` folder.
+click on the :guilabel:`content` folder ins the S3 console and click Upload. Select :guilabel:`Add Files`
 and select the file (example: *panupv2-all-contents-8225-5857*) downloaded previously and click
-:guilable:`Upload`:
+:guilabel:`Upload`:
 
 .. figure:: img/bootstrap-7.png
 
@@ -194,16 +194,16 @@ Once completed the file is listed under the folder content :
 
 Optional for Bootstrap: 
 If need upgrade automaticaly your VM after boot, you can Upload a PANOS image file to the **software** folder.
-click on the :guilable:`software` folder ins the S3 console and click :guilable:`Upload`. Select :guilable:`Add Files`
+click on the :guilabel:`software` folder ins the S3 console and click :guilabel:`Upload`. Select :guilabel:`Add Files`
 and select the file (example: *PanOS_vm_9.0.1*) retrieved from PANW support site, and click
-:guilable:`Upload`:
+:guilabel:`Upload`:
 
 
 Optional for Bootstrap: 
-If need associate licenses (BYOL) automaticaly your FW VM after boot, you can Upload a Licenses file to the :guilable:`license` folder.
-click on the :guilable:`license` folder ins the S3 console and click :guilable:`Upload`. Select :guilable:`Add Files`
+If need associate licenses (BYOL) automaticaly your FW VM after boot, you can Upload a Licenses file to the :guilabel:`license` folder.
+click on the :guilabel:`license` folder ins the S3 console and click :guilabel:`Upload`. Select :guilabel:`Add Files`
 and select the file (example: *0001A100110-threats.key*) downloaded previously and click
-:guilable:`Upload`:
+:guilabel:`Upload`:
 
 
 ******************************
@@ -545,7 +545,7 @@ plane has completed its initialization.
 
     show chassis-ready
 
-If the response is :guilable:`yes`, you are ready to proceed with the configuration
+If the response is :guilabel:`yes`, you are ready to proceed with the configuration
 activities.
 
 .. note:: While it is a security best practice to use SSH keys to authenticate
