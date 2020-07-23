@@ -623,9 +623,10 @@ https://docs.aws.amazon.com/cloudformation/index.html
 VPC Deletion
 ************
 
-In order to clean up and suppress the VPC you need to delete the following items in that order: 
-- EC2 instances (**EC2 > Instances** select both instances, select action and **Terminate**)
-- Network interfaces (**VPC > Network Interfaces**)
-- Elastic IP addresses (**VPC > Elastic IP addresses**)
-- VPC (**EC2 > VPC > Your VPC**, select the ``utd-activity1`` VPC and go to **Actions** then **Delete VPC**, confirm to delete the VPC and the reminding configuration)
+In order to clean up and suppress the VPC you need to delete the following items in that order:
+
+- EC2 instances (:guilabel:`EC2` > :guilabel:`Instances` select both instances, select :guilabel:`action` and :guilabel:`Terminate`)
+- Network interfaces (:guilabel:`VPC` > :guilabel:`Network Interfaces`)
+- Elastic IP addresses (:guilabel:`VPC` > :guilabel:`Elastic IP addresses`)
+- VPC (:guilabel:`EC2` > :guilabel:`VPC` > :guilabel:`Your VPC`, select the :guilabel:`utd-activity1` VPC and go to :guilabel:`Actions` then :guilabel:`Delete VPC`, confirm to delete the VPC and the reminding configuration)
 
