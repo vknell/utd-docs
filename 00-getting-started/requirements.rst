@@ -83,12 +83,12 @@ It is a best practice not to use the root account to create workloads and modify
 You will create a user and a group to access the console with the proper rights.
 
 
-From AWS console, go to **Services** and choose **IAM** as shown:
+From AWS console, go to :guilabel:`Services` and choose :guilabel:`IAM` as shown:
 
 .. figure:: img/aws-iam.png
 
 
-Clic on **Users** as shown:
+Clic on :guilabel:`Users` as shown:
 
 .. figure:: img/aws-iam-user.png
 
@@ -96,20 +96,20 @@ Clic on **Users** as shown:
 Create IAM account for console access
 -------------------------------------
 
-Clic **Add User**, give a name and define **Access type** for **AWS Management Console access** as shown after that clic on **Next Permissions**:
+Clic :guilabel:`Add User`, give a name and define :guilabel:`Access type` for :guilabel:`AWS Management Console access` as shown after that clic on :guilabel:`Next Permissions`:
 
 .. figure:: img/aws-iam-user-add-console.png
 
 .. figure:: img/aws-iam-user-creation-console.png
 
 
-Next clic **Create Group**:
+Next clic :guilabel:`Create Group`:
 
 .. figure:: img/aws-iam-user-create-group-console.png
 
 
-Provide a group name **utd** and filter **policy Type** menu by **FullAccess**, and add the following rights.
-Amazon Rights for group **utd**:
+Provide a group name :guilabel:`utd` and filter :guilabel:`policy Type` menu by :guilabel:`FullAccess`, and add the following rights.
+Amazon Rights for group :guilabel:`utd`:
     - AWSMarketplaceFullAccess
     - AmazonEC2FullAccess
     - AWSLambdaFullAccess
@@ -118,7 +118,7 @@ Amazon Rights for group **utd**:
     - CloudWatchFullAccess
     - AmazonVPCFullAccess
     - IAMFullAccess
-Then click **Create Group**:
+Then click :guilabel:`Create Group`:
 
 .. figure:: img/aws-iam-user-group-creation-console.png
 
@@ -127,12 +127,12 @@ Then select the group:
 .. figure:: img/aws-iam-user-to-group-console.png
 
 
-Click **Next:Tags**, you can leave it empty and click **Next:Review** and finally click **Create User**:
+Click :guilabel:`Next:Tags`, you can leave it empty and click :guilabel:`Next:Review` and finally click :guilabel:`Create User`:
 
 .. figure:: img/aws-iam-user-review-console.png
 
 
-The user is now created, download the CSV file to retrieve the password. After this step you can click on **Close**:
+The user is now created, download the CSV file to retrieve the password. After this step you can click on :guilabel:`Close`:
 
 .. figure:: img/aws-iam-user-success-csv-console.png
 
@@ -140,29 +140,29 @@ The user is now created, download the CSV file to retrieve the password. After t
 Create IAM account for API access
 ---------------------------------
 
-Clic **Add User**:
+Clic :guilabel:`Add User`:
 
 .. figure:: img/aws-iam-user-add-api.png
 
 
-Give it a name and define **Access type** for **Programmatic access** as shown after that clic on **Next Permissions**:
+Give it a name and define :guilabel:`Access type` for :guilabel:`Programmatic access` as shown after that clic on :guilabel:`Next Permissions`:
 
 .. figure:: img/aws-iam-user-creation-api.png
 
 
-Next select the **utd** group previously created. And click on **Next:Tags**:
+Next select the :guilabel:`utd` group previously created. And click on :guilabel:`Next:Tags`:
 
 .. figure:: img/aws-iam-user-to-group-api.png
 
 
-Clic **Next:Review**, and finally click on **Create User**:
+Clic :guilabel:`Next:Review`, and finally click on :guilabel:`Create User`:
 
 .. figure:: img/aws-iam-user-review-api.png
 
 
-The API user has been created, download the **Access key ID** and **Secret access key** by clicking **Download .csv**.These credentials are needed to connect to Amazon EC2 service through Terraform.
+The API user has been created, download the :guilabel:`Access key ID` and :guilabel:`Secret access key` by clicking :guilabel:`Download .csv`.These credentials are needed to connect to Amazon EC2 service through Terraform.
 
-We also recommand to copy/paste theses information in a **notepad** to use them to create AWS environment variables.
+We also recommand to copy/paste theses information in a :guilabel:`notepad` to use them to create AWS environment variables.
 After this step, you can click on close:
 
 .. figure:: img/aws-iam-user-success-csv-api.png
@@ -171,13 +171,13 @@ After this step, you can click on close:
 Launch a first EC2 instance to sign the EULA
 ============================================
 
-.. warning:: To be able to launch an EC2 instance of a Palo Alto Networks VM Series, you need to first approve the End-User Licence Agreement. If no date is displayed under the **Effective Date** in your subscription page of the product, your subscription is not yet approved and you won't be able to use this AMI.
+.. warning:: To be able to launch an EC2 instance of a Palo Alto Networks VM Series, you need to first approve the End-User Licence Agreement. If no date is displayed under the :guilabel:`Effective Date` in your subscription page of the product, your subscription is not yet approved and you won't be able to use this AMI.
 
-To do that log in using any account and search for Palo Alto Networks in the marketplace. Click on **Services**, type ``Marketplace`` and open the link:
+To do that log in using any account and search for Palo Alto Networks in the marketplace. Click on :guilabel:`Services`, type ``Marketplace`` and open the link:
 
 .. figure:: img/aws-marketplace-open.png
 
-Then choose **discover** in the left menu and search for ``Palo Alto Networks``:
+Then choose :guilabel:`discover` in the left menu and search for ``Palo Alto Networks``:
 
 .. figure:: img/aws-marketplace-search.png
 
@@ -188,13 +188,13 @@ Open the four following links in new tabs:
 - VM-Series Next-Generation Firewall Bundle 1
 - VM-Series Next-Generation Firewall Bundle 2
 
-For each one, click on **Continue to Subscribe** and **Accept the terms**:
+For each one, click on :guilabel:`Continue to Subscribe` and :guilabel:`Accept the terms`:
 
 .. figure:: img/aws-marketplace-subscribe.png
 
 .. figure:: img/aws-marketplace-acceptterms.png
 
-Once done you should see a green ribbon at the top of the screen *Thanking you for subscribing*, the **effective date** will be in the pending state. This step can take several minutes (20-30).
+Once done you should see a green ribbon at the top of the screen *Thanking you for subscribing*, the :guilabel:`effective date` will be in the pending state. This step can take several minutes (20-30).
 
 .. figure:: img/aws-marketplace-subscribed.png
 
