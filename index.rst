@@ -5,9 +5,7 @@ Palo Alto Networks: Automation Lab Guide
 .. image:: img/palo-alto-networks-logo.png
    :align: center
 
-*******
-Welcome
-*******
+**Welcome**
 
 Welcome to the Palo Alto Networks Automation Lab!
 
@@ -17,26 +15,17 @@ Following the deployment, we will automate the configuration of the firewall to 
 
 Lastly, we will ensure that the firewall is able to respond effectively to changes made to the application infrastructure.  You will deploying your application in Amazon Web Services (AWS).  
 
-
-*********
-Objective
-*********
+**Objective**
 
 Discover the cloud 
 
-
-*****************
-Learning Outcomes
-*****************
+**Learning Outcomes**
 
 - Understand the various methods for automating the deployment of Palo Alto Networks NGFW instances in cloud environments
 - Learn to use industry-leading configuration management automation tools to implement changes to PAN-OS devices
 - Learn how the Palo Alto Networks NGFW can automatically respond to changes in the network environment
 
-
-***************************
-Automation Journey Overview
-***************************
+**Automation Journey Overview**
 
 The objective of this workshop is to deploy and secure a `WordPress <https://wordpress.org>`_ content management system in AWS.  This web application will be supported by an `Apache <https://httpd.apache.org>`_ web server and a database server residing in two separate subnets with different AZ.  
 
@@ -44,8 +33,8 @@ As part of our infrastructure deployment, a VM-Series NGFW in a specific VPC 'VP
 
 
 This training workshop provides hands-on exposure to the three primary
-categories of infrastructure automation activities: **Build**, **Run**, and
-**Respond**.
+categories of infrastructure automation activities: :guilabel:`Build`, :guilabel:`Run`, and
+:guilabel:`Respond`.
 
 .. image:: img/build-run-respond.png
 
@@ -70,10 +59,7 @@ Respond
     are defined in advance but only initiated when a event matching its trigger
     criteria occurs.
 
-
-**************
-Lab Components
-**************
+**Lab Components**
 
 AWS Amazon Web Service
     Amazon Web Services is a subsidiary of Amazon that provides on-demand cloud
