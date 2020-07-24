@@ -6,37 +6,33 @@ Palo Alto Networks: Automation Lab Guide
    :align: center
 
 **Welcome**
+    Welcome to the Palo Alto Networks Automation Lab!
 
-Welcome to the Palo Alto Networks Automation Lab!
+    In this lab we will be learning how to automate the deployment and configuration of infrastructure supporting a web application within AWS public cloud provider.  A key element of this infrastructure is the Palo Alto Networks NGFW.  
 
-In this lab we will be learning how to automate the deployment and configuration of infrastructure supporting a web application within AWS public cloud provider.  A key element of this infrastructure is the Palo Alto Networks NGFW.  
+    Following the deployment, we will automate the configuration of the firewall to support and protect protect the web application through a VPC Transit  
 
-Following the deployment, we will automate the configuration of the firewall to support and protect protect the web application through a VPC Transit  
-
-Lastly, we will ensure that the firewall is able to respond effectively to changes made to the application infrastructure.  You will deploying your application in Amazon Web Services (AWS).  
+    Lastly, we will ensure that the firewall is able to respond effectively to changes made to the application infrastructure.  You will deploying your application in Amazon Web Services (AWS).  
 
 **Objective**
-
-Discover the cloud 
+    Discover the cloud 
 
 **Learning Outcomes**
-
-- Understand the various methods for automating the deployment of Palo Alto Networks NGFW instances in cloud environments
-- Learn to use industry-leading configuration management automation tools to implement changes to PAN-OS devices
-- Learn how the Palo Alto Networks NGFW can automatically respond to changes in the network environment
+    - Understand the various methods for automating the deployment of Palo Alto Networks NGFW instances in cloud environments
+    - Learn to use industry-leading configuration management automation tools to implement changes to PAN-OS devices
+    - Learn how the Palo Alto Networks NGFW can automatically respond to changes in the network environment
 
 **Automation Journey Overview**
 
-The objective of this workshop is to deploy and secure a `WordPress <https://wordpress.org>`_ content management system in AWS.  This web application will be supported by an `Apache <https://httpd.apache.org>`_ web server and a database server residing in two separate subnets with different AZ.  
+    The objective of this workshop is to deploy and secure a `WordPress <https://wordpress.org>`_ content management system in AWS.  This web application will be supported by an `Apache <https://httpd.apache.org>`_ web server and a database server residing in two separate subnets with different AZ.  
 
-As part of our infrastructure deployment, a VM-Series NGFW in a specific VPC 'VPC-Transit' will be inserted between Internet and the web subnet, and the database subnet.  However, we will need to configure this virtual firewall to support its network environment and the applications it will be protecting.
+    As part of our infrastructure deployment, a VM-Series NGFW in a specific VPC 'VPC-Transit' will be inserted between Internet and the web subnet, and the database subnet.  However, we will need to configure this virtual firewall to support its network environment and the applications it will be protecting.
 
+    This training workshop provides hands-on exposure to the three primary
+    categories of infrastructure automation activities: :guilabel:`Build`, :guilabel:`Run`, and
+    :guilabel:`Respond`.
 
-This training workshop provides hands-on exposure to the three primary
-categories of infrastructure automation activities: :guilabel:`Build`, :guilabel:`Run`, and
-:guilabel:`Respond`.
-
-.. image:: img/build-run-respond.png
+    .. image:: img/build-run-respond.png
 
 Build
     Build automation is the means by which a set of infrastructure elements are
