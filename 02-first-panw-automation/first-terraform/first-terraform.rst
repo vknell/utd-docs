@@ -242,8 +242,7 @@ Modify/Adapt Configuration
 
 1. You need to modify the ``variables.tf`` file with a Terminal or text editor.
 
-
-To set the AWS access key and secret key of your IAM account for API access ( see the doc `here </en/latest/00-getting-started/aws-account.html>`_. ):
+To set the AWS access key and secret key of your IAM account for API access (see the doc `here </en/latest/00-getting-started/aws-account.html>`_.):
 
 .. code-block:: console
 

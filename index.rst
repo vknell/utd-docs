@@ -121,9 +121,11 @@ Red Hat Ansible
     :caption: cloud discovery
 
     01-discovery/aws-discovery/aws-disc
-    01-discovery/gcp-discovery/gcp-disc
-    01-discovery/azure-discovery/azure-disc
+    # 01-discovery/gcp-discovery/gcp-disc
+    # 01-discovery/azure-discovery/azure-disc
     01-discovery/terraform-discovery/terraform-disc
+    # 01-discovery/ansible-discovery/ansible-disc
+    # 01-discovery/kubernetes-discovery/k8s-disc
 
 .. toctree::
     :maxdepth: 2
@@ -131,6 +133,8 @@ Red Hat Ansible
     :caption: 1st panw automation
 
     02-first-panw-automation/first-terraform/first-terraform
+    # 02-first-panw-automation/first-ansible/first-ansible
+    # 02-first-panw-automation/first-skillet/first-skillet
 
 .. toctree::
     :maxdepth: 2
@@ -147,8 +151,8 @@ Red Hat Ansible
     :hidden:
     :caption: Cloud Security
 
-    04-cloud-security/deploy/deploy
-    04-cloud-security/prisma/prisma-cloud
+    # 04-cloud-security/deploy/deploy
+    # 04-cloud-security/prisma/prisma-cloud
 
 .. toctree::
     :maxdepth: 2
