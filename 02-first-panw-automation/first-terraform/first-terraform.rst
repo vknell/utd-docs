@@ -148,28 +148,34 @@ Click Create policy
 .. figure:: img/buckets3-11.png
 
 
-******************************
+********************************
 Build Bootstrapping in S3 Bucket
-******************************
+********************************
 
 click on the newly created bucket and modify 
 
 on the newly created bucket
-and add four folders called :guilabel:`config`, :guilabel:`license`, :guilabel:`software` and :guilabel:`content` by clicking on
-Create Folder:
+and add four folders called :guilabel:`config`, :guilabel:`license`, :guilabel:`software` and :guilabel:`content` by clicking on :guilabel:`Create Folder`:
 
 .. figure:: img/bootstrap-1.png
 
-Fill in the folder name and click :guilabel:`Save`. Repeat the process for the three remaining
+Fill in the folder name. Repeat the process for the three remaining
 folders.
 
 .. figure:: img/bootstrap-2.png
 
+Click on :guilabel:`Save`
+
 .. figure:: img/bootstrap-3.png
 
-Upload files in the various buckets folder from :guilabel:`~/utd-automation/first-terraform` folder.
 
-Upload the bootstrap.xml and init-cfg.txt files from bootstrap folder :guilabel:`~/utd-automation/first-terraform/bootstrap-files/` to the :guilabel:`config` folder by clicking :guilabel:`config`.
+
+*******************************
+Upload your files in the bucket
+*******************************
+
+Upload the bootstrap.xml and init-cfg.txt files from bootstrap folder :guilabel:`~/utd-automation/first-terraform/bootstrap-files/` to the :guilabel:`config` folder.
+Click on :guilabel:`config`.
 
 .. figure:: img/bootstrap-4.png
 
@@ -181,10 +187,8 @@ The two files should be listed under the folder:
 
 .. figure:: img/bootstrap-6.png
 
-Upload the :guilabel:`panupv2-all-contents-8225-5857` file to the :guilabel:`content` folder.
-click on the :guilabel:`content` folder ins the S3 console and click Upload. Select :guilabel:`Add Files`
-and select the file (example: *panupv2-all-contents-8225-5857*) downloaded previously and click
-:guilabel:`Upload`:
+Upload the :guilabel:`panupv2-all-contents-xxxx-xxxx` file to the :guilabel:`content` folder.
+click on the :guilabel:`content` folder in the S3 console and click on :guilabel:`Upload`.
 
 .. figure:: img/bootstrap-7.png
 
@@ -193,7 +197,7 @@ Once completed the file is listed under the folder content :
 .. figure:: img/bootstrap-8.png
 
 
-Optional for Bootstrap: 
+Upgrade (Optional)
 If need upgrade automaticaly your VM after boot, you can Upload a PANOS image file to the **software** folder.
 click on the :guilabel:`software` folder ins the S3 console and click :guilabel:`Upload`. Select :guilabel:`Add Files`
 and select the file (example: *PanOS_vm_9.0.1*) retrieved from PANW support site, and click
@@ -223,7 +227,7 @@ contents of these files to see what they contain and how they're structured.
 
 .. code-block:: console
 
-    code deploy_panvm.tf deploy_vpc.tf variables.tf
+    code deploy_pavm.tf deploy_vpc.tf variables.tf
 
 ``deploy_pavm.tf`` - Terraform template for Palo Alto Networks VM-Series
 firewall.
@@ -249,7 +253,7 @@ To set the AWS access key and secret key of your IAM account for API access (see
 
     # AWS Credential
     variable "access_key" {
-    decscription = "AWS Access Key"
+    description = "AWS Access Key"
     default = "XXXX"
     }
     variable "secret_key" {
@@ -263,10 +267,10 @@ To set the AWS access key and secret key of your IAM account for API access (see
 
     # AWS Region and Availablility Zone
     variable "region" {
-    default = "us-west-2"
+    default = "us-east-1"
     }
     variable "availability_zone" {
-    default = "us-west-2a"
+    default = "us-east-1c"
     }
 
 
@@ -380,7 +384,7 @@ Then verify or adapt AMI ID if needed :
     default = "pa_bootstrap_s3_readonly"
     }
 
-7. You need to modify the deploy_panw.tf file with a Terminal or text editor.
+7. You need to modify the deploy_pavm.tf file with a Terminal or text editor.
 
 For both AWS, the licensing options are bring your own license (BYOL) and pay as you go/consumption-based (PAYG) subscriptions.
 
@@ -390,7 +394,7 @@ For both AWS, the licensing options are bring your own license (BYOL) and pay as
         - Bundle 2 contents: VM-300 firewall license, Threat Prevention (inclusive of IPS, AV, Malware prevention), WildFire™ threat intelligence service, 
           URL Filtering, GlobalProtect Subscriptions and Premium Support.
 
-In deploy_panw.tf you can adapt the AMI information regarding your licensing
+In deploy_pavm.tf you can adapt the AMI information regarding your licensing
 type (BYOL or Bundle2):
 
 .. code-block:: terraform
@@ -448,6 +452,10 @@ In deploy_vpc.tf you have to uncomment code to use Bootstrap S3 Bucket and give 
     */
 
 .. note:: The ARN value has been copied in this file at the beginning of the activity.
+
+
+
+.. warning:: Save your file using ``CTRL+S``
 
 
 *************************************

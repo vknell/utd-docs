@@ -138,9 +138,9 @@ Open VS Code and edit the ``main.tf`` file to add a code snippet that will add a
    Virtual router **default**.
    :align: center
 
-Once the virtual router resource in ``main.tf`` has been added and the file saved (*CTRL+S*) you can run ``terraform apply``.
+Once the virtual router resource in ``main.tf`` has been added and the file saved (``CTRL+S``) you can run ``terraform apply``.
 
-..note:: When a value is by default, you do not need to specify it in your Terraform file. The Static Distance is 10 by default.
+.. note:: When a value is by default, you do not need to specify it in your Terraform file. The Static Distance is 10 by default.
 
 Security Zones
 ==============
@@ -225,10 +225,7 @@ First, let's change to the Ansible configuration directory.
 Module Communications
 =====================
 
-Just like with Terraform, your first task is setting up the communication with
-the firewall.  The IP address, username, and password (or API key) can be set
-as variables or specified on the command line.  However, since we've already
-set them as environment variables during the Terraform Configuration, we can just read them in.
+.. informational:: Just like with Terraform, your first task is setting up the communication with the firewall.  The IP address, username, and password (or API key) can be set as variables or specified on the command line.  However, since we've already set them as environment variables during the Terraform Configuration, we can just read them in.
 
 The ``vars.yml`` file contains the following:
 
@@ -312,12 +309,12 @@ The example code for that module looks like this:
 
 .. code-block:: yaml
 
-    - name: Create service object 'ssh-tcp-22'
-      panos_service_object:
-        provider: '{{ provider }}'
-        name: 'ssh-tcp-22'
-        destination_port: '22'
-        description: 'SSH on tcp/22'
+          - name: Create service object 'ssh-tcp-22'
+            panos_service_object:
+              provider: '{{ provider }}'
+              name: 'ssh-tcp-22'
+              destination_port: '22'
+              description: 'SSH on tcp/22'
 
 Exercise:
 ---------

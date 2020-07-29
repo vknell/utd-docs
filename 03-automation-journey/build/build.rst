@@ -30,7 +30,7 @@ In order for Terraform to do this it will need to authenticate to AWS using your
 
 .. warning:: Hard-coding credentials into any Terraform configuration is not recommended, and risks secret leakage should this file ever be committed to a public version control system (like github). Rather than write these as Terraform variables, we will use Linux environment variables. Static credentials can be provided by adding an access_key and secret_key in-line in the AWS provider block, **but this is not safe**
 
-*Working on a private project with no public sources you could add the following snippet*
+*Working on a private project with no public sources you could add the following snippet*:
 
 .. code-block:: console
 
@@ -105,11 +105,11 @@ You can find more information about Region and AZ in the `AWS User Guide <https:
 
 .. code-block:: terraform
 
-    aws_region_name     = "<SEE_INSTRUCTOR_PRESENTATION>"
-    aws_az_name         = "<SEE_INSTRUCTOR_PRESENTATION>"
+    aws_region_name     = "YOUR-REGION"
+    aws_az_name         = "YOUR AZ"
     public_key_file     = "/home/panadmin/.ssh/lab_ssh_key.pub"
 
-**Do not forget to save your changes to create the new file: File > Save or CTRL + S.**
+.. warning:: Do not forget to save your changes to create the new file: :guilabel:`File` > :guilabel:`Save` or ``CTRL + S``.
 
 
 You can find the available AZ for a region by typing the following command from the terminal (AWS Cli is required):
@@ -122,8 +122,8 @@ For example, for the United States - North Virginia (1st AWS Region and AZ):
 
 .. code-block:: terraform
 
-    aws_region_name     = "eu-east-1"
-    aws_az_name         = "eu-east-1a"
+    aws_region_name     = "us-east-1"
+    aws_az_name         = "us-east-1a"
     public_key_file     = "~/.ssh/lab_ssh_key.pub"
 
 
@@ -214,16 +214,16 @@ You can log in to the AWS Console using your utd-console `IAM profile </en/lates
 Confirm firewall bootstrap completion
 *************************************
 
-SSH into the firewall with the following credentials.
+SSH into the firewall with the following credentials:
 
 - **Username:** ``admin``
 - **Password:** ``PaloAlto#2020``
 
 .. code-block:: console
 
-    ssh admin@<FIREWALL_MGMT_IP>
+    ssh admin@
 
-Replace ``<FIREWALL_MGMT_IP>`` with the IP address of the firewall management
+Enter the IP address of the firewall management
 interface that was provided in the Terraform plan results.  This information
 can be easily recalled using the ``terraform output`` command within the
 deployment directory.
