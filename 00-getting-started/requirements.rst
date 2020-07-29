@@ -92,6 +92,8 @@ Clic on :guilabel:`Users` as shown:
 
 .. figure:: img/aws-iam-user.png
 
+.. important:: A credit card is required for the AWS account to be valid. Each lab has a cost, if done properly and the environment deleted at the end of each lab the cost should be of the amount described at the beginning of each lab.
+
 
 Create IAM account for console access
 -------------------------------------
@@ -110,13 +112,13 @@ Next clic :guilabel:`Create Group`:
 
 Provide a group name :guilabel:`utd` and filter :guilabel:`policy Type` menu by :guilabel:`FullAccess`, and add the following rights.
 Amazon Rights for group :guilabel:`utd`:
-    - AWSMarketplaceFullAccess
     - AmazonEC2FullAccess
-    - AWSLambdaFullAccess
-    - ElasticLoadBalancingFullAccess
     - AmazonS3FullAccess
-    - CloudWatchFullAccess
     - AmazonVPCFullAccess
+    - AWSLambdaFullAccess
+    - AWSMarketplaceFullAccess
+    - CloudWatchFullAccess
+    - ElasticLoadBalancingFullAccess
     - IAMFullAccess
 Then click :guilabel:`Create Group`:
 
@@ -131,6 +133,7 @@ Click :guilabel:`Next:Tags`, you can leave it empty and click :guilabel:`Next:Re
 
 .. figure:: img/aws-iam-user-review-console.png
 
+.. warning:: Do not skip this step, the password is not visible in the console afterward.
 
 The user is now created, download the CSV file to retrieve the password. After this step you can click on :guilabel:`Close`:
 

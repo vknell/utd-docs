@@ -13,7 +13,8 @@ Log into the AWS console
 
 From the POD machine you can open firefox and navigate to the `AWS URL <https://console.aws.amazon.com/>`_
 
-Log in with your AWS ``utd-console`` account (your IAM account with console access rights) see the doc `here </en/latest/00-getting-started/requirements.html#create-iam-aws-accounts>`_.
+Log in with your AWS ``utd-console`` account (your IAM account with console access rights) see the doc `here </en/latest/00-getting-started/requirements.html#create-iam-aws-accounts>`_. Use the link provided in your .csv file. It should look like this https://xxxxxxxxxxxx.console.aws.com/
+
 
 
 *********************************************
@@ -24,13 +25,15 @@ Step 1: Click on Services, and search for VPC. You can add it to the quicklinks 
 
 .. figure:: img/aws-console-access.png
 
-Step2: In the left menu Virtual Private Cloud > Your VPC > Create VPC
+Step2: In the left menu Virtual :guilabel:`Private Cloud` > :guilabel:`Your VPC` > :guilabel:`Create VPC`
 
 .. figure:: img/create-vpc-1.png
 
+.. note:: In each region a default VPC is already provisionned, and one to 6 defaults subnets will already be affected to this VPC.
+
 .. figure:: img/create-vpc-2.png
 
-Etape 3 : Remplissez le nom du VPC, le sous réseau, laissez les autres paramètres par défaut et cliquez sur Save pour sauvegarder :
+Etape 3 : Remplissez le nom du VPC, le sous réseau, laissez les autres paramètres par défaut et cliquez sur :guilabel:`Create`.
 
 .. figure:: img/create-vpc-3.png
 
@@ -52,15 +55,15 @@ Création des sous réseaux AWS (subnets)
 Le bloc de réseaux IPv4 créé avec le VPC sera maintenant segmenté en plusieurs sous réseaux. Vous pouvez créer des sous-réseaux ayant des plages d’adresses IP qui feront partis du bloc IPv4 du VPC.
 Les sous réseaux seront utilisés comme suit :
 
-+--------------+--------------+-------------+--------------------+
-| Subnet       | Address      | Interface   | Availability Zone  |
-+==============+==============+=============+====================+
-| Management   | 10.2.0.0/24  | management  | eu-west-3          |
-+--------------+--------------+-------------+--------------------+
-| Internet     | 10.2.1.0/24  | internet    | eu-west-3          |
-+--------------+--------------+-------------+--------------------+
-| Web Server   | 10.2.2.0/24  | web         | eu-west-3          |
-+--------------+--------------+-------------+--------------------+
++------------------------+--------------+-------------+--------------------+
+| Subnet                 | Address      | Interface   | Availability Zone  |
++========================+==============+=============+====================+
+| utd-act1-mgmt-net      | 10.2.0.0/24  | management  | eu-west-3          |
++------------------------+--------------+-------------+--------------------+
+| utd-act1-internet-net  | 10.2.1.0/24  | internet    | eu-west-3          |
++------------------------+--------------+-------------+--------------------+
+| utd-act1-web-net       | 10.2.2.0/24  | web         | eu-west-3          |
++------------------------+--------------+-------------+--------------------+
 
 
 Etape 1: allez dans :guilabel:`VPC` > :guilabel:`Subnets` > :guilabel:`Create subnet`
@@ -140,7 +143,7 @@ Ci-dessous, les tables de routage à créer sont décrites dans le tableau ci-de
 | utd-web-rt         | 10.2.0.0/16  | local    | Web Server   |
 +--------------------+--------------+----------+--------------+
 
-Etape 1 : Créez la table de routage *utd-management-rt* en allant vers Services > VPC > Virtual Private Cloud > Routes Tables > Create route table.
+Etape 1 : Créez la table de routage ``utd-management-rt`` en allant vers :guilabel:`Services` > :guilabel:`VPC` > :guilabel:`Virtual Private Cloud` > :guilabel:`Routes Tables` > :guilabel:`Create route table`.
 
 Etape 2 : Entrez le nom de la table de routage, sélectionnez le VPC :guilabel:`utd-activity1` et sauvegardez.
 
@@ -269,16 +272,15 @@ Création des interfaces réseau pour le firewall virtuel VM-Series
 
 Avant d’installer l’instance de pare-feu virtuel, vous allez créer les interfaces Ethernet1/1 et Ethernet1/2 pour l’associer ultérieurement à la VM-Series.
 
-Etape 1: Allez dans Services > EC2 > Network & Security > Network Interfaces > Create Network
-Interface
+Etape 1: Allez dans :guilabel:`Services` > :guilabel:`EC2` > :guilabel:`Network & Security` > :guilabel:`Network Interfaces` > :guilabel:`Create Network Interface`
 
 .. figure:: img/create-vpc-27.png
 
-Etape 2 : Créez l’interface Ethernet1/1 qui est l’interface ``Internet`` en donnant une description, sélectionnant le subnet Untrusted_Subnet, donnant l’adresse IP ``10.2.1.10`` et en sélectionnant le Security Group *utd-web-sg*
+Etape 2 : Créez l’interface ``Ethernet1/1`` qui est l’interface ``Internet`` en donnant une description, sélectionnant le subnet :guilabel:`Internet`, donnant l’adresse IP ``10.2.1.10`` et en sélectionnant le Security Group ``utd-internet-sg``
 
 .. figure:: img/create-vpc-28.png
 
-Etape 3 : Créez l’interface Ethernet1/2 qui est l’interface ``Web`` en donnant une description, sélectionnant le subnet Trusted_Subnet, donnant l’adresse IP ``10.2.5.10`` et en sélectionnant le Security Group ``utd-web-sg``
+Etape 3 : Créez l’interface ``Ethernet1/2`` qui est l’interface ``Web`` en donnant une description, sélectionnant le subnet :guilabel:`Web``, donnant l’adresse IP ``10.2.5.10`` et en sélectionnant le Security Group ``utd-web-sg``
 
 .. figure:: img/create-vpc-29.png
 .. figure:: img/create-vpc-30.png
@@ -288,36 +290,36 @@ Etape 3 : Créez l’interface Ethernet1/2 qui est l’interface ``Web`` en donn
 Déploiement de la VM-Series 300 dans AWS
 ****************************************
 
-Le pare-feu VM-Series sera déployé dans le VPC *utd-activity1* créé précédemment. L’interface de gestion est dans le sous-réseau Management_Subnet. Les sous-réseaux d'adresses IP, les tables de routage et les groupes de sécurité ont été mis en place dans la section précédente pour l'ensemble du VPC et sont utilisés dans cette section.
+Le pare-feu VM-Series sera déployé dans le VPC ``utd-activity1`` créé précédemment. L’interface de gestion est dans le sous-réseau Management_Subnet. Les sous-réseaux d'adresses IP, les tables de routage et les groupes de sécurité ont été mis en place dans la section précédente pour l'ensemble du VPC et sont utilisés dans cette section.
 Dans un premier temps le firewall sera déployé avec une seule interface qui est l’interface de management. Une fois déployé, vous allez lui associer les interfaces créées dans l’étape précédente.
 
-Etape 1 : Allez dans Services > EC2 > Instances > Instances > Launch Instance, sélectionnez AWS Marketplace, faites une recherche sur Palo Alto Networks et sélectionnez VM-Series Next-Generation Firewall (BYOL and ELA)
+Etape 1 : Allez dans :guilabel:`Services` > :guilabel:`EC2` > :guilabel:`Instances` > :guilabel:`Launch Instance`, sélectionnez :guilabel:`AWS Marketplace`, faites une recherche sur ``Palo Alto Networks`` et sélectionnez :guilabel:`VM-Series Next-Generation Firewall Bundle 2`
 
 .. figure:: img/create-vpc-31.png
 .. figure:: img/create-vpc-32.png
 
-Etape 2 : Dans Choose Instance Type, cherchez le type m5.xlarge, sélectionnez et cliquez sur Next:Configure Instance Details
+Etape 2 : Dans :guilabel:`Choose Instance Type`, cherchez le type :guilabel:`m5.xlarge`, sélectionnez et cliquez sur :guilabel:`Next:Configure Instance Details`
 
-Etape 3 : Dans Configure Instance Details, sélectionnez le VPC ``utd-activity1`` pour Network, dans Subnet sélectionner Management_Subnet. You can leave Auto-assign Public IP to the default behaviour which is *Disable* et dans Network Interfaces > Primary IP modifiez le champ pour mettre l’adresse IP ``10.2.0.10``.
+Etape 3 : Dans :guilabel:`Configure Instance Details`, sélectionnez le VPC ``utd-activity1`` pour Network, dans Subnet sélectionner :guilabel:`Management_Subnet`. You can leave **Auto-assign Public IP** to the default behaviour which is *Disable* et dans :guilabel:`Network Interfaces` > :guilabel:`Primary IP` modifiez le champ pour mettre l’adresse IP ``10.2.0.10``.
 
 .. figure:: img/create-vpc-33.png
 
-Etape 4: Dans Add Storage, cliquez sur Next Next : Add Tags (aucune modification)
+Etape 4: Dans :guilabel:`Add Storage`, cliquez sur :guilabel:`Next Next : Add Tags` (aucune modification)
 
-Etape 5 : Dans Add Tags, cliquez sur Next : Configure Security Group
+Etape 5 : Dans :guilabel:`Add Tags`, cliquez sur :guilabel:`Next : Configure Security Group`
 
-Etape 6 : Dans Configure Security Group, sélectionnez le groupe de sécurité Management_SG, et cliquez sur Review and Launch
+Etape 6 : Dans :guilabel:`Configure Security Group`, sélectionnez le groupe de sécurité :guilabel:`utd-act1-mgmt-sg`, et cliquez sur Review and Launch
 
 .. figure:: img/create-vpc-34.png
 
-Etape 7 : Dans Review and Launch, cliquez sur Launch
+Etape 7 : Dans :guilabel:`Review and Launch`, cliquez sur :guilabel:`Launch`
 
 Etape 8 : Créez une paire de clé publique/clé privée pour pouvoir se connecter en SSH sur le firewall.
-Il faut choisir Create a new key pair, donner à un nom (comme ``utd-activity1-kp``), télécharger la paire de clés sur votre machine et enfin, lancer le déploiement en cliquant sur Launch Instances
+Il faut choisir Create a new key pair, donner à un nom (comme ``utd-activity1-kp``), télécharger la paire de clés sur votre machine et enfin, lancer le déploiement en cliquant sur :guilabel:`Launch Instances`
 
 .. figure:: img/create-vpc-35.png
 
-Retournez dans le panneau de gestion des interfaces Services > EC2 > Network & Security > Network Interfaces et nommez vos interfaces ``utd-eth1/1``, ``utd-eth2/2`` et ``utd-mgmt`` pour l'interface nouvellement créée.
+Retournez dans le panneau de gestion des interfaces :guilabel:`Services` > :guilabel:`EC2` > :guilabel:`Network & Security` > :guilabel:`Network Interfaces` et nommez vos interfaces ``utd-eth1/1``, ``utd-eth2/2`` et ``utd-mgmt`` pour l'interface nouvellement créée.
 
 .. figure:: img/create-vpc-35-1.png
 
@@ -326,25 +328,25 @@ Retournez dans le panneau de gestion des interfaces Services > EC2 > Network & S
 Création de adresses IP publiques
 *********************************
 
-Etape 1 : Allez dans Services > EC2 > Network & Security > Elastic IP > Allocate Elastic IP Address
+Etape 1 : Allez dans :guilabel:`Services` > :guilabel:`EC2` > :guilabel:`Network & Security` > :guilabel:`Elastic IP` > :guilabel:`Allocate Elastic IP Address`
 
-Etape 2 : Sélectionnez Amazon’s pool of IPv4 addresses et cliquez sur allocate pour allouer une première adresse publique IPv4
+Etape 2 : Sélectionnez :guilabel:`Amazon’s pool of IPv4 addresses` et cliquez sur allocate pour allouer une première adresse publique IPv4
 
 .. figure:: img/create-vpc-36.png
 
 Etape 3 : Répétez les deux étapes précédentes pour allouer une deuxième adresse IP publique
 
-tape 4 : Sélectionnez une des deux adresses IP publiques, ensuite allez dans Actions > Associate Elastic IP address
+tape 4 : Sélectionnez une des deux adresses IP publiques, ensuite allez dans :guilabel:`Actions` > :guilabel:`Associate Elastic IP address`
 
 .. figure:: img/create-vpc-37.png
 
-Etape 5 : Sélectionnez Network interface dans Resource type, dans Network Interface sélectionnez l’interface ``utd-mgmt`` et dans Private IP address, sélectionnez l’adresse IP privée du subnet ``10.2.0.10``
+Etape 5 : Sélectionnez :guilabel:`Network interface` dans Resource type, dans :guilabel:`Network Interface` sélectionnez l’interface ``utd-mgmt`` et dans Private IP address, sélectionnez l’adresse IP privée du subnet ``10.2.0.10``
 
 .. figure:: img/create-vpc-38.png
 
-Etape 6 : Dans cette étape, il faut sélectionner la deuxième adresse IP qui n’est pas encore allouée, ensuite allez dans Actions > Associate Elastic IP Address
+Etape 6 : Dans cette étape, il faut sélectionner la deuxième adresse IP qui n’est pas encore allouée, ensuite allez dans :guilabel:`Actions` > :guilabel:`Associate Elastic IP Address`
 
-Etape 7 : Sélectionnez Network interface dans Resource type, dans Network Interface sélectionnez l’interface ``utd-eth1/1`` et dans Private IP address, sélectionnez l’adresse IP privée du subnet ``10.2.1.10``
+Etape 7 : Sélectionnez :guilabel:`Network interface` dans Resource type, dans Network Interface sélectionnez l’interface ``utd-eth1/1`` et dans Private IP address, sélectionnez l’adresse IP privée du subnet ``10.2.1.10``
 
 .. figure:: img/create-vpc-39.png
 
@@ -353,7 +355,7 @@ Etape 7 : Sélectionnez Network interface dans Resource type, dans Network Inter
 Attacher les interfaces Ethernet1/1 et Ethernet1/2 au Firewall
 **************************************************************
 
-Etape 1 : Allez dans Services > EC2 > Network & Security > Network Interfaces, Sélectionnez
+Etape 1 : Allez dans :guilabel:`Services` > :guilabel:`EC2` > :guilabel:`Network & Security` > :guilabel:`Network Interfaces`, Sélectionnez
 l’interface Ethernet1/1, cliquez sur Attach, choisissez l’instance du firewall dans Instance ID et cliquez sur Attach
 
 .. figure:: img/create-vpc-40.png
@@ -404,13 +406,13 @@ Configuration du pare-feu nouvelle génération
 
 Configurer les Zones
 
-Etape 1 : Allez dans Networks > Zones > Add
+Etape 1 : Allez dans :guilabel:`Networks` > :guilabel:`Zones` > :guilabel:`Add`
 
-Etape 2 : Ajoutez une nouvelle zone nommée ``internet`` et de type Layer3
+Etape 2 : Ajoutez une nouvelle zone nommée ``internet`` et de type :guilabel:`Layer3`
 
 .. figure:: img/create-vpc-43.png
 
-Etape 3 : Ajoutez une deuxième zone nommée ``web`` de type Layer3
+Etape 3 : Ajoutez une deuxième zone nommée ``web`` de type :guilabel:`Layer3`
 
 .. figure:: img/create-vpc-44.png
 
@@ -419,14 +421,14 @@ Etape 3 : Ajoutez une deuxième zone nommée ``web`` de type Layer3
 Configurer un Profil de Management d’Interface
 **********************************************
 
-Etape 1 : Dans Network > Network Profiles > Interface Mgmt cliquez sur Add en bas à gauche et ajoutez un nouveau profil de gestion.
+Etape 1 : Dans :guilabel:`Network` > :guilabel:`Network Profiles` > :guilabel:`Interface Mgmt` cliquez sur :guilabel:`Add` en bas à gauche et ajoutez un nouveau profil de gestion.
 
 Etape 2 : attribuez le nom PingProfile au profil de gestion, sélectionnez le Ping dans Networks Services et cliquez sur OK
 
 .. figure:: img/create-vpc-47.png
 
-Configurer les interfaces Ethernet1/1 et Ethernet1/2
-Etape 1 : Allez dans Network > Interfaces > Ethernet1/1
+Configurer les interfaces :guilabel:`Ethernet1/1` et :guilabel:`Ethernet1/2`
+Etape 1 : Allez dans :guilabel:`Network` > :guilabel:`Interfaces` > :guilabel:`Ethernet1/1`
 
 Etape 2 : Dans Interface Type, sélectionnez Layer3
 
@@ -434,11 +436,11 @@ Etape 3 : Dans l’onglet Config, sélectionnez le routeur virtuel default et la
 
 .. figure:: img/create-vpc-48.png
 
-Etape 4 : Dans l’onglet IPv4, sélectionnez DHCP Client, cochez Enable et Automatically create default route pointing to default gateway provided by server
+Etape 4 : Dans l’onglet IPv4, sélectionnez DHCP Client, cochez :guilabel:`Enable` et :guilabel:`Automatically create default route pointing to default gateway provided by server`
 
 .. figure:: img/create-vpc-49.png
 
-Etape 5 : Dans l’onglet Advanced, allez dans Management Profile, sélectionnez PingProfile et cliquez sur OK
+Etape 5 : Dans l’onglet Advanced, allez dans :guilabel:`Management Profile`, sélectionnez PingProfile et cliquez sur OK
 
 .. figure:: img/create-vpc-50.png
 
@@ -459,12 +461,12 @@ Etape 8 : Dans l’onglet Advanced, allez dans Management Profile, sélectionnez
 Configurer les objets
 *********************
 
-Etape 1 : Créez un objet d’adresse en allant dans Objects > Addresses > Add, nommez l’objet
-``WebServer_Private``, sélectionnez IP Netmask comme Type et ajoutez l’adresse IP ``10.2.2.11``
+Etape 1 : Créez un objet d’adresse en allant dans :guilabel:`Objects` > :guilabel:`Addresses` > :guilabel:`Add`, nommez l’objet
+``WebServer_Private``, sélectionnez :guilabel:`IP Netmask` comme Type et ajoutez l’adresse IP ``10.2.2.11``
 
 .. figure:: img/create-vpc-54.png
 
-Etape 2 : Créez un deuxième objet d’adresse en allant dans Objects > Addresses > Add, nommez l’objet ``WebServer_Public``, sélectionnez IP Netmask comme Type et ajoutez l’adresse IP ``10.2.1.10``
+Etape 2 : Créez un deuxième objet d’adresse en allant dans :guilabel:`Objects` > :guilabel:`Addresses` > :guilabel:`Add`, nommez l’objet ``WebServer_Public``, sélectionnez :guilabel:`IP Netmask` comme Type et ajoutez l’adresse IP ``10.2.1.10``
 
 .. figure:: img/create-vpc-55.png
 
@@ -475,15 +477,15 @@ Configuration Système du pare-feu
 
 Dans cette section, la configuration système du firewall sera décrite. Cette configuration sera nécessaire pour que le firewall soit capable d’activer la licence dans la section suivante. La configuration de DNS, NTP, Hostname et Timezone est décrite ci-dessous.
 
-Etape 1 : Allez dans Device > Setup > Management > General Setting, attribuez au firewall un nom dans le champ Hostname comme utd-pa, sélectionnez Europe/Paris dans TimeZone et validez
+Etape 1 : Allez dans :guilabel:`Device` > :guilabel:`Setup` > :guilabel:`Management` > :guilabel:`General Setting`, attribuez au firewall un nom dans le champ Hostname comme utd-pa, sélectionnez :guilabel:`Europe/Paris` dans TimeZone et validez
 
 .. figure:: img/create-vpc-56.png
 
-Etape 2 : Dans l’onglet Services > Services, ajoutez l’adresse ``8.8.8.8`` comme adresse du Primary DNS Server et ``1.1.1.1`` comme Secondary DNS
+Etape 2 : Dans l’onglet :guilabel:`Services` > :guilabel:`Services`, ajoutez l’adresse ``8.8.8.8`` comme adresse du Primary DNS Server et ``1.1.1.1`` comme Secondary DNS
 
 .. figure:: img/create-vpc-57.png
 
-Etape 3 : Dans l’onglet NTP, ajoutez l’adresse 0.fr.pool.ntp.org comme adresse de NTP Primaire et 1.fr.pool.ntp.org comme NTP secondaire.
+Etape 3 : Dans l’onglet NTP, ajoutez l’adresse ``0.fr.pool.ntp.org`` comme adresse de NTP Primaire et 1.fr.pool.ntp.org comme NTP secondaire.
 
 .. figure:: img/create-vpc-58.png
 
@@ -526,39 +528,24 @@ Une fois la configuration terminée, un **Commit** est indispensable pour appliq
 .. figure:: img/create-vpc-61.png
 
 
-************************************
-Activation de la licence (Auth-Code)
-************************************
-
-Utilisez le code d’autorisation (auth-code) que vous avez reçu par mail pour activer toutes les fonctionnalités de sécurité sur votre NGFW.
-
-Etape 1 : Allez dans Devices > Licenses
-
-Etape 2 : Cliquez sur Activate features using Authorization Code, entrez l’auth-code reçu par e-mail et validez
-
-Etape 3 : Une fois la validation faite, cliquez sur Retrieve licence from licence server. Quelques secondes plus tard, toutes les licences seront activées
-
-.. figure:: img/create-vpc-62.png
-
-
 ********************************************************************
 Déploiement et configuration du serveur Web protégé par la VM-Series
 ********************************************************************
 
 Configurer une route par défaut pour le subnet Trusted_Subnet
 
-Etape 1 : Allez dans Services > VPC > Routes tables > ``utd-web-rt`` > Routes > Edit Routes et ajoutez une route par défaut qui pointe vers l’interface Ethernet1/2 du NGFW virtuel déployé précédemment
+Etape 1 : Allez dans :guilabel:`Services` > :guilabel:`VPC` > :guilabel:`Routes tables` > ``utd-web-rt`` > Routes > Edit Routes et ajoutez une route par défaut qui pointe vers l’interface Ethernet1/2 du NGFW virtuel déployé précédemment
 
 Etape 2 : Sauvegardez les modifications via Save routes
 
 .. figure:: img/create-vpc-63.png
 
 Déployer le nouveau serveur web
-Etape 1 : Allez dans Services > EC2 > Instances > Instances > Launch Instance. Dans Choose AMI sélectionnez Amazon Linux 2 AMI (HVM), SSD Volume Type
+Etape 1 : Allez dans :guilabel:`Services` > :guilabel:`EC2` > :guilabel:`Instances` > :guilabel:`Instances` > :guilabel:`Launch Instance`. Dans Choose AMI sélectionnez Amazon Linux 2 AMI (HVM), SSD Volume Type
 
 .. figure:: img/create-vpc-64.png
 
-Etape 2 : Dans Choose Instance Type, sélectionnez le type t2.micro et cliquez sur Next : Configure Instance details
+Etape 2 : Dans :guilabel:`Choose Instance Type`, sélectionnez le type :guilabel:`t2.micro` et cliquez sur Next : Configure Instance details
 
 .. figure:: img/create-vpc-65.png
 
@@ -596,15 +583,15 @@ Cliquez ensuite sur Next: Add Storage.
 
 .. figure:: img/create-vpc-67.png
 
-Etape 6 : Dans Add Storage, cliquez sur Next Next : Add Tags (aucune modification)
-Etape 7 : Dans Add Tags, cliquez sur Next : Configure Security Group
-Etape 8 : Dans Configure Security Group, sélectionnez le groupe de sécurité Trusted_SG, et cliquez sur Review and Launch
+Etape 6 : Dans :guilabel:`Add Storage`, cliquez sur :guilabel:`Next Next : Add Tags` (aucune modification)
+Etape 7 : Dans :guilabel:`Add Tags`, cliquez sur :guilabel:`Next : Configure Security Group`
+Etape 8 : Dans :guilabel:`Configure Security Group`, sélectionnez le groupe de sécurité Web, et cliquez sur :guilabel:`Review and Launch`
 
 .. figure:: img/create-vpc-68.png
 
-Etape 9 : Dans Review and Launch, cliquez sur Launch
+Etape 9 : Dans :guilabel:`Review and Launch`, cliquez sur :guilabel:`Launch`
 
-Etape 10 : Dans Select existing key pair or create a new key pair, choisissez l’option Choose an existing key pair, sélectionnez la paire de clés *utd-activity1-kp*, cochez I acknowledge... et cliquez sur Launch Instances
+Etape 10 : Dans :guilabel:`Select existing key pair or create a new key pair`, choisissez l’option :guilabel:`Choose an existing key pair`, sélectionnez la paire de clés *utd-activity1-kp*, cochez :guilabel:`I acknowledge...` et cliquez sur :guilabel:`Launch Instances`
 
 .. figure:: img/create-vpc-69.png
 

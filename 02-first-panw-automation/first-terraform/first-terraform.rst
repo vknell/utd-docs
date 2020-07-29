@@ -92,7 +92,8 @@ through the subsequent steps as the default values will be used.
 
 .. note:: Select the same region as your VPC. You will need to enter a globally unique bucket name. AWS will warn you if the name is not unique. 
 
-Once the bucket is created, select your bucket and click on :guilabel:`copy ARN` button and copy/paste the value in file named :guilabel:`ARNBucket`.
+
+Now we will add the ARN in your Linux environment variables. Once the bucket is created, select your bucket and click on :guilabel:`copy ARN` button and copy/paste the value after ``export ARN=``.
 In your terminal type the following command and paste the key that is in your clipboard:
 
 .. code-block:: console
@@ -148,7 +149,7 @@ Click Create policy
 
 
 ******************************
-Build Bootstrping in S3 Bucket
+Build Bootstrapping in S3 Bucket
 ******************************
 
 click on the newly created bucket and modify 
