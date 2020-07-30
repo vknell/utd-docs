@@ -209,43 +209,4 @@ You can log in to the AWS Console using your utd-console `IAM profile </en/lates
 
 .. figure:: img/aws-console-check.png
 
-
-*************************************
-Confirm firewall bootstrap completion
-*************************************
-
-SSH into the firewall with the following credentials:
-
-- **Username:** ``admin``
-- **Password:** ``PaloAlto#2020``
-
-.. code-block:: console
-
-    ssh admin@
-
-Enter the IP address of the firewall management
-interface that was provided in the Terraform plan results.  This information
-can be easily recalled using the ``terraform output`` command within the
-deployment directory.
-
-.. warning:: If you are unsuccessful the firewall instance is likely still
-   bootstrapping or performing an autocommit.  Hit ``Ctrl-C`` and try again
-   after waiting a few minutes.  The bootstrap process can take up to *ten
-   minutes* to complete before you are able to successfully log in.
-
-Once you have logged into the firewall you can check to ensure the management
-plane has completed its initialization.
-
-.. code-block:: console
-
-    admin@lab-fw> show chassis-ready
-
-If the response is ``yes``, you are ready to proceed with the configuration
-activities.
-
-.. note:: While it is a security best practice to use SSH keys to authenticate
-          to VM instances in the cloud, we have defined a static password for
-          the firewall's admin account in this lab (specifically, in the 
-          bootstrap package).  This is because the PAN-OS XML API cannot utilize SSH keys and requires a
-          username/password or API key for authentication.
-
+**You deployed your infrastructure sucessfully, you can now proceed to the configuration.**

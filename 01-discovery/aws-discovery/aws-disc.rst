@@ -15,23 +15,27 @@ From the POD machine you can open firefox and navigate to the `AWS URL <https://
 
 Log in with your AWS ``utd-console`` account (your IAM account with console access rights) see the doc `here </en/latest/00-getting-started/requirements.html#create-iam-aws-accounts>`_. Use the link provided in your .csv file. It should look like this https://xxxxxxxxxxxx.console.aws.com/
 
+You should see 3 Text box, the first one for your :guilabel:`Account ID`, the second one for the :guilabel:`IAM Account`, here ``utd-console``, and the third one for your :guilabel:`Password` (in your CSV file).
 
+.. figure:: img/aws-iam-console-access.png
 
 *********************************************
 Create your first VPC (Virtual Private Cloud)
 *********************************************
 
-Step 1: Click on Services, and search for VPC. You can add it to the quicklinks at the top of the screen.
+Step 1: Click on :guilabel:`Services`, and search for ``VPC``. You can add it to the quicklinks at the top of the screen.
 
 .. figure:: img/aws-console-access.png
 
-Step2: In the left menu Virtual :guilabel:`Private Cloud` > :guilabel:`Your VPC` > :guilabel:`Create VPC`
-
-.. figure:: img/create-vpc-1.png
+You should land on the VPC Dashboard page, click on :guilabel:`VPCs` or :guilabel:`Your VPCs` in the left menu.
 
 .. note:: In each region a default VPC is already provisionned, and one to 6 defaults subnets will already be affected to this VPC.
 
-.. figure:: img/create-vpc-2.png
+.. figure:: img/aws-vpc-dashboard.png
+
+Step2: In the left menu Virtual :guilabel:`Private Cloud` > :guilabel:`Your VPC` > :guilabel:`Create VPC`
+
+.. figure:: img/aws-vpc-create-button.png
 
 Etape 3 : Remplissez le nom du VPC, le sous réseau, laissez les autres paramètres par défaut et cliquez sur :guilabel:`Create`.
 
@@ -280,7 +284,7 @@ Etape 2 : Créez l’interface ``Ethernet1/1`` qui est l’interface ``Internet`
 
 .. figure:: img/create-vpc-28.png
 
-Etape 3 : Créez l’interface ``Ethernet1/2`` qui est l’interface ``Web`` en donnant une description, sélectionnant le subnet :guilabel:`Web``, donnant l’adresse IP ``10.2.5.10`` et en sélectionnant le Security Group ``utd-web-sg``
+Etape 3 : Créez l’interface ``Ethernet1/2`` qui est l’interface ``Web`` en donnant une description, sélectionnant le subnet :guilabel:`Web``, donnant l’adresse IP ``10.2.2.10`` et en sélectionnant le Security Group ``utd-web-sg``
 
 .. figure:: img/create-vpc-29.png
 .. figure:: img/create-vpc-30.png

@@ -53,9 +53,9 @@ using the ``env | grep PANOS`` command:
 
 .. code-block:: console
 
-    PANOS_HOSTNAME=54.160.48.152
     PANOS_USERNAME=admin
     PANOS_PASSWORD=PaloAlto#2020
+    PANOS_HOSTNAME=54.160.48.152
 
 With these values defined, we can now initialize the Terraform panos provider with the following command.
 
@@ -64,6 +64,47 @@ With these values defined, we can now initialize the Terraform panos provider wi
     terraform init
 
 The provider is now ready to communicate with our firewall.
+
+
+*************************************
+Confirm firewall bootstrap completion
+*************************************
+
+SSH into the firewall with the following credentials:
+
+- **Username:** ``admin``
+- **Password:** ``PaloAlto#2020``
+
+.. code-block:: console
+
+    ssh admin@
+
+Enter the IP address of the firewall management
+interface that was provided in the Terraform plan results.  This information
+can be easily recalled using the ``terraform output`` command within the
+deployment directory.
+
+.. warning:: If you are unsuccessful the firewall instance is likely still
+   bootstrapping or performing an autocommit.  Hit ``Ctrl-C`` and try again
+   after waiting a few minutes.  The bootstrap process can take up to *ten
+   minutes* to complete before you are able to successfully log in.
+
+Once you have logged into the firewall you can check to ensure the management
+plane has completed its initialization.
+
+.. code-block:: console
+
+    admin@lab-fw> show chassis-ready
+
+If the response is ``yes``, you are ready to proceed with the configuration
+activities.
+
+.. note:: While it is a security best practice to use SSH keys to authenticate
+          to VM instances in the cloud, we have defined a static password for
+          the firewall's admin account in this lab (specifically, in the 
+          bootstrap package).  This is because the PAN-OS XML API cannot utilize SSH keys and requires a
+          username/password or API key for authentication.
+
 
 Network Interfaces
 ==================

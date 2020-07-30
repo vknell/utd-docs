@@ -96,6 +96,8 @@ through the subsequent steps as the default values will be used.
 Now we will add the ARN in your Linux environment variables. Once the bucket is created, select your bucket and click on :guilabel:`copy ARN` button and copy/paste the value after ``export ARN=``.
 In your terminal type the following command and paste the key that is in your clipboard:
 
+# /!\ ADD SCREENSHOT HERE # REVIEW WITH NEW SCRIPTS /!\
+
 .. code-block:: console
     
     export ARN=
@@ -131,7 +133,7 @@ Choose :guilabel:`Read` for Access level:
 
 .. figure:: img/buckets3-7.png
 
-Click on :guilabel:`Ressources`, Specify bucket ressource ARN for the GetBucketLocation... and click on :guilabel:`bucket` on :guilabel:`Add ARN to retrict access`:
+Click on :guilabel:`Ressources`, Specify bucket ressource ARN for the :guilabel:`GetBucketLocation...` and click on :guilabel:`bucket` on :guilabel:`Add ARN to retrict access`:
 
 .. figure:: img/buckets3-8.png
 
