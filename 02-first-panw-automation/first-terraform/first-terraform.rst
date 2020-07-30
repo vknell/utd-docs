@@ -145,7 +145,9 @@ Click on :guilabel:`Review Policy`
 
 .. figure:: img/buckets3-10.png
 
-Click Create policy
+Click Create policy, and give it a name: ``pa_bootstrap_s3_readonly``
+
+# CHANGE SCREENSHOT HERE
 
 .. figure:: img/buckets3-11.png
 
