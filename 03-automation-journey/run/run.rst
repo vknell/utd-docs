@@ -66,11 +66,11 @@ With these values defined, we can now initialize the Terraform panos provider wi
 The provider is now ready to communicate with our firewall.
 
 
-*************************************
-Confirm firewall bootstrap completion
-*************************************
+**************************************
+Confirm firewall readiness (optionnal)
+**************************************
 
-SSH into the firewall with the following credentials:
+Now the firewall should be up and running, you can SSH into the firewall with the following credentials:
 
 - **Username:** ``admin``
 - **Password:** ``PaloAlto#2020``
@@ -145,8 +145,12 @@ This configuration creates your network interfaces.  The PAN-OS provider
 doesn't need any additional configuration specified because it is pulling that
 information from the environment variables we set earlier.
 
-Now, you can run ``terraform apply``, and the interfaces will be created on the
+Now, you can run the ``terraform apply`` command, and the interfaces will be created on the
 firewall.
+
+.. code-block:: console
+
+    terraform apply
 
 
 Virtual Router
@@ -172,7 +176,9 @@ Exercise:
 Open VS Code and edit the ``main.tf`` file to add a code snippet that will add a virtual router to your configuration, matchning the following settings:
 
 .. code-block:: console
-  code maint.tf
+  code main.tf
+  # or
+  subl main.tf
 
 .. figure:: img/terraform-vr.png
 
@@ -180,6 +186,10 @@ Open VS Code and edit the ``main.tf`` file to add a code snippet that will add a
    :align: center
 
 Once the virtual router resource in ``main.tf`` has been added and the file saved (``CTRL+S``) you can run ``terraform apply``.
+
+.. code-block:: console
+
+    terraform apply
 
 .. note:: When a value is by default, you do not need to specify it in your Terraform file. The Static Distance is 10 by default.
 
@@ -216,7 +226,9 @@ Exercise:
 Open VS Code and edit the ``main.tf`` file to add a code snippet that will add three zones mapped with the right interfaces to your configuration, matchning the following settings:
 
 .. code-block:: console
-  code maint.tf
+  code main.tf
+  # or 
+  subl main.tf
 
 .. figure:: img/terraform-untrust_zone.png
 
@@ -235,6 +247,10 @@ Open VS Code and edit the ``main.tf`` file to add a code snippet that will add t
 
 
 Once the zones and mapping in ``main.tf`` have been added and the file saved (*CTRL+S*) you can run ``terraform apply``.
+
+.. code-block:: console
+
+    terraform apply
 
 **You're done with the Terraform portion of the lab!**
 
@@ -298,6 +314,8 @@ Open the ``playbook.yml`` file in your text editor.
 .. code-block:: console
 
   code playbook.yml
+  # or
+  subl playbook.yml
 
 It will contain the following:
 

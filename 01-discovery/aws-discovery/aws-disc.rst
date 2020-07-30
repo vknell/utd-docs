@@ -27,9 +27,9 @@ Step 1: Click on :guilabel:`Services`, and search for ``VPC``. You can add it to
 
 .. figure:: img/aws-console-access.png
 
-You should land on the VPC Dashboard page, click on :guilabel:`VPCs` or :guilabel:`Your VPCs` in the left menu.
-
 .. note:: In each region a default VPC is already provisionned, and one to 6 defaults subnets will already be affected to this VPC.
+
+You should land on the VPC Dashboard page, click on :guilabel:`VPCs` or :guilabel:`Your VPCs` in the left menu.
 
 .. figure:: img/aws-vpc-dashboard.png
 
@@ -59,15 +59,15 @@ Création des sous réseaux AWS (subnets)
 Le bloc de réseaux IPv4 créé avec le VPC sera maintenant segmenté en plusieurs sous réseaux. Vous pouvez créer des sous-réseaux ayant des plages d’adresses IP qui feront partis du bloc IPv4 du VPC.
 Les sous réseaux seront utilisés comme suit :
 
-+------------------------+--------------+-------------+--------------------+
-| Subnet                 | Address      | Interface   | Availability Zone  |
-+========================+==============+=============+====================+
-| utd-act1-mgmt-net      | 10.2.0.0/24  | management  | eu-west-3          |
-+------------------------+--------------+-------------+--------------------+
-| utd-act1-internet-net  | 10.2.1.0/24  | internet    | eu-west-3          |
-+------------------------+--------------+-------------+--------------------+
-| utd-act1-web-net       | 10.2.2.0/24  | web         | eu-west-3          |
-+------------------------+--------------+-------------+--------------------+
++---------------------+--------------+-------------+--------------------+
+| Subnet              | Address      | Interface   | Availability Zone  |
++=====================+==============+=============+====================+
+| utd-management-net  | 10.2.0.0/24  | management  | eu-west-3          |
++---------------------+--------------+-------------+--------------------+
+| utd-internet-net.   | 10.2.1.0/24  | internet    | eu-west-3          |
++---------------------+--------------+-------------+--------------------+
+| utd-web-net         | 10.2.2.0/24  | web         | eu-west-3          |
++---------------------+--------------+-------------+--------------------+
 
 
 Etape 1: allez dans :guilabel:`VPC` > :guilabel:`Subnets` > :guilabel:`Create subnet`
@@ -308,18 +308,18 @@ Etape 3 : Dans :guilabel:`Configure Instance Details`, sélectionnez le VPC ``ut
 
 .. figure:: img/create-vpc-33.png
 
-Etape 4: Dans :guilabel:`Add Storage`, cliquez sur :guilabel:`Next Next : Add Tags` (aucune modification)
+Etape 4: Dans :guilabel:`Add Storage`, cliquez sur :guilabel:`Next : Add Tags` (aucune modification à faire)
 
 Etape 5 : Dans :guilabel:`Add Tags`, cliquez sur :guilabel:`Next : Configure Security Group`
 
-Etape 6 : Dans :guilabel:`Configure Security Group`, sélectionnez le groupe de sécurité :guilabel:`utd-act1-mgmt-sg`, et cliquez sur Review and Launch
+Etape 6 : Dans :guilabel:`Configure Security Group`, sélectionnez le groupe de sécurité :guilabel:`utd-management-sg`, et cliquez sur Review and Launch
 
 .. figure:: img/create-vpc-34.png
 
 Etape 7 : Dans :guilabel:`Review and Launch`, cliquez sur :guilabel:`Launch`
 
 Etape 8 : Créez une paire de clé publique/clé privée pour pouvoir se connecter en SSH sur le firewall.
-Il faut choisir Create a new key pair, donner à un nom (comme ``utd-activity1-kp``), télécharger la paire de clés sur votre machine et enfin, lancer le déploiement en cliquant sur :guilabel:`Launch Instances`
+Il faut choisir :guilabel:`Create a new key pair`, donner à un nom (comme ``utd-activity1-kp``), télécharger la paire de clés sur votre machine et enfin, lancer le déploiement en cliquant sur :guilabel:`Launch Instances`
 
 .. figure:: img/create-vpc-35.png
 
@@ -378,13 +378,13 @@ Par défaut et pour un nouveau déploiement de VM-Series dans AWS, l’instance 
 Ci-dessous, les étapes nécessaires seront détaillées.
 Etape 1 : Ouvrez un terminal Linux sur la machine de Lab
 
-Etape 2 : Connectez-vous en ssh sur la VM-Series admin@**your-ip**
+Etape 2 : Connectez-vous en ssh sur la VM-Series admin@``your-ip``
 
 .. code-block:: console
 
     cd Downloads
     chmod 600 utd-activity1-kp.pem 
-    ssh -i utd-activity1-kp.pem admin@your-ip
+    ssh -i utd-activity1-kp.pem admin@
 
 Etape 3 : Configurez le mot de passe admin entrant la commande suivante:
 
@@ -393,7 +393,7 @@ Etape 3 : Configurez le mot de passe admin entrant la commande suivante:
     configure
     set mgt-config users admin password
 
-Etape 4 : Sauvegardez les modifications via un **commit** et quittez le terminal Linux
+Etape 4 : Sauvegardez les modifications via un :guilabel:`commit` et quittez le terminal Linux
 
 .. code-block:: console
 
@@ -401,7 +401,7 @@ Etape 4 : Sauvegardez les modifications via un **commit** et quittez le terminal
     exit
     exit
 
-Etape 5 : Naviguez sur le firewall virtuel avec l’adresse IP publique avec le login admin et le mot de passe configuré durant l’étape précédente : https://**your-ip**
+Etape 5 : Naviguez sur le firewall virtuel avec l’adresse IP publique avec le login admin et le mot de passe configuré durant l’étape précédente : ``https://your-ip``
 
 .. figure:: img/create-vpc-42.png
 
@@ -446,11 +446,11 @@ Etape 4 : Dans l’onglet IPv4, sélectionnez DHCP Client, cochez :guilabel:`Ena
 
 .. figure:: img/create-vpc-49.png
 
-Etape 5 : Dans l’onglet Advanced, allez dans :guilabel:`Management Profile`, sélectionnez PingProfile et cliquez sur OK
+Etape 5 : Dans l’onglet Advanced, allez dans :guilabel:`Management Profile`, sélectionnez PingProfile et cliquez sur :guilabel:`OK`
 
 .. figure:: img/create-vpc-50.png
 
-Etape 6 : Ouvrez Ethernet1/2. Dans Interface Type, sélectionnez Layer3 et dans l’onglet Config, sélectionnez le routeur virtuel default et la zone de sécurité ``web``
+Etape 6 : Ouvrez Ethernet1/2. Dans Interface Type, sélectionnez :guilabel:`Layer3`  et dans l’onglet :guilabel:`Config`, sélectionnez le routeur virtuel :guilabel:`default` et la zone de sécurité ``web``
 
 .. figure:: img/create-vpc-51.png
 
@@ -458,7 +458,7 @@ Etape 7 : Dans l’onglet IPv4, sélectionnez DHCP Client, cochez Enable et déc
 
 .. figure:: img/create-vpc-52.png
 
-Etape 8 : Dans l’onglet Advanced, allez dans Management Profile, sélectionnez PingProfile et cliquez sur OK
+Etape 8 : Dans l’onglet Advanced, allez dans :guilabel:`Management Profile`, sélectionnez :guilabel:`PingProfile` et cliquez sur :guilabel:`OK`
 
 .. figure:: img/create-vpc-53.png
 
@@ -555,14 +555,14 @@ Etape 2 : Dans :guilabel:`Choose Instance Type`, sélectionnez le type :guilabel
 
 .. figure:: img/create-vpc-65.png
 
-Etape 3 : Dans Configure Instance, sélectionnez le VPC ``utd-activity1`` dans Network, sélectionnez le subnet Trusted_Subnet, sélectionnez Disable dans Auto-assign Public IP et laissez les autres paramètres par défaut
+Etape 3 : Dans :guilabel:`Configure Instancez , sélectionnez le VPC ``utd-activity1`` dans Network, sélectionnez le subnet Trusted_Subnet, sélectionnez Disable dans Auto-assign Public IP et laissez les autres paramètres par défaut
 
 .. figure:: img/create-vpc-66.png
 
 Etape 4 : Dans Networks interfaces, ajoutez l’adresse IP ``10.2.2.11`` comme adresse IP Primaire
 
-Etape 5 : Dans cette étape, vous allez utiliser Cloud-Init pour initialiser l'instance avec les paramètres souhaités. Il faut copié coller le script **bash** suivant
-Cliquez ensuite sur Next: Add Storage.
+Etape 5 : Dans cette étape, vous allez utiliser Cloud-Init pour initialiser l'instance avec les paramètres souhaités. Il faut copié et coller le script **bash** suivant.
+Cliquez ensuite sur :guilabel:`Next: Add Storage`.
 
 .. code-block:: bash
 
@@ -581,17 +581,20 @@ Cliquez ensuite sur Next: Add Storage.
     package_upgrade: true
     packages:
       - httpd
+    write_files:
+      - content: I deployed a web server and secured it thanks to Palo Alto Networks!
+        permissions: 0644
+        path: /var/www/html/index.html
     runcmd:
       - systemctl start httpd
       - systemctl enable httpd
-      - echo "I finished the first module!" > /var/www/html/index.html
 
 
 .. figure:: img/create-vpc-67.png
 
 Etape 6 : Dans :guilabel:`Add Storage`, cliquez sur :guilabel:`Next Next : Add Tags` (aucune modification)
 Etape 7 : Dans :guilabel:`Add Tags`, cliquez sur :guilabel:`Next : Configure Security Group`
-Etape 8 : Dans :guilabel:`Configure Security Group`, sélectionnez le groupe de sécurité Web, et cliquez sur :guilabel:`Review and Launch`
+Etape 8 : Dans :guilabel:`Configure Security Group`, sélectionnez le groupe de sécurité :guilabel:`Web`, et cliquez sur :guilabel:`Review and Launch`
 
 .. figure:: img/create-vpc-68.png
 
@@ -619,7 +622,8 @@ VPC Deletion
 In order to clean up and suppress the VPC you need to delete the following items in that order:
 
 - EC2 instances (:guilabel:`EC2` > :guilabel:`Instances` select both instances, select :guilabel:`action` and :guilabel:`Terminate`)
-- Network interfaces (:guilabel:`VPC` > :guilabel:`Network Interfaces`)
-- Elastic IP addresses (:guilabel:`VPC` > :guilabel:`Elastic IP addresses`)
-- VPC (:guilabel:`EC2` > :guilabel:`VPC` > :guilabel:`Your VPC`, select the :guilabel:`utd-activity1` VPC and go to :guilabel:`Actions` then :guilabel:`Delete VPC`, confirm to delete the VPC and the reminding configuration)
+- Security Key (:guilabel:`EC2` > :guilabel:`Key pairs`)
+- Network interfaces (:guilabel:`EC2` > :guilabel:`Network Interfaces`)
+- Elastic IP addresses (:guilabel:`EC2` > :guilabel:`Elastic IP addresses`)
+- VPC (:guilabel:`VPC` > :guilabel:`Your VPC`, select the :guilabel:`utd-activity1` VPC and go to :guilabel:`Actions` then :guilabel:`Delete VPC`, confirm to delete the VPC and the reminding configuration)
 

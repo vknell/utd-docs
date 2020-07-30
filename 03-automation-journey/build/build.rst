@@ -83,6 +83,8 @@ contents of these files in your text editor to see what they contain and how the
 .. code-block:: console
 
     code main.tf variables.tf outputs.tf
+    # or
+    subl main.tf variables.tf outputs.tf
 
 The file ``main.tf`` defines the providers that will be used and the resources
 that will be created (more on that shortly).  Since it is poor practice to hard
@@ -99,6 +101,8 @@ file.
 .. code-block:: console
 
     code terraform.tfvars
+    # or 
+    subl terraform.tfvars
 
 Copy and paste the following snippet in your new file. **Change the values** for the Region and Availability Zone.
 You can find more information about Region and AZ in the `AWS User Guide <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html>`_. And more information on Palo Alto Networks solutions on `TechDocs <https://docs.paloaltonetworks.com/vm-series/9-0/vm-series-deployment/set-up-the-vm-series-firewall-on-aws/deploy-the-vm-series-firewall-on-aws/obtain-the-ami/get-amazon-machine-image-ids.html>`_.
@@ -208,5 +212,7 @@ Verify on AWS Console some elements created by terraform
 You can log in to the AWS Console using your utd-console `IAM profile </en/latest/00-getting-started/requirements.html#create-iam-account-for-console-access>`_. Confirm that the 3 EC2 instances have been created by Terraform:
 
 .. figure:: img/aws-console-check.png
+
+.. note:: The firewall will take between 5 to 10 minutes to be operational. To boot using the bootstrap file and auto-commiting the configuration.
 
 **You deployed your infrastructure sucessfully, you can now proceed to the configuration.**

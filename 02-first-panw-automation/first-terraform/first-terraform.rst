@@ -230,6 +230,8 @@ contents of these files to see what they contain and how they're structured.
 .. code-block:: console
 
     code deploy_pavm.tf deploy_vpc.tf variables.tf
+    # or
+    subl deploy_pavm.tf deploy_vpc.tf variables.tf
 
 ``deploy_pavm.tf`` - Terraform template for Palo Alto Networks VM-Series
 firewall.
@@ -536,7 +538,7 @@ SSH into the firewall with the following credentials.
 
 .. code-block:: console
 
-    ssh admin@<FIREWALL_MGMT_IP>
+    ssh admin@
 
 Replace ``<FIREWALL_MGMT_IP>`` with the IP address of the firewall management
 interface that was provided in the Terraform plan results.  This information
