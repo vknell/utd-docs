@@ -280,11 +280,11 @@ Etape 1: Allez dans :guilabel:`Services` > :guilabel:`EC2` > :guilabel:`Network 
 
 .. figure:: img/create-vpc-27.png
 
-Etape 2 : Créez l’interface ``Ethernet1/1`` qui est l’interface ``Internet`` en donnant une description, sélectionnant le subnet :guilabel:`Internet`, donnant l’adresse IP ``10.2.1.10`` et en sélectionnant le Security Group ``utd-internet-sg``
+Etape 2 : Créez l’interface ``Ethernet1/1`` qui est l’interface ``Internet`` en donnant une description, sélectionnant le subnet :guilabel:`Internet`, donnant l’adresse IP ``10.2.1.10``. Une fois le subnet choisi vous pourrez choisir le Security Group ``utd-internet-sg``:
 
 .. figure:: img/create-vpc-28.png
 
-Etape 3 : Créez l’interface ``Ethernet1/2`` qui est l’interface ``Web`` en donnant une description, sélectionnant le subnet :guilabel:`Web``, donnant l’adresse IP ``10.2.2.10`` et en sélectionnant le Security Group ``utd-web-sg``
+Etape 3 : Créez l’interface ``Ethernet1/2`` qui est l’interface ``Web`` en donnant une description, sélectionnant le subnet :guilabel:`Web`, donnant l’adresse IP ``10.2.2.10``. Une fois le subnet choisi vous pourrez choisir le Security Group ``utd-web-sg``:
 
 .. figure:: img/create-vpc-29.png
 .. figure:: img/create-vpc-30.png
@@ -364,7 +364,6 @@ l’interface Ethernet1/1, cliquez sur Attach, choisissez l’instance du firewa
 
 .. figure:: img/create-vpc-40.png
 
-
 Etape 2 : Répétez l’étape 1 pour attacher l’interface Ethernet1/2 à l’instance Firewall
 
 .. figure:: img/create-vpc-41.png
@@ -382,6 +381,7 @@ Etape 1 : Ouvrez un terminal Linux sur la machine de Lab
 Etape 2 : Connectez-vous en ssh sur la VM-Series admin@**your-ip**
 
 .. code-block:: console
+
     cd Downloads
     chmod 600 utd-activity1-kp.pem 
     ssh -i utd-activity1-kp.pem admin@your-ip
@@ -389,12 +389,14 @@ Etape 2 : Connectez-vous en ssh sur la VM-Series admin@**your-ip**
 Etape 3 : Configurez le mot de passe admin entrant la commande suivante:
 
 .. code-block:: console
+
     configure
     set mgt-config users admin password
 
 Etape 4 : Sauvegardez les modifications via un **commit** et quittez le terminal Linux
 
 .. code-block:: console
+
     commit
     exit
     exit
@@ -527,7 +529,7 @@ La figure suivante décrit les règles de NAT à configurer sur le firewall.
 .. figure:: img/create-vpc-60.png
 
 Sauvegarder la configuration du pare-feu
-Une fois la configuration terminée, un **Commit** est indispensable pour appliquer l’ensemble des modifications. Cliquez en haut à droite et validez:
+Une fois la configuration terminée, un :guilabel:`Commit` est indispensable pour appliquer l’ensemble des modifications. Cliquez en haut à droite et validez:
 
 .. figure:: img/create-vpc-61.png
 
