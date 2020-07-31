@@ -83,6 +83,8 @@ and click on :guilabel:`S3`:
 
 Click :guilabel:`Create Bucket`:
 
+# CHANGE SCREENSHOT
+
 .. figure:: img/buckets3-2.png
 
 Enter a bucket name and select a region and click :guilabel:`Create` as there is no need to go
@@ -468,12 +470,10 @@ In deploy_vpc.tf you have to uncomment code to use Bootstrap S3 Bucket and give 
 Initialize the AWS Terraform provider
 *************************************
 
-Once you've created the ``terraform.tfvars`` file and populated it with the
-variables and values you are now ready to initialize the Terraform providers.
 For this initial deployment we will only be using the
 `AWS Provider <https://www.terraform.io/docs/providers/aws/index.html>`_.
 This initialization process will download all the software, modules, and
-plugins needed for working in a particular environment.
+plugins needed for working in a particular environment:
 
 .. code-block:: console
 

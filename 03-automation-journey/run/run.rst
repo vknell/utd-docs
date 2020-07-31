@@ -176,6 +176,7 @@ Exercise:
 Open VS Code and edit the ``main.tf`` file to add a code snippet that will add a virtual router to your configuration, matchning the following settings:
 
 .. code-block:: console
+
   code main.tf
   # or
   subl main.tf

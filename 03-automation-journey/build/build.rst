@@ -30,9 +30,9 @@ In order for Terraform to do this it will need to authenticate to AWS using your
 
 .. warning:: Hard-coding credentials into any Terraform configuration is not recommended, and risks secret leakage should this file ever be committed to a public version control system (like github). Rather than write these as Terraform variables, we will use Linux environment variables. Static credentials can be provided by adding an access_key and secret_key in-line in the AWS provider block, **but this is not safe**
 
-*Working on a private project with no public sources you could add the following snippet*:
+*Working on a private project with no public sources you could add the following snippet to a .tf file*:
 
-.. code-block:: console
+.. code-block:: terraform
 
     provider "aws" {
       region     = "us-east-1"
@@ -40,7 +40,7 @@ In order for Terraform to do this it will need to authenticate to AWS using your
       secret_key = "my-secret-key"
     }
 
-Instead create **environment variables**, you can provide your credentials via the ``AWS_ACCESS_KEY_ID`` and ``AWS_SECRET_ACCESS_KEY`` environment variables, representing your AWS Access Key and AWS Secret Key, respectively.
+Instead create **environment variables**, you can provide your credentials via the ``AWS_ACCESS_KEY_ID`` and ``AWS_SECRET_ACCESS_KEY`` environment variables, representing your AWS Access Key and AWS Secret Key, respectively. Type the following commands in the terminal:
 
 .. code-block:: console
 
