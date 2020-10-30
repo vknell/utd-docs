@@ -95,73 +95,11 @@ through the subsequent steps as the default values will be used.
 .. note:: Select the same region as your VPC. You will need to enter a globally unique bucket name. AWS will warn you if the name is not unique. 
 
 
-Now we will add the ARN in your Linux environment variables. Once the bucket is created, select your bucket and click on :guilabel:`copy ARN` button and copy/paste the value after ``export ARN=``.
-In your terminal type the following command and paste the key that is in your clipboard:
-
-# /!\ ADD SCREENSHOT HERE # REVIEW WITH NEW SCRIPTS /!\
-
-.. code-block:: console
-    
-    export ARN=
-
-Then enter the following command to update the files with your ARN.
-
-.. code-block:: console
-
-    sed -i 's/arn:aws:s3:::ha1-dev-paloalto/'"$ARN"'/g' ~/utd-automation/first-terraform/deploy_vpc.tf
-
-This information will used later in Terraform script for bootstrap of VM FW.
-
-
-**************************************************
-Add restricted permission on S3 Bucket (Read only)
-**************************************************
-
-We need to give the **relevant rights** for the IAM account created to use the API (IAM account for API access).
-
-Go to :guilabel:`Services` > :guilabel:`IAM` and click on :guilabel:`Customer Managed Policies`:
-
-.. figure:: img/buckets3-4.png
-
-Clic :guilabel:`Create policy`:
-
-.. figure:: img/buckets3-5.png
-
-Click on :guilabel:`Choose a service` and choose :guilabel:`S3`:
-
-.. figure:: img/buckets3-6.png
-
-Choose :guilabel:`Read` for Access level:
-
-.. figure:: img/buckets3-7.png
-
-Click on :guilabel:`Ressources`, Specify bucket ressource ARN for the :guilabel:`GetBucketLocation...` and click on :guilabel:`bucket` on :guilabel:`Add ARN to retrict access`:
-
-.. figure:: img/buckets3-8.png
-
-Add ARN of the Bucket :
-
-.. figure:: img/buckets3-9.png
-
-Click on :guilabel:`Review Policy`
-
-.. figure:: img/buckets3-10.png
-
-Click Create policy, and give it a name: ``pa_bootstrap_s3_readonly``
-
-# CHANGE SCREENSHOT HERE
-
-.. figure:: img/buckets3-11.png
-
-
 ********************************
 Build Bootstrapping in S3 Bucket
 ********************************
 
-click on the newly created bucket and modify 
-
-on the newly created bucket
-and add four folders called :guilabel:`config`, :guilabel:`license`, :guilabel:`software` and :guilabel:`content` by clicking on :guilabel:`Create Folder`:
+Add four folders called :guilabel:`config`, :guilabel:`license`, :guilabel:`software` and :guilabel:`content` by clicking on :guilabel:`Create Folder`:
 
 .. figure:: img/bootstrap-1.png
 
@@ -175,17 +113,16 @@ Click on :guilabel:`Save`
 .. figure:: img/bootstrap-3.png
 
 
-
 *******************************
 Upload your files in the bucket
 *******************************
 
-Upload the bootstrap.xml and init-cfg.txt files from bootstrap folder :guilabel:`~/utd-automation/first-terraform/bootstrap-files/` to the :guilabel:`config` folder.
+Click on :guilabel:`config` to enter the subfolder and upload the bootstrap.xml and init-cfg.txt files from bootstrap folder :guilabel:`~/utd-automation/first-terraform/bootstrap-files/` to the :guilabel:`config` folder.
 Click on :guilabel:`config`.
 
 .. figure:: img/bootstrap-4.png
 
-Select Add Files and select the two files (:guilabel:`bootstrap.xml` and :guilabel:`init-cft.txt`) handled previously and click Upload:
+Select Add Files and select the two files (:guilabel:`bootstrap.xml` and :guilabel:`init-cft.txt`) handled previously and click :guilabel:`Upload`:
 
 .. figure:: img/bootstrap-5.png
 
@@ -204,17 +141,68 @@ Once completed the file is listed under the folder content :
 
 
 Upgrade (Optional)
+==================
 If need upgrade automaticaly your VM after boot, you can Upload a PANOS image file to the **software** folder.
 click on the :guilabel:`software` folder ins the S3 console and click :guilabel:`Upload`. Select :guilabel:`Add Files`
 and select the file (example: *PanOS_vm_9.0.1*) retrieved from PANW support site, and click
 :guilabel:`Upload`:
 
-
-Optional for Bootstrap: 
+Optional for Bootstrap:
+=======================
 If need associate licenses (BYOL) automaticaly your FW VM after boot, you can Upload a Licenses file to the :guilabel:`license` folder.
 click on the :guilabel:`license` folder ins the S3 console and click :guilabel:`Upload`. Select :guilabel:`Add Files`
 and select the file (example: *0001A100110-threats.key*) downloaded previously and click
 :guilabel:`Upload`:
+
+
+**************************************************
+Add restricted permission on S3 Bucket (Read only)
+**************************************************
+
+We need to give the **relevant rights** for the IAM account created to use the API (IAM account for API access).
+
+Create the policy:
+==================
+
+Go to :guilabel:`Services` > :guilabel:`IAM` and click on :guilabel:`Customer Managed Policies`:
+
+.. figure:: img/buckets3-4.png
+
+Clic :guilabel:`Create policy`:
+
+.. figure:: img/buckets3-5.png
+
+Click on :guilabel:`Choose a service`, type ``S3`` in the search bar choose the :guilabel:`S3` service:
+
+.. figure:: img/buckets3-6.png
+
+Choose :guilabel:`Read` for Access level, you can specify the :guilabel:`GetBucketLocation...` Access Level:
+
+.. figure:: img/buckets3-7.png
+
+Then click on :guilabel:`Ressources`,  and click on :guilabel:`bucket` and :guilabel:`Add ARN to retrict access`:
+
+.. figure:: img/buckets3-8.png
+
+Add the ARN of the Bucket previously created, find it in your terminal window, it should look like ``arn:aws:s3:::BUCKETNAME``
+
+.. figure:: img/buckets3-9.png
+
+Click on :guilabel:`Review Policy`
+
+.. figure:: img/buckets3-10.png
+
+Click Create policy, and give it a name: ``pa_bootstrap_s3_readonly``
+
+# CHANGE SCREENSHOT HERE
+
+.. figure:: img/buckets3-11.png
+
+
+Create a role to attach the policy to:
+============================================
+
+TO DO CREATE A ROLE ``pa_bootstrap_s3_readonly``
 
 
 ******************************
@@ -225,7 +213,7 @@ Change into the AWS deployment directory.
 
 .. code-block:: console
 
-    $ cd ~/utd-automation/first-terraform/
+    cd ~/utd-automation/first-terraform/
 
 In this directory you will find the three main files associated with a
 Terraform plan: ``deploy_panvm.tf``, ``variables.tf``, and ``deploy_vpc.tf``.  View the
@@ -461,7 +449,15 @@ In deploy_vpc.tf you have to uncomment code to use Bootstrap S3 Bucket and give 
 
 .. note:: The ARN value has been copied in this file at the beginning of the activity.
 
+Change the volume_size to 65
 
+.. code-block:: terrafom 
+
+    root_block_device = {
+        volume_type = "gp2"
+        volume_size = "65"
+        delete_on_termination = true
+    }
 
 .. warning:: Save your file using ``CTRL+S``
 
