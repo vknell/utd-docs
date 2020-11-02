@@ -111,7 +111,7 @@ You can find more information about Region and AZ in the `AWS User Guide <https:
 
     aws_region_name     = "YOUR-REGION"
     aws_az_name         = "YOUR AZ"
-    public_key_file     = "/home/panadmin/.ssh/lab_ssh_key.pub"
+    public_key_file     = "~/.ssh/lab_ssh_key.pub"
 
 .. warning:: Do not forget to save your changes to create the new file: :guilabel:`File` > :guilabel:`Save` or ``CTRL + S``.
 
