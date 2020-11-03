@@ -21,7 +21,7 @@ https://github.com/PaloAltoNetworks/terraform-templates
 
 .. note:: We already provided the sample files  used in this lab. This repository (or *repo*) contains the files needed to deploy the network and compute infrastructure.
 
-On your machine the files are in the :guilabel:`~/utd-automation/first-terraform/` folder. We will switch to this environnement later on.
+On your machine the files are in the :guilabel:`~/utd-automation/pan-terraform/` folder. We will switch to this environnement later on.
 
 
 ********************************
@@ -64,7 +64,7 @@ Move the key to the following folder:
 
 .. code-block:: console
 
-    mv ~/Downloads/ec2sshkeypair.pem ~/utd-automation/first-terraform/
+    mv ~/Downloads/ec2sshkeypair.pem ~/utd-automation/pan-terraform/
 
 
 **********************************
@@ -117,7 +117,7 @@ Click on :guilabel:`Save`
 Upload your files in the bucket
 *******************************
 
-Click on :guilabel:`config` to enter the subfolder and upload the bootstrap.xml and init-cfg.txt files from bootstrap folder :guilabel:`~/utd-automation/first-terraform/bootstrap-files/` to the :guilabel:`config` folder.
+Click on :guilabel:`config` to enter the subfolder and upload the bootstrap.xml and init-cfg.txt files from bootstrap folder :guilabel:`~/utd-automation/pan-terraform/bootstrap-files/` to the :guilabel:`config` folder.
 Click on :guilabel:`config`.
 
 .. figure:: img/bootstrap-4.png
@@ -213,7 +213,7 @@ Change into the AWS deployment directory.
 
 .. code-block:: console
 
-    cd ~/utd-automation/first-terraform/
+    cd ~/utd-automation/pan-terraform/
 
 In this directory you will find the three main files associated with a
 Terraform plan: ``deploy_panvm.tf``, ``variables.tf``, and ``deploy_vpc.tf``.  View the
@@ -280,7 +280,7 @@ To set the AWS access key and secret key of your IAM account for API access (see
     }
     variable "pavm_key_path" {
     description = "Path to the private portion of the SSH key specified."
-    default = "~/utd-automation/first-terraform/ec2sshkeypair.pem"
+    default = "~/utd-automation/pan-terraform/ec2sshkeypair.pem"
     }
 
 4. (Optional) Modify variables.tf file with a Terminal or text editor with right information regarding the VPC CIDR and VPC Subnets if needed:
