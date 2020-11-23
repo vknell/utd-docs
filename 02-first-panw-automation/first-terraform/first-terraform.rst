@@ -192,7 +192,7 @@ Click on :guilabel:`Review Policy`
 
 .. figure:: img/buckets3-10.png
 
-Click Create policy, and give it a name: ``pa_bootstrap_s3_readonly``
+Click Create policy, and give it a name: ``S3AccessUTD``
 
 # CHANGE SCREENSHOT HERE
 
@@ -202,7 +202,17 @@ Click Create policy, and give it a name: ``pa_bootstrap_s3_readonly``
 Create a role to attach the policy to:
 ============================================
 
-TO DO CREATE A ROLE ``pa_bootstrap_s3_readonly``
+Go to :guilabel:`Services` > :guilabel:`IAM` and click on :guilabel:`Roles`:
+
+Clic :guilabel:`Create role`.
+
+When asked to choose a use case select :guilabel:`EC2`.
+
+Click on :guilabel:`Next permission`.
+
+Filter on the policy you previously created ``S3AccessUTD`` then click on :guilabel:`Next: Tags` and :guilabel:`Next: Review`, give the role a name: :guilabel:`pa_bootstrap_s3_readonly`
+
+Click on :guilabel:`Create role`
 
 
 ******************************
@@ -276,7 +286,7 @@ To set the AWS access key and secret key of your IAM account for API access (see
 
     variable "pavm_key_name" {
     description = "Name of the SSH keypair to use in AWS."
-    default = "ec2sshkeypair.pem"
+    default = "ec2sshkeypair"
     }
     variable "pavm_key_path" {
     description = "Path to the private portion of the SSH key specified."

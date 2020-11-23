@@ -561,7 +561,7 @@ Etape 3 : Dans :guilabel:`Configure Instancez , sélectionnez le VPC ``utd-activ
 
 Etape 4 : Dans Networks interfaces, ajoutez l’adresse IP ``10.2.2.11`` comme adresse IP Primaire
 
-Etape 5 : Dans cette étape, vous allez utiliser Cloud-Init pour initialiser l'instance avec les paramètres souhaités. Il faut copié et coller le script **bash** suivant.
+Etape 5 : Dans cette étape, vous allez utiliser Cloud-Init pour initialiser l'instance avec les paramètres souhaités. Il faut copier et coller le script **bash** suivant.
 Cliquez ensuite sur :guilabel:`Next: Add Storage`.
 
 .. code-block:: bash
