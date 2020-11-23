@@ -194,8 +194,6 @@ Click on :guilabel:`Review Policy`
 
 Click Create policy, and give it a name: ``S3AccessUTD``
 
-# CHANGE SCREENSHOT HERE
-
 .. figure:: img/buckets3-11.png
 
 
