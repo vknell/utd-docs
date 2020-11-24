@@ -1,6 +1,6 @@
-##########################
-First Terraform Deployment
-##########################
+#################################
+First Terraform Deployment (beta)
+#################################
 
 In this activity you will:
 
