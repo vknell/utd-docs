@@ -189,7 +189,7 @@ Confirm firewall bootstrap completion
 SSH into the firewall with the following credentials.
 
 - **Username:** ``admin``
-- **Password:** ``PaloAlto#2020``
+- **Password:** ``PaloAlto2005``
 
 
 .. code-block:: console

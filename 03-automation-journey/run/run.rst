@@ -43,7 +43,7 @@ following commands to add the appropriate environment variables:
 .. code-block:: console
 
     export PANOS_USERNAME="admin"
-    export PANOS_PASSWORD="PaloAlto#2020"
+    export PANOS_PASSWORD="PaloAlto2005"
     export PANOS_HOSTNAME="<YOUR FIREWALL MGMT IP GOES HERE>"
 
 .. note:: Replace the text ``<YOUR FIREWALL MGMT IP GOES HERE>`` with your firewall's management IP address.
@@ -54,7 +54,7 @@ using the ``env | grep PANOS`` command:
 .. code-block:: console
 
     PANOS_USERNAME=admin
-    PANOS_PASSWORD=PaloAlto#2020
+    PANOS_PASSWORD=PaloAlto2005
     PANOS_HOSTNAME=54.160.48.152
 
 With these values defined, we can now initialize the Terraform panos provider with the following command.
@@ -73,7 +73,7 @@ Confirm firewall readiness (optionnal)
 Now the firewall should be up and running, you can SSH into the firewall with the following credentials:
 
 - **Username:** ``admin``
-- **Password:** ``PaloAlto#2020``
+- **Password:** ``PaloAlto2005``
 
 .. code-block:: console
 
@@ -330,8 +330,8 @@ It will contain the following:
     vars_files:
       - vars.yml
 
-    roles:
-      - PaloAltoNetworks.paloaltonetworks
+    collections:
+      - paloaltonetworks.panos
 
     tasks:
       - name: Create web server object

@@ -25,7 +25,7 @@ Create a VM Information Source (GCP)
 We will be creating a VM Information Source on the firewall to monitor the GCP Compute Engine environment for meta-data about the running VM instances.  Open a web browser and go to ``https://<your-firewall-ip>``.  You will log in with the following credentials.
 
 - **Username:** ``admin``
-- **Password:** ``PaloAlto#2020``
+- **Password:** ``PaloAlto2005``
 
 Once you have logged into the firewall, go to the **VM Information Sources** under the **Device** tab and click **Add**.
 
@@ -61,7 +61,7 @@ Create a VM Information Source (AWS)
 We will be creating a VM Information Source on the firewall to monitor the AWS EC2 environment for meta-data about the running VM instances.  Open a web browser and go to ``https://<your-firewall-ip>``.  You will log in with the following credentials.
 
 - **Username:** ``admin``
-- **Password:** ``PaloAlto#2020``
+- **Password:** ``PaloAlto2005``
 
 Once you have logged into the firewall, go to the **VM Information Sources** under the **Device** tab and click **Add**.
 
