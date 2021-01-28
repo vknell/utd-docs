@@ -118,27 +118,30 @@ You've been provided with the following Terraform plan in ``main.tf``:
 .. code-block:: terraform
 
     provider "panos" {}
-
+    
     resource "panos_ethernet_interface" "untrust" {
-        name                      = "ethernet1/1"
-        vsys                      = "vsys1"
-        mode                      = "layer3"
-        enable_dhcp               = true
-        create_dhcp_default_route = true
+      name                      = "ethernet1/1"
+      comment                   = "untrust interface"
+      vsys                      = "vsys1"
+      mode                      = "layer3"
+      enable_dhcp               = true
+      create_dhcp_default_route = true
     }
-
+    
     resource "panos_ethernet_interface" "web" {
-        name        = "ethernet1/2"
-        vsys        = "vsys1"
-        mode        = "layer3"
-        enable_dhcp = true
+      name        = "ethernet1/2"
+      comment     = "web interface"
+      vsys        = "vsys1"
+      mode        = "layer3"
+      enable_dhcp = true
     }
-
+    
     resource "panos_ethernet_interface" "db" {
-        name        = "ethernet1/3"
-        vsys        = "vsys1"
-        mode        = "layer3"
-        enable_dhcp = true
+      name        = "ethernet1/3"
+      comment     = "database interface"
+      vsys        = "vsys1"
+      mode        = "layer3"
+      enable_dhcp = true
     }
 
 This configuration creates your network interfaces.  The PAN-OS provider
@@ -472,7 +475,7 @@ The example code for the module should do what you need, copy and paste the foll
 .. code-block:: yaml
 
   - name: commit candidate config on firewall
-    panos_commit:
+    panos_commit_firewall:
       provider: '{{ provider }}'
 
 

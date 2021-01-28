@@ -25,20 +25,20 @@ We will be creating a VM Information Source on the firewall to monitor the AWS E
 - **Username:** ``admin``
 - **Password:** ``PaloAlto2005``
 
-Once you have logged into the firewall, go to the **VM Information Sources** under the **Device** tab and click **Add**.
+Once you have logged into the firewall, go to the ``VM Information Sources`` under the ``Device`` tab and click ``Add``.
 
 .. figure:: img/monitor-add-source-aws.png
    :align: center
 
-- Provide a name for your monitored source in the **Name** field.
+- Provide a name for your monitored source in the ``Name`` field.
 
-- (optional) Provide a description of the monitored source in the **Description** field.
+- (optional) Provide a description of the monitored source in the ``Description`` field.
 
-- Ensure that *AWS VPC* is selected from the **Type** field selection.
+- Ensure that ``AWS VPC`` is selected from the ``Type`` field selection.
 
-- Ensure that the **Enabled** button is selected.
+- Ensure that the ``Enabled`` button is selected.
 
-- The **Source** field will contain the URI of the AWS region in which the lab is deployed.  The format for this is *ec2.<your_AWS_region>.amazonaws.com*. For example, if the region is *us-west-2* then the URI will be *ec2.us-west-2.amazonaws.com*.
+- The ``Source`` field will contain the URI of the AWS region in which the lab is deployed.  The format for this is *ec2.<your_AWS_region>.amazonaws.com*. For example, if the region is *us-east-1* then the URI will be ``ec2.us-east-1.amazonaws.com``.
 
 - The **Access Key ID** Type ``env | grep AWS_ACCESS | cut -f2 -d "="`` to display your key ID in the terminal.
 
